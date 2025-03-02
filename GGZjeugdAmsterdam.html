@@ -35,16 +35,33 @@
 
     <!-- Zoekfunctie sectie -->
     <section id="zoekfunctie">
-        <h2>Zoek Zorginstellingen</h2>
+        <h2>Zoek Jeugdhulp in Amsterdam</h2>
         <form>
             <label for="zorgtype">Kies zorgtype:</label>
             <select id="zorgtype" name="zorgtype">
+                <option value="alle">Alle typen</option>
                 <option value="basis">Basis GGZ</option>
                 <option value="gespecialiseerd">Gespecialiseerde GGZ</option>
                 <option value="hoogspecialistisch">Hoogspecialistische zorg</option>
             </select>
+            
+            <label for="leeftijd">Leeftijd kind:</label>
+            <select id="leeftijd" name="leeftijd">
+                <option value="alle">Alle leeftijden</option>
+                <option value="0-12">0-12 jaar</option>
+                <option value="12-18">12-18 jaar</option>
+                <option value="18-23">18-23 jaar</option>
+            </select>
+
+            <label for="filter">Type instelling:</label>
+            <select id="filter" name="filter">
+                <option value="alle">Alle instellingen</option>
+                <option value="okt">Alleen Ouder- en Kindteams</option>
+                <option value="ggz">Alleen GGZ instellingen</option>
+            </select>
+
             <label for="locatie">Voer locatie in:</label>
-            <input type="text" id="locatie" name="locatie" placeholder="Bijvoorbeeld: Amsterdam">
+            <input type="text" id="locatie" name="locatie" placeholder="Bijvoorbeeld: Amsterdam Noord">
             <button type="submit">Zoek</button>
         </form>
     </section>
@@ -53,6 +70,29 @@
     <section id="zorgkaart">
         <h2>Zorginstellingen op de Kaart</h2>
         <div id="map"></div> <!-- Dit is de plek voor je interactieve kaart -->
+    </section>
+
+    <!-- Zorginstellingen overzicht sectie -->
+    <section id="overzicht">
+        <h2>Overzicht Zorginstellingen</h2>
+        <div class="table-container">
+            <table id="zorginstellingen-tabel">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Type</th>
+                        <th>Adres</th>
+                        <th>Telefoon</th>
+                        <th>Leeftijd</th>
+                        <th>Specialisaties</th>
+                        <th>Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Wordt gevuld door JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <!-- Footer sectie -->

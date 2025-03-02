@@ -1,36 +1,50 @@
-# GGZ Jeugd Amsterdam Kaart
+# Jeugd GGZ Amsterdam - Interactieve Zorgkaart
 
-Een interactieve kaart die alle GGZ-jeugdzorg locaties in Amsterdam weergeeft. Deze applicatie helpt ouders en jongeren bij het vinden van passende geestelijke gezondheidszorg in de regio Amsterdam.
+Een interactieve kaart die jeugd GGZ instellingen en Ouder- en Kindteams (OKT's) in Amsterdam weergeeft.
 
 ## Functionaliteiten
 
-- Interactieve kaart met alle GGZ-jeugdzorg locaties
-- Kleurcodering voor verschillende typen zorg:
-  - Groen: Ouder- en Kindteams (OKT)
-  - Geel: Basis GGZ
-  - Oranje: Gespecialiseerde GGZ
-  - Roze: Hoogspecialistische zorg
-- Zoekfunctie op:
-  - Type zorg
-  - Leeftijdscategorie
-  - Locatie
-  - Zorgfilter (OKT/GGZ)
-- Uitgebreide informatietabel met alle zorginstellingen
-- Detailinformatie bij elke locatie (adres, telefoon, website, specialisaties)
+- Interactieve Google Maps kaart met alle zorginstellingen
+- Filtering op type zorg (Basis GGZ, Gespecialiseerde GGZ, Hoogspecialistische zorg)
+- Filtering op type instelling (OKT of GGZ)
+- Filtering op leeftijdscategorie
+- Zoeken op locatie
+- Overzichtstabel met alle informatie
+- Kleurcodering voor verschillende typen zorg
+- Responsive design voor mobiel gebruik
+
+## Installatie
+
+1. Clone de repository:
+```bash
+git clone https://github.com/mha-1915/ggz-jeugd-amsterdam.git
+cd ggz-jeugd-amsterdam
+```
+
+2. Start een lokale server (bijvoorbeeld met Python):
+```bash
+python3 -m http.server
+```
+
+3. Open de website in je browser:
+```
+http://localhost:8000/GGZjeugdAmsterdam.html
+```
 
 ## Technische Details
 
-- HTML5, CSS3, JavaScript
-- Google Maps API voor kaartweergave
-- Responsive design
+- Vanilla JavaScript voor de functionaliteit
+- Google Maps JavaScript API voor de kaart
+- CSS Grid en Flexbox voor de layout
+- Responsive design met media queries
 - Geen externe dependencies nodig
-
-## Gebruik
-
-1. Clone de repository
-2. Open `GGZjeugdAmsterdam.html` in een webbrowser
-3. Zorg voor een actieve internetverbinding voor de Google Maps functionaliteit
 
 ## Licentie
 
-MIT License - Vrij te gebruiken en aan te passen 
+MIT License - Zie LICENSE bestand voor details.
+
+## Contact
+
+Voor vragen of suggesties, neem contact op via:
+- Email: info@zorgkaartamsterdam.nl
+- GitHub Issues: https://github.com/mha-1915/ggz-jeugd-amsterdam/issues 

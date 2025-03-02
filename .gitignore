@@ -1,8 +1,32 @@
-# Configuratiebestanden met gevoelige informatie
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# Config files met gevoelige informatie
 config.js
+.env
 
 # OS gegenereerde bestanden
-.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -11,12 +35,9 @@ ehthumbs.db
 Thumbs.db
 
 # IDE bestanden
-.idea/
-.vscode/
 *.swp
 *.swo
 *.log
 
 # Node modules (als je die later zou gebruiken)
-node_modules/
 .env 

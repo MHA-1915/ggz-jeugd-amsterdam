@@ -2,6 +2,7 @@
 let map;
 let markers = [];
 let currentInfoWindow = null; // Nieuwe variabele voor het bijhouden van het huidige open infowindow
+let legendaToegevoegd = false; // Nieuwe variabele om bij te houden of de legenda al is toegevoegd
 
 // Zorginstelling data
 const zorginstellingen = [
@@ -20,8 +21,8 @@ const zorginstellingen = [
         type: "Hoogspecialistisch",
         positie: { lat: 52.3637058, lng: 4.8561758 },
         adres: "Baarsjesweg 224, 1058 AA Amsterdam",
-        telefoon: "020-590-4333",
-        website: "https://arkinjeugdengezin.nl",
+        telefoon: "020-5905555",
+        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
         leeftijd: "0-23 jaar",
         specialisaties: "Gezinstherapie, eetstoornissen, angst"
     },
@@ -30,8 +31,8 @@ const zorginstellingen = [
         type: "Hoogspecialistisch",
         positie: { lat: 52.3348, lng: 4.9561 },
         adres: "Wisselwerking 46-48, 1112 XR Diemen",
-        telefoon: "020-590-8710",
-        website: "https://arkinjeugdengezin.nl",
+        telefoon: "020-5905555",
+        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
         leeftijd: "0-23 jaar",
         specialisaties: "Gezinstherapie, eetstoornissen, angst"
     },
@@ -40,8 +41,8 @@ const zorginstellingen = [
         type: "Hoogspecialistisch",
         positie: { lat: 52.3912, lng: 4.8914 },
         adres: "Klaprozenweg 111, 1033 NN Amsterdam",
-        telefoon: "020-590-5700",
-        website: "https://arkinjeugdengezin.nl",
+        telefoon: "020-5905555",
+        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/ ",
         leeftijd: "0-23 jaar",
         specialisaties: "Gezinstherapie, eetstoornissen, angst"
     },
@@ -50,20 +51,10 @@ const zorginstellingen = [
         type: "Hoogspecialistisch",
         positie: { lat: 52.3221158, lng: 4.9732716 },
         adres: "Bijlmerdreef 1169, 1103 TT Amsterdam Zuidoost",
-        telefoon: "020-590-4400",
-        website: "https://arkinjeugdengezin.nl",
+        telefoon: "020-5905555",
+        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
         leeftijd: "0-23 jaar",
         specialisaties: "Gezinstherapie, eetstoornissen, angst"
-    },
-    {
-        naam: "Kinder- en Jeugdpsychiatrie Amsterdam UMC",
-        type: "hoogspecialistisch",
-        positie: { lat: 52.2956, lng: 4.9591 },
-        adres: "Meibergdreef 5, 1105 AZ Amsterdam",
-        telefoon: "020-5669111",
-        website: "https://www.amsterdamumc.nl/kinderpsychiatrie",
-        leeftijd: "0-18 jaar",
-        specialisaties: "Complexe psychiatrische problematiek, crisis"
     },
     {
         naam: "GGZ inGeest Jeugd - De Nieuwe Valerius",
@@ -546,8 +537,10 @@ function bepaalKleur(type, isOKT) {
 }
 
 // Functie om de zorginstellingen tabel te vullen
-function vulZorginstellingenTabel(instellingen) {
-    const tbody = document.querySelector('#zorginstellingen-tabel tbody');
+function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
+    const tbody = document.querySelector(isGefilterd ? '#gefilterde-zorginstellingen-tabel tbody' : '#zorginstellingen-tabel tbody');
+    if (!tbody) return; // Als de tabel niet bestaat op de huidige pagina, doe niets
+    
     tbody.innerHTML = ''; // Leeg de huidige inhoud
 
     instellingen.forEach(instelling => {
@@ -565,11 +558,18 @@ function vulZorginstellingenTabel(instellingen) {
         `;
         tbody.appendChild(row);
     });
+
+    // Update de resultaten teller als we gefilterde resultaten tonen
+    if (isGefilterd) {
+        const resultatenTeller = document.getElementById('resultaten-teller');
+        if (resultatenTeller) {
+            resultatenTeller.textContent = `${instellingen.length} resultaten gevonden`;
+        }
+    }
 }
 
 // Initialiseer de kaart
 function initMap() {
-    // Centreer de kaart op Amsterdam
     const amsterdam = { lat: 52.3676, lng: 4.9041 };
     
     map = new google.maps.Map(document.getElementById("map"), {
@@ -577,12 +577,38 @@ function initMap() {
         center: amsterdam,
         zoomControl: true,
         zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_CENTER
+            position: google.maps.ControlPosition.LEFT_CENTER,
+            style: google.maps.ZoomControlStyle.LARGE
+        },
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        },
+        streetViewControl: false,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP,
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
         },
         styles: [
             {
                 featureType: "poi.business",
                 stylers: [{ visibility: "off" }]
+            },
+            {
+                featureType: "transit",
+                elementType: "labels.icon",
+                stylers: [{ visibility: "off" }]
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#e9e9e9" }]
+            },
+            {
+                featureType: "landscape",
+                elementType: "geometry",
+                stylers: [{ color: "#f5f5f5" }]
             }
         ]
     });
@@ -590,8 +616,15 @@ function initMap() {
     // Plaats markers voor alle zorginstellingen
     toonZorginstellingen(zorginstellingen);
     
-    // Vul de tabel met alle zorginstellingen
-    vulZorginstellingenTabel(zorginstellingen);
+    // Vul de juiste tabel op basis van de huidige pagina
+    const isKaartPagina = document.getElementById('map') !== null;
+    if (isKaartPagina) {
+        // Op de kaartpagina tonen we initieel alle zorginstellingen
+        vulZorginstellingenTabel(zorginstellingen, true);
+    } else {
+        // Op de overzichtspagina tonen we het volledige overzicht
+        vulZorginstellingenTabel(zorginstellingen, false);
+    }
 
     // Voeg event listener toe aan het zoekformulier
     document.querySelector('form').addEventListener('submit', function(e) {
@@ -653,28 +686,7 @@ function toonZorginstellingen(instellingen) {
     });
 
     // Update de legenda
-    const legendaDiv = document.createElement('div');
-    legendaDiv.innerHTML = `
-        <div style="background: white; padding: 10px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
-            <div style="margin-bottom: 5px;">
-                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #4CAF50; margin-right: 5px; vertical-align: middle;"></span>
-                <span style="vertical-align: middle;">Ouder- en Kindteam</span>
-            </div>
-            <div style="margin-bottom: 5px;">
-                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #FFC107; margin-right: 5px; vertical-align: middle;"></span>
-                <span style="vertical-align: middle;">Basis GGZ</span>
-            </div>
-            <div style="margin-bottom: 5px;">
-                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #FF5722; margin-right: 5px; vertical-align: middle;"></span>
-                <span style="vertical-align: middle;">Gespecialiseerde GGZ</span>
-            </div>
-            <div>
-                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #E91E63; margin-right: 5px; vertical-align: middle;"></span>
-                <span style="vertical-align: middle;">Hoogspecialistische zorg</span>
-            </div>
-        </div>
-    `;
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendaDiv);
+    updateLegenda();
 }
 
 // Functie om markers te verwijderen
@@ -692,13 +704,9 @@ function zoekZorginstellingen() {
 
     // Filter zorginstellingen op basis van criteria
     const gefilterd = zorginstellingen.filter(instelling => {
-        // Check zorgtype
         const matchType = zorgtype === 'alle' || instelling.type.toLowerCase() === zorgtype;
-        
-        // Check locatie
         const matchLocatie = instelling.adres.toLowerCase().includes(locatie);
         
-        // Check leeftijd
         let matchLeeftijd = true;
         if (leeftijd !== 'alle') {
             const [min, max] = leeftijd.split('-').map(Number);
@@ -706,7 +714,6 @@ function zoekZorginstellingen() {
             matchLeeftijd = (min >= instMin && min <= instMax) || (max >= instMin && max <= instMax);
         }
 
-        // Check instelling type (OKT of GGZ)
         let matchFilter = true;
         if (filter === 'okt') {
             matchFilter = instelling.naam.toLowerCase().includes('okt');
@@ -717,7 +724,43 @@ function zoekZorginstellingen() {
         return matchType && matchLocatie && matchLeeftijd && matchFilter;
     });
 
-    // Toon gefilterde resultaten op de kaart en in de tabel
+    // Toon gefilterde resultaten op de kaart
     toonZorginstellingen(gefilterd);
-    vulZorginstellingenTabel(gefilterd);
+    
+    // Vul de gefilterde resultaten tabel als we op de kaartpagina zijn
+    const gefilterdeTabel = document.getElementById('gefilterde-zorginstellingen-tabel');
+    if (gefilterdeTabel) {
+        vulZorginstellingenTabel(gefilterd, true);
+    }
+}
+
+// Update de legenda
+function updateLegenda() {
+    if (legendaToegevoegd) return;
+
+    const legendaDiv = document.createElement('div');
+    legendaDiv.className = 'legenda-container';
+    legendaDiv.innerHTML = `
+        <div class="legenda">
+            <h3>Type zorginstelling</h3>
+            <div class="legenda-item">
+                <span style="background: #4CAF50"></span>
+                <span>Ouder- en Kindteam (OKT)</span>
+            </div>
+            <div class="legenda-item">
+                <span style="background: #FFC107"></span>
+                <span>Basis GGZ</span>
+            </div>
+            <div class="legenda-item">
+                <span style="background: #FF5722"></span>
+                <span>Gespecialiseerde GGZ</span>
+            </div>
+            <div class="legenda-item">
+                <span style="background: #E91E63"></span>
+                <span>Hoogspecialistische zorg</span>
+            </div>
+        </div>
+    `;
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(legendaDiv);
+    legendaToegevoegd = true;
 } 

@@ -9,31 +9,33 @@
 body {
     line-height: 1.6;
     color: #282828;
-    background-color: #f3f3f3;
+    background-color: #f5f5f5;
 }
 
 /* Header stijlen */
 header {
-    background: #EC0000;
+    background: linear-gradient(135deg, #EC0000 0%, #cc0000 100%);
     color: white;
     padding: 1.5rem 0;
     position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header h1 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
 
 nav {
     background: rgba(255,255,255,0.1);
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     margin-top: 1rem;
     border-top: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
 }
 
 nav ul {
@@ -60,16 +62,21 @@ nav a:hover {
 /* Hoofdcontent stijlen */
 main {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 2.5rem auto;
     padding: 0 2rem;
 }
 
 section {
     background: white;
-    border-radius: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 2.5rem;
     padding: 2rem;
+    transition: box-shadow 0.3s ease;
+}
+
+section:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 h2 {
@@ -89,9 +96,13 @@ h3 {
 /* Zoekformulier stijlen */
 form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     align-items: end;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
 }
 
 .form-group {
@@ -107,90 +118,184 @@ label {
 
 input, select {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #E6E6E6;
-    border-radius: 0;
+    padding: 0.875rem;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
     background-color: white;
 }
 
 input:focus, select:focus {
     border-color: #004699;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(0,70,153,0.1);
 }
 
 button {
-    background: #004699;
+    background: linear-gradient(135deg, #004699 0%, #003875 100%);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0;
+    padding: 0.875rem 1.5rem;
+    border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 button:hover {
-    background: #003875;
+    background: linear-gradient(135deg, #003875 0%, #002952 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,70,153,0.2);
 }
 
 /* Kaart stijlen */
 #map {
-    height: 600px;
-    border-radius: 0;
+    height: 650px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    margin: 1.5rem 0;
+    border: 1px solid #e9ecef;
+}
+
+/* Legenda stijlen */
+.legenda-container {
+    margin: 10px;
+    pointer-events: auto;
+}
+
+.legenda {
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    min-width: 240px;
+    max-width: 280px;
+    border: 1px solid rgba(0,0,0,0.08);
+    margin: 12px;
+}
+
+.legenda h3 {
+    color: #004699;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e9ecef;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+}
+
+.legenda-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+}
+
+.legenda-item:last-child {
+    margin-bottom: 0;
+}
+
+.legenda-item span:first-child {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.legenda-item span:last-child {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Google Maps controls styling */
+.gm-style .gm-style-mtc button {
+    font-family: 'Amsterdam Sans', 'Roboto', Arial, sans-serif !important;
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+}
+
+.gm-style .gm-style-mtc div {
+    padding: 4px !important;
 }
 
 /* Info window stijlen */
-.gm-style-iw {
-    padding: 1rem !important;
+.gm-style .gm-style-iw-c {
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+    max-width: 320px !important;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+    padding: 0 !important;
 }
 
 .gm-style-iw h3 {
     color: #004699;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
 }
 
 .gm-style-iw p {
-    margin-bottom: 0.5rem;
-    color: #282828;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.gm-style-iw p:last-child {
+    margin-bottom: 0;
 }
 
 .gm-style-iw a {
     color: #004699;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s;
 }
 
 .gm-style-iw a:hover {
+    color: #003366;
     text-decoration: underline;
 }
 
-/* Legenda stijlen */
-.legenda {
-    background: white;
-    padding: 1rem;
-    border-radius: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 1rem;
-    font-size: 0.9rem;
-}
+/* Responsieve aanpassingen */
+@media (max-width: 768px) {
+    .legenda {
+        min-width: 200px;
+        max-width: 240px;
+        padding: 12px;
+    }
 
-.legenda div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
+    .legenda h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
 
-.legenda span:first-child {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
+    .legenda-item span:first-child {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+    }
+
+    .legenda-item span:last-child {
+        font-size: 13px;
+    }
 }
 
 /* Grid layout voor informatieve secties */
@@ -270,31 +375,37 @@ footer a:hover {
 
 #zorginstellingen-tabel {
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 24px 0;
     background-color: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-#zorginstellingen-tabel th,
-#zorginstellingen-tabel td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 #zorginstellingen-tabel th {
-    background-color: #004699;
+    background: linear-gradient(135deg, #004699 0%, #003875 100%);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
+    padding: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
 }
 
-#zorginstellingen-tabel tr:nth-child(even) {
-    background-color: #f8f8f8;
+#zorginstellingen-tabel td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 15px;
+}
+
+#zorginstellingen-tabel tr:last-child td {
+    border-bottom: none;
 }
 
 #zorginstellingen-tabel tr:hover {
-    background-color: #f0f0f0;
+    background-color: #f8f9fa;
 }
 
 #zorginstellingen-tabel td a {
@@ -304,5 +415,103 @@ footer a:hover {
 
 #zorginstellingen-tabel td a:hover {
     text-decoration: underline;
+}
+
+/* Navigatie stijlen */
+.main-nav {
+    background: #004699;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-nav ul {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.main-nav a.active {
+    background: rgba(255,255,255,0.2);
+    font-weight: 600;
+}
+
+/* Gefilterde resultaten sectie */
+.gefilterde-resultaten {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+.gefilterde-resultaten-header {
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resultaten-teller {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+#gefilterde-zorginstellingen-tabel {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Pagina specifieke stijlen */
+.kaart-pagina .map-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.overzicht-pagina .intro-text {
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Responsieve aanpassingen */
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .main-nav a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .gefilterde-resultaten-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
 }
 

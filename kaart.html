@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zorgkaart GGZ Jeugd Amsterdam</title>
+    <link rel="stylesheet" href="GGZjeugdAmsterdam.css">
+</head>
+<body class="kaart-pagina">
+    <header>
+        <h1>GGZ Jeugd Amsterdam</h1>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="kaart.html" class="active">Zorgkaart</a></li>
+            <li><a href="overzicht.html">Volledig Overzicht</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Zoek een zorginstelling</h2>
+            <form id="zoekformulier">
+                <div class="form-group">
+                    <label for="zorgtype">Type zorg</label>
+                    <select id="zorgtype" name="zorgtype">
+                        <option value="alle">Alle types</option>
+                        <option value="basis">Basis GGZ</option>
+                        <option value="gespecialiseerd">Gespecialiseerde GGZ</option>
+                        <option value="hoogspecialistisch">Hoogspecialistische zorg</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="leeftijd">Leeftijdscategorie</label>
+                    <select id="leeftijd" name="leeftijd">
+                        <option value="alle">Alle leeftijden</option>
+                        <option value="0-4">0-4 jaar</option>
+                        <option value="4-12">4-12 jaar</option>
+                        <option value="12-18">12-18 jaar</option>
+                        <option value="18-23">18-23 jaar</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filter">Type instelling</label>
+                    <select id="filter" name="filter">
+                        <option value="alle">Alle instellingen</option>
+                        <option value="okt">Alleen OKT</option>
+                        <option value="ggz">Alleen GGZ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="locatie">Zoek op locatie</label>
+                    <input type="text" id="locatie" name="locatie" placeholder="Bijv. Amsterdam Zuid">
+                </div>
+                <button type="submit">Zoeken</button>
+            </form>
+        </section>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div class="gefilterde-resultaten">
+            <div class="gefilterde-resultaten-header">
+                <h3>Gevonden zorginstellingen</h3>
+                <span id="resultaten-teller">Alle zorginstellingen</span>
+            </div>
+            <div class="table-container">
+                <table id="gefilterde-zorginstellingen-tabel">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Type</th>
+                            <th>Adres</th>
+                            <th>Telefoon</th>
+                            <th>Leeftijd</th>
+                            <th>Specialisaties</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <div>
+                <h3>Contact</h3>
+                <p>Voor vragen over verwijzingen kunt u contact opnemen met het aanmeldpunt van de betreffende instelling.</p>
+            </div>
+            <div>
+                <h3>Disclaimer</h3>
+                <p>Deze kaart is bedoeld als hulpmiddel. Aan de informatie kunnen geen rechten worden ontleend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Detecteer of we op GitHub Pages zijn
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        // Laad de juiste Google Maps API
+        const script = document.createElement('script');
+        script.src = isGitHubPages 
+            ? "https://maps.googleapis.com/maps/api/js?key=GITHUB_MAPS_API_KEY" 
+            : "https://maps.googleapis.com/maps/api/js";
+        document.body.appendChild(script);
+        // Wacht tot de API geladen is en initialiseer dan de kaart
+        script.onload = function() {
+            if (typeof google !== 'undefined') {
+                initMap();
+            } else {
+                console.error('Google Maps API niet correct geladen');
+            }
+        };
+    </script>
+    <script src="GGZjeugdAmsterdam.js"></script>
+</body>
+</html> 

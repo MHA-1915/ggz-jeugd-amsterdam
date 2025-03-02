@@ -1,47 +1,39 @@
-# Jeugd GGZ Amsterdam - Interactieve Zorgkaart
+# Zorgkaart GGZ Jeugd Amsterdam
 
-Een interactieve kaart die jeugd GGZ instellingen en Ouder- en Kindteams (OKT's) in Amsterdam weergeeft.
+Een interactieve kaart van GGZ-instellingen en Ouder- en Kindteams (OKT's) in Amsterdam.
 
 ## Functionaliteiten
 
-- Interactieve Google Maps kaart met alle zorginstellingen
-- Filtering op type zorg (Basis GGZ, Gespecialiseerde GGZ, Hoogspecialistische zorg)
-- Filtering op type instelling (OKT of GGZ)
-- Filtering op leeftijdscategorie
-- Zoeken op locatie
-- Overzichtstabel met alle informatie
-- Kleurcodering voor verschillende typen zorg
-- Responsive design voor mobiel gebruik
+- Interactieve kaart met alle GGZ-instellingen en OKT's
+- Filtering op type zorg, leeftijdscategorie en locatie
+- Gedetailleerde informatie over elke instelling
+- Volledig overzicht van alle zorginstellingen
+- Responsief ontwerp voor desktop en mobiel
 
-## Installatie
+## Gebruik
 
-1. Clone de repository:
-```bash
-git clone https://github.com/mha-1915/ggz-jeugd-amsterdam.git
-cd ggz-jeugd-amsterdam
-```
-
-2. Start een lokale server (bijvoorbeeld met Python):
-```bash
-python3 -m http.server
-```
-
-3. Open de website in je browser:
-```
-http://localhost:8000/GGZjeugdAmsterdam.html
-```
+1. Open de [Zorgkaart](kaart.html) om zorginstellingen op de kaart te bekijken
+2. Gebruik de filters om specifieke zorginstellingen te vinden
+3. Klik op een marker voor meer informatie over de instelling
+4. Bekijk het [volledige overzicht](overzicht.html) van alle zorginstellingen
 
 ## Technische Details
 
-- Vanilla JavaScript voor de functionaliteit
-- Google Maps JavaScript API voor de kaart
-- CSS Grid en Flexbox voor de layout
-- Responsive design met media queries
+- Gebouwd met HTML, CSS en JavaScript
+- Maakt gebruik van de Google Maps JavaScript API
+- Responsive design met moderne CSS-technieken
 - Geen externe dependencies nodig
+
+## Lokaal Ontwikkelen
+
+1. Clone de repository
+2. Open een terminal in de projectmap
+3. Start een lokale server (bijvoorbeeld `python3 -m http.server`)
+4. Open `http://localhost:8000` in je browser
 
 ## Licentie
 
-MIT License - Zie LICENSE bestand voor details.
+Dit project is beschikbaar onder de MIT-licentie.
 
 ## Contact
 

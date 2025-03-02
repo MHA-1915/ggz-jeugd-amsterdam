@@ -26,21 +26,33 @@
                 Voor een interactieve kaart en zoekfunctie kunt u terecht op de <a href="kaart.html">Zorgkaart</a> pagina.
             </p>
 
-            <div class="table-container">
-                <table id="zorginstellingen-tabel">
-                    <thead>
-                        <tr>
-                            <th>Naam</th>
-                            <th>Type</th>
-                            <th>Adres</th>
-                            <th>Telefoon</th>
-                            <th>Leeftijd</th>
-                            <th>Specialisaties</th>
-                            <th>Website</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="tabs">
+                <nav class="tab-nav">
+                    <button class="tab-button active" data-tab="alle">Alle Instellingen</button>
+                    <button class="tab-button" data-tab="okt">Ouder- en Kindteams</button>
+                    <button class="tab-button" data-tab="basis">Basis GGZ</button>
+                    <button class="tab-button" data-tab="gespecialiseerd">Gespecialiseerde GGZ</button>
+                    <button class="tab-button" data-tab="hoogspecialistisch">Hoogspecialistische Zorg</button>
+                </nav>
+
+                <div class="tab-content active" id="alle">
+                    <div class="table-container">
+                        <table id="zorginstellingen-tabel">
+                            <thead>
+                                <tr>
+                                    <th>Naam</th>
+                                    <th>Type</th>
+                                    <th>Adres</th>
+                                    <th>Telefoon</th>
+                                    <th>Leeftijd</th>
+                                    <th>Specialisaties</th>
+                                    <th>Website</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

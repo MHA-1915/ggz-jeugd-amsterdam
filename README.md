@@ -1,28 +1,82 @@
-# Zorgkaart GGZ Jeugd Amsterdam
+# GGZ Jeugd Amsterdam Kaart
 
-Een interactieve kaart van GGZ-instellingen en Ouder- en Kindteams (OKT's) in Amsterdam.
+Een interactieve kaart die GGZ-zorginstellingen en Ouder- en Kindteams in Amsterdam weergeeft.
 
 ## Functionaliteiten
 
-- Interactieve kaart met alle GGZ-instellingen en OKT's
-- Filtering op type zorg, leeftijdscategorie en locatie
-- Gedetailleerde informatie over elke instelling
-- Volledig overzicht van alle zorginstellingen
-- Responsief ontwerp voor desktop en mobiel
+- Interactieve kaart met alle GGZ-zorginstellingen
+- Filtering op type zorg en leeftijdscategorie
+- Gedetailleerde informatie per instelling
+- Responsive design
+
+## Installatie
+
+1. Clone de repository:
+```bash
+git clone [repository-url]
+cd GGZjeugdAmsterdam
+```
+
+2. Installeer de backend dependencies:
+```bash
+cd server
+npm install
+```
+
+3. Configureer de environment variables:
+```bash
+cp .env.example .env
+```
+Vul je Google Maps API key in in het `.env` bestand.
 
 ## Gebruik
 
-1. Open de [Zorgkaart](kaart.html) om zorginstellingen op de kaart te bekijken
-2. Gebruik de filters om specifieke zorginstellingen te vinden
-3. Klik op een marker voor meer informatie over de instelling
-4. Bekijk het [volledige overzicht](overzicht.html) van alle zorginstellingen
+1. Start de backend server:
+```bash
+cd server
+npm run dev
+```
 
-## Technische Details
+2. Start de frontend server (in een nieuwe terminal):
+```bash
+cd ..
+python3 -m http.server 8080
+```
 
-- Gebouwd met HTML, CSS en JavaScript
-- Maakt gebruik van de Google Maps JavaScript API
-- Responsive design met moderne CSS-technieken
-- Geen externe dependencies nodig
+3. Open de website in je browser:
+```
+http://localhost:8080/kaart.html
+```
+
+## Google Maps API Setup
+
+1. Ga naar de [Google Cloud Console](https://console.cloud.google.com)
+2. Maak een nieuw project aan of selecteer een bestaand project
+3. Enable de Maps JavaScript API
+4. Maak een API key aan
+5. Stel domeinbeperkingen in voor de API key
+6. Voeg de API key toe aan je `.env` bestand
+
+## Veiligheid
+
+- De API key wordt veilig beheerd via de backend
+- CORS is geconfigureerd voor lokale development
+- Gevoelige informatie is uitgesloten van versiecontrole
+
+## Development
+
+Voor development:
+1. Backend draait op `http://localhost:3000`
+2. Frontend is beschikbaar op `http://localhost:8080`
+3. Gebruik `nodemon` voor automatisch herladen van de backend
+
+## Productie
+
+Voor productie deployment:
+1. Pas de CORS origins aan in `server.js`
+2. Stel de juiste domeinbeperkingen in voor de Google Maps API key
+3. Gebruik een beveiligde hosting provider voor de backend
+4. Configureer SSL/TLS voor veilige communicatie
 
 ## Lokaal Ontwikkelen
 

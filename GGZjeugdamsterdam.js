@@ -4,8 +4,42 @@ let markers = [];
 let currentInfoWindow = null; // Nieuwe variabele voor het bijhouden van het huidige open infowindow
 let legendaToegevoegd = false; // Nieuwe variabele om bij te houden of de legenda al is toegevoegd
 
-// Zorginstelling data
+// Voorbeeld zorginstellingen data
 const zorginstellingen = [
+    {
+        naam: "OKT Amsterdam Zuid",
+        type: "Ouder- en Kindteam",
+        adres: "Koninginneweg 1, 1075 CL Amsterdam",
+        telefoon: "020-555 5963",
+        leeftijd: "0-23",
+        specialisaties: "Opvoedondersteuning, Ontwikkeling, Gezinscoaching",
+        website: "https://oktamsterdam.nl",
+        positie: { lat: 52.3507, lng: 4.8696 }
+    },
+    {
+        naam: "Levvel",
+        type: "Hoogspecialistische Zorg",
+        adres: "Dr. Jan van Breemenstraat 1, 1056 AB Amsterdam",
+        telefoon: "020-555 5151",
+        leeftijd: "0-23",
+        specialisaties: "Complexe gedragsstoornissen, Trauma, Autisme",
+        website: "https://levvel.nl",
+        positie: { lat: 52.3662, lng: 4.8544 }
+    },
+    {
+        naam: "Arkin Jeugd & Gezin",
+        type: "Gespecialiseerde GGZ",
+        adres: "Baarsjesweg 224, 1058 AA Amsterdam",
+        telefoon: "020-590 1330",
+        leeftijd: "12-23",
+        specialisaties: "Angst, Depressie, Gedragsproblemen",
+        website: "https://arkinjeugdengezin.nl",
+        positie: { lat: 52.3645, lng: 4.8453 }
+    }
+];
+
+// Zorginstelling data
+const zorginstellingenData = [
     {
         naam: "Levvel",
         type: "Hoogspecialistisch",
@@ -520,6 +554,14 @@ const oktGebieden = {
     ]
 };
 
+// Kleuren voor verschillende type zorginstellingen
+const markerKleuren = {
+    'Ouder- en Kindteam': '#4CAF50',
+    'Basis GGZ': '#FFC107',
+    'Gespecialiseerde GGZ': '#FF5722',
+    'Hoogspecialistische Zorg': '#E91E63'
+};
+
 // Functie om de kleur te bepalen op basis van het type zorg
 function bepaalKleur(type, isOKT) {
     if (isOKT) return '#4CAF50'; // Groen voor OKT
@@ -536,207 +578,138 @@ function bepaalKleur(type, isOKT) {
     }
 }
 
-// Functie om de zorginstellingen tabel te vullen
+// Functie om zorginstellingen te sorteren op naam
+function sorteerInstellingen(instellingen) {
+    return [...instellingen].sort((a, b) => a.naam.localeCompare(b.naam));
+}
+
+// Functie om zorginstellingen tabel te vullen
 function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
     const tbody = document.querySelector(isGefilterd ? '#gefilterde-zorginstellingen-tabel tbody' : '#zorginstellingen-tabel tbody');
-    if (!tbody) return; // Als de tabel niet bestaat op de huidige pagina, doe niets
+    if (!tbody) return;
     
-    tbody.innerHTML = ''; // Leeg de huidige inhoud
+    tbody.innerHTML = '';
 
-    instellingen.forEach(instelling => {
+    // Sorteer de instellingen alfabetisch
+    const gesorteerdeInstellingen = sorteerInstellingen(instellingen);
+
+    gesorteerdeInstellingen.forEach(instelling => {
         const isOKT = instelling.naam.toLowerCase().includes('okt');
         const kleur = bepaalKleur(instelling.type, isOKT);
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${instelling.naam}</td>
-            <td><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: ${kleur}; margin-right: 5px;"></span>${instelling.type}</td>
+            <td>
+                <div class="type-indicator">
+                    <span style="background: ${kleur};"></span>
+                    ${instelling.type}
+                </div>
+            </td>
             <td>${instelling.adres}</td>
             <td><a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></td>
             <td>${instelling.leeftijd}</td>
             <td>${instelling.specialisaties}</td>
-            <td><a href="${instelling.website}" target="_blank">Website</a></td>
+            <td><a href="${instelling.website}" target="_blank" rel="noopener noreferrer">Website</a></td>
         `;
         tbody.appendChild(row);
     });
 
-    // Update de resultaten teller als we gefilterde resultaten tonen
-    if (isGefilterd) {
+    // Update resultaten teller
+    const resultatenTeller = document.getElementById('resultaten-teller');
+    if (resultatenTeller) {
+        resultatenTeller.textContent = `${instellingen.length} ${instellingen.length === 1 ? 'resultaat' : 'resultaten'} gevonden`;
+    }
+}
+
+// Wacht tot het document geladen is
+document.addEventListener('DOMContentLoaded', function() {
+    const { isKaartPagina, isOverzichtPagina } = bepaalPagina();
+    
+    if (isKaartPagina) {
+        // Wacht tot de Google Maps API is geladen
+        if (window.google && window.google.maps) {
+            initMap();
+        } else {
+            window.initMap = initializeMap;
+        }
+    }
+    
+    // Als we op de overzichtpagina zijn
+    if (isOverzichtPagina) {
+        // Vul initieel alle zorginstellingen
+        const alleInstellingen = filterZorginstellingenOpType('alle');
+        vulZorginstellingenTabel(alleInstellingen, false);
+        
+        // Initialiseer de tabs
+        initializeTabs();
+        
+        // Update de resultaten teller
         const resultatenTeller = document.getElementById('resultaten-teller');
         if (resultatenTeller) {
-            resultatenTeller.textContent = `${instellingen.length} resultaten gevonden`;
+            resultatenTeller.textContent = `${alleInstellingen.length} resultaten gevonden`;
         }
     }
-}
+});
 
-// Initialiseer de kaart
+// Functie om de kaart te initialiseren (wordt aangeroepen door de Google Maps API)
 function initMap() {
+    console.log('initMap wordt aangeroepen');
+    
+    const mapElement = document.getElementById('map');
+    if (!mapElement) {
+        console.error('Kaart element niet gevonden');
+        return;
+    }
+
+    // Centreer de kaart op Amsterdam
     const amsterdam = { lat: 52.3676, lng: 4.9041 };
     
-    map = new google.maps.Map(document.getElementById("map"), {
+    // Basis kaart opties
+    const mapOptions = {
         zoom: 12,
         center: amsterdam,
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_CENTER,
-            style: google.maps.ZoomControlStyle.LARGE
-        },
-        fullscreenControl: true,
-        fullscreenControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP
-        },
-        streetViewControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
         mapTypeControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP,
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_RIGHT
         },
-        styles: [
-            {
-                featureType: "poi.business",
-                stylers: [{ visibility: "off" }]
-            },
-            {
-                featureType: "transit",
-                elementType: "labels.icon",
-                stylers: [{ visibility: "off" }]
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#e9e9e9" }]
-            },
-            {
-                featureType: "landscape",
-                elementType: "geometry",
-                stylers: [{ color: "#f5f5f5" }]
-            }
-        ]
-    });
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+        scaleControl: true,
+        streetViewControl: true,
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
+        },
+        fullscreenControl: true
+    };
 
-    // Plaats markers voor alle zorginstellingen
-    toonZorginstellingen(zorginstellingen);
-    
-    // Vul de juiste tabel op basis van de huidige pagina
-    const isKaartPagina = document.getElementById('map') !== null;
-    if (isKaartPagina) {
-        // Op de kaartpagina tonen we initieel alle zorginstellingen
-        vulZorginstellingenTabel(zorginstellingen, true);
-    } else {
-        // Op de overzichtspagina tonen we het volledige overzicht
-        vulZorginstellingenTabel(zorginstellingen, false);
-    }
-
-    // Voeg event listener toe aan het zoekformulier
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        zoekZorginstellingen();
-    });
-}
-
-// Functie om zorginstellingen op de kaart te tonen
-function toonZorginstellingen(instellingen) {
-    // Verwijder bestaande markers
-    verwijderMarkers();
-
-    // Voeg nieuwe markers toe
-    instellingen.forEach(instelling => {
-        // Bepaal marker kleur en icoon op basis van type instelling
-        const isOKT = instelling.naam.toLowerCase().includes('okt');
-        const kleur = bepaalKleur(instelling.type, isOKT);
-        const markerOptions = {
-            position: instelling.positie,
-            map: map,
-            title: instelling.naam,
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                fillColor: kleur,
-                fillOpacity: 1,
-                strokeColor: '#000000',
-                strokeWeight: 1,
-                scale: 10
-            }
-        };
-
-        const marker = new google.maps.Marker(markerOptions);
-
-        // Voeg info window toe met meer informatie
-        const infoWindow = new google.maps.InfoWindow({
-            content: `
-                <div style="max-width: 300px;">
-                    <h3>${instelling.naam}</h3>
-                    <p><strong>Type:</strong> <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: ${kleur}; margin-right: 5px;"></span>${instelling.type}</p>
-                    <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-                    <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
-                    <p><strong>Adres:</strong> ${instelling.adres}</p>
-                    <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
-                    <p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>
-                </div>
-            `
-        });
-
-        marker.addListener('click', () => {
-            if (currentInfoWindow) {
-                currentInfoWindow.close();
-            }
-            infoWindow.open(map, marker);
-            currentInfoWindow = infoWindow;
-        });
-
-        markers.push(marker);
-    });
-
-    // Update de legenda
-    updateLegenda();
-}
-
-// Functie om markers te verwijderen
-function verwijderMarkers() {
-    markers.forEach(marker => marker.setMap(null));
-    markers = [];
-}
-
-// Functie voor het zoeken van zorginstellingen
-function zoekZorginstellingen() {
-    const zorgtype = document.getElementById('zorgtype').value;
-    const leeftijd = document.getElementById('leeftijd').value;
-    const filter = document.getElementById('filter').value;
-    const locatie = document.getElementById('locatie').value.toLowerCase();
-
-    // Filter zorginstellingen op basis van criteria
-    const gefilterd = zorginstellingen.filter(instelling => {
-        const matchType = zorgtype === 'alle' || instelling.type.toLowerCase() === zorgtype;
-        const matchLocatie = instelling.adres.toLowerCase().includes(locatie);
+    try {
+        // Maak de kaart aan
+        map = new google.maps.Map(mapElement, mapOptions);
         
-        let matchLeeftijd = true;
-        if (leeftijd !== 'alle') {
-            const [min, max] = leeftijd.split('-').map(Number);
-            const [instMin, instMax] = instelling.leeftijd.split('-').map(str => parseInt(str));
-            matchLeeftijd = (min >= instMin && min <= instMax) || (max >= instMin && max <= instMax);
-        }
-
-        let matchFilter = true;
-        if (filter === 'okt') {
-            matchFilter = instelling.naam.toLowerCase().includes('okt');
-        } else if (filter === 'ggz') {
-            matchFilter = !instelling.naam.toLowerCase().includes('okt');
-        }
-
-        return matchType && matchLocatie && matchLeeftijd && matchFilter;
-    });
-
-    // Toon gefilterde resultaten op de kaart
-    toonZorginstellingen(gefilterd);
-    
-    // Vul de gefilterde resultaten tabel als we op de kaartpagina zijn
-    const gefilterdeTabel = document.getElementById('gefilterde-zorginstellingen-tabel');
-    if (gefilterdeTabel) {
-        vulZorginstellingenTabel(gefilterd, true);
+        // Log succesvol maken van de kaart
+        console.log('Kaart succesvol aangemaakt');
+        
+        // Voeg markers en legenda toe nadat de kaart is geladen
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            console.log('Kaart is geladen, markers worden toegevoegd');
+            voegMarkersToe(zorginstellingenData);
+            voegLegendaToe();
+        });
+    } catch (error) {
+        console.error('Fout bij het maken van de kaart:', error);
     }
 }
 
-// Update de legenda
-function updateLegenda() {
-    if (legendaToegevoegd) return;
+// Maak initMap beschikbaar in het window object voor de callback
+window.initMap = initMap;
+
+// Functie om de legenda toe te voegen
+function voegLegendaToe() {
+    if (legendaToegevoegd || !map) return;
 
     const legendaDiv = document.createElement('div');
     legendaDiv.className = 'legenda-container';
@@ -763,4 +736,162 @@ function updateLegenda() {
     `;
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(legendaDiv);
     legendaToegevoegd = true;
+}
+
+// Functie om markers toe te voegen
+function voegMarkersToe(zorginstellingen) {
+    // Verwijder bestaande markers
+    markers.forEach(marker => marker.setMap(null));
+    markers = [];
+
+    zorginstellingen.forEach(instelling => {
+        const isOKT = instelling.naam.toLowerCase().includes('okt');
+        const kleur = bepaalKleur(instelling.type, isOKT);
+        
+        const marker = new google.maps.Marker({
+            position: { 
+                lat: parseFloat(instelling.positie.lat), 
+                lng: parseFloat(instelling.positie.lng) 
+            },
+            map: map,
+            title: instelling.naam,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: kleur,
+                fillOpacity: 1,
+                strokeWeight: 1,
+                strokeColor: '#ffffff',
+                scale: 10
+            }
+        });
+
+        // Info window content
+        const contentString = `
+            <div class="info-window">
+                <h3>${instelling.naam}</h3>
+                <p><strong>Type:</strong> ${instelling.type}</p>
+                <p><strong>Adres:</strong> ${instelling.adres}</p>
+                <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
+                <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
+                <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
+                ${instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
+            </div>
+        `;
+
+        const infowindow = new google.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 300
+        });
+
+        // Sluit het huidige infowindow als er een open is
+        marker.addListener('click', () => {
+            if (currentInfoWindow) {
+                currentInfoWindow.close();
+            }
+            infowindow.open(map, marker);
+            currentInfoWindow = infowindow;
+        });
+
+        markers.push(marker);
+    });
+}
+
+// Functie om de kaart te updaten met gefilterde resultaten
+function updateKaart(gefilterd = false) {
+    const zorginstellingen = gefilterd ? filterZorginstellingenOpType(gefilterd) : zorginstellingenData;
+    voegMarkersToe(zorginstellingen);
+}
+
+// Functie om zorginstellingen te filteren op type
+function filterZorginstellingenOpType(type) {
+    if (type === 'alle') return zorginstellingenData;
+    
+    return zorginstellingenData.filter(instelling => {
+        const isOKT = instelling.naam.toLowerCase().includes('okt');
+        
+        switch(type) {
+            case 'okt':
+                return isOKT;
+            case 'basis':
+                return instelling.type.toLowerCase() === 'basis' && !isOKT;
+            case 'gespecialiseerd':
+                return instelling.type.toLowerCase() === 'gespecialiseerd';
+            case 'hoogspecialistisch':
+                return instelling.type.toLowerCase() === 'hoogspecialistisch';
+            default:
+                return true;
+        }
+    });
+}
+
+// Functie om tabs te beheren
+function initializeTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    
+    if (!tabButtons.length) return; // Als we niet op de overzichtspagina zijn
+    
+    // Vul initieel de 'alle' tab
+    const alleInstellingen = filterZorginstellingenOpType('alle');
+    vulZorginstellingenTabel(alleInstellingen, false);
+    updateResultatenTeller(alleInstellingen.length);
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Verwijder active class van alle buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Voeg active class toe aan geklikte button
+            button.classList.add('active');
+            
+            // Filter en toon zorginstellingen
+            const type = button.dataset.tab;
+            const gefilterd = filterZorginstellingenOpType(type);
+            vulZorginstellingenTabel(gefilterd, false);
+            updateResultatenTeller(gefilterd.length);
+        });
+    });
+}
+
+// Helper functie voor het updaten van de resultaten teller
+function updateResultatenTeller(aantal) {
+    const resultatenTeller = document.getElementById('resultaten-teller');
+    if (resultatenTeller) {
+        resultatenTeller.textContent = `${aantal} ${aantal === 1 ? 'resultaat' : 'resultaten'} gevonden`;
+    }
+}
+
+// Functie voor het zoeken van zorginstellingen
+function zoekZorginstellingen() {
+    const typeFilter = document.getElementById('type-filter');
+    const leeftijdFilter = document.getElementById('leeftijd-filter');
+    
+    const zorgtype = typeFilter ? typeFilter.value : 'alle';
+    const leeftijd = leeftijdFilter ? leeftijdFilter.value : 'alle';
+
+    // Filter zorginstellingen op basis van criteria
+    const gefilterd = zorginstellingenData.filter(instelling => {
+        const matchType = zorgtype === '' || instelling.type.toLowerCase().includes(zorgtype);
+        
+        let matchLeeftijd = true;
+        if (leeftijd !== '') {
+            const [zoekMin, zoekMax] = leeftijd.split('-').map(Number);
+            const [instMin, instMax] = instelling.leeftijd.split(/[- ]/)[0].split('-').map(Number);
+            matchLeeftijd = (zoekMin >= instMin && zoekMin <= instMax) || 
+                          (zoekMax >= instMin && zoekMax <= instMax) ||
+                          (zoekMin <= instMin && zoekMax >= instMax);
+        }
+
+        return matchType && matchLeeftijd;
+    });
+
+    // Update de kaart en tabel met gefilterde resultaten
+    voegMarkersToe(gefilterd);
+    vulZorginstellingenTabel(gefilterd, true);
+}
+
+// Functie om te bepalen op welke pagina we zijn
+function bepaalPagina() {
+    const isKaartPagina = document.querySelector('.kaart-pagina') !== null;
+    const isOverzichtPagina = document.querySelector('.overzicht-pagina') !== null;
+    return { isKaartPagina, isOverzichtPagina };
 } 

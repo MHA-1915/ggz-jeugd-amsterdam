@@ -154,68 +154,57 @@ button:hover {
 
 /* Kaart stijlen */
 #map {
-    height: 650px;
+    width: 100%;
+    height: 600px;
+    margin: 20px 0;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    margin: 1.5rem 0;
-    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Legenda stijlen */
+.info-window {
+    padding: 15px;
+    max-width: 300px;
+}
+
+.info-window h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.info-window p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
 .legenda-container {
+    background: white;
+    padding: 10px;
     margin: 10px;
-    pointer-events: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .legenda {
-    background: white;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    min-width: 240px;
-    max-width: 280px;
-    border: 1px solid rgba(0,0,0,0.08);
-    margin: 12px;
+    font-size: 14px;
 }
 
 .legenda h3 {
-    color: #004699;
+    margin: 0 0 10px 0;
     font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #e9ecef;
-    text-transform: uppercase;
-    letter-spacing: 0.75px;
 }
 
 .legenda-item {
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    padding: 2px 0;
-}
-
-.legenda-item:last-child {
-    margin-bottom: 0;
+    margin: 5px 0;
 }
 
 .legenda-item span:first-child {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    margin-right: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    flex-shrink: 0;
-}
-
-.legenda-item span:last-child {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.4;
-    font-weight: 500;
+    margin-right: 8px;
+    display: inline-block;
 }
 
 /* Google Maps controls styling */
@@ -367,80 +356,180 @@ footer a:hover {
     }
 }
 
+/* Tabel styling verbetering */
 .table-container {
     max-width: 100%;
     overflow-x: auto;
     margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
+#gefilterde-zorginstellingen-tabel,
 #zorginstellingen-tabel {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin: 24px 0;
     background-color: white;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    border-radius: 8px;
-    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
+#gefilterde-zorginstellingen-tabel th,
 #zorginstellingen-tabel th {
     background: linear-gradient(135deg, #004699 0%, #003875 100%);
     color: white;
     font-weight: 600;
     padding: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 14px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    white-space: nowrap;
 }
 
+#gefilterde-zorginstellingen-tabel td,
 #zorginstellingen-tabel td {
-    padding: 14px 16px;
+    padding: 12px 16px;
     border-bottom: 1px solid #e9ecef;
-    font-size: 15px;
+    vertical-align: top;
 }
 
-#zorginstellingen-tabel tr:last-child td {
-    border-bottom: none;
+#gefilterde-zorginstellingen-tabel td:first-child,
+#zorginstellingen-tabel td:first-child {
+    font-weight: 500;
 }
 
+/* Kolom breedtes */
+#gefilterde-zorginstellingen-tabel th:nth-child(1),
+#zorginstellingen-tabel th:nth-child(1) { width: 20%; } /* Naam */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(2),
+#zorginstellingen-tabel th:nth-child(2) { width: 12%; } /* Type */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(3),
+#zorginstellingen-tabel th:nth-child(3) { width: 20%; } /* Adres */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(4),
+#zorginstellingen-tabel th:nth-child(4) { width: 10%; } /* Telefoon */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(5),
+#zorginstellingen-tabel th:nth-child(5) { width: 8%; } /* Leeftijd */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(6),
+#zorginstellingen-tabel th:nth-child(6) { width: 22%; } /* Specialisaties */
+
+#gefilterde-zorginstellingen-tabel th:nth-child(7),
+#zorginstellingen-tabel th:nth-child(7) { width: 8%; } /* Website */
+
+/* Hover effect op rijen */
+#gefilterde-zorginstellingen-tabel tr:hover,
 #zorginstellingen-tabel tr:hover {
     background-color: #f8f9fa;
 }
 
+/* Links in de tabel */
+#gefilterde-zorginstellingen-tabel td a,
 #zorginstellingen-tabel td a {
     color: #004699;
     text-decoration: none;
+    font-weight: 500;
 }
 
+#gefilterde-zorginstellingen-tabel td a:hover,
 #zorginstellingen-tabel td a:hover {
     text-decoration: underline;
 }
 
-/* Navigatie stijlen */
+/* Type indicator styling */
+.type-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.type-indicator span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* Responsive aanpassingen */
+@media (max-width: 1024px) {
+    .table-container {
+        margin: 10px -16px;
+        border-radius: 0;
+    }
+
+    #gefilterde-zorginstellingen-tabel,
+    #zorginstellingen-tabel {
+        font-size: 13px;
+    }
+
+    #gefilterde-zorginstellingen-tabel th,
+    #zorginstellingen-tabel th,
+    #gefilterde-zorginstellingen-tabel td,
+    #zorginstellingen-tabel td {
+        padding: 10px 12px;
+    }
+}
+
+/* Gefilterde resultaten header styling */
+.gefilterde-resultaten-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.gefilterde-resultaten-header h3 {
+    margin: 0;
+    color: #004699;
+    font-size: 18px;
+}
+
+#resultaten-teller {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Tab Navigatie */
 .main-nav {
-    background: #004699;
-    padding: 1rem 0;
-    margin-bottom: 2rem;
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    padding: 0;
+    margin: 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
-    list-style: none;
-    display: flex;
-    gap: 2rem;
+}
+
+.main-nav li {
+    margin: 0;
+    flex: 0 1 auto;
 }
 
 .main-nav a {
-    color: white;
+    display: block;
+    padding: 1rem 2rem;
+    color: #fff;
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
     transition: all 0.3s ease;
+    position: relative;
+    text-align: center;
 }
 
 .main-nav a:hover {
@@ -449,7 +538,40 @@ footer a:hover {
 
 .main-nav a.active {
     background: rgba(255,255,255,0.2);
-    font-weight: 600;
+}
+
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .main-nav a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Content Sections */
+main section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
 /* Gefilterde resultaten sectie */
@@ -512,6 +634,342 @@ footer a:hover {
         flex-direction: column;
         gap: 0.5rem;
         align-items: flex-start;
+    }
+}
+
+/* Tabs op overzichtspagina */
+.tabs {
+    margin: 20px 0;
+    border-bottom: 2px solid #004699;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-bottom: 2px;
+}
+
+.tab-button {
+    padding: 12px 24px;
+    border: 2px solid #e0e0e0;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: -2px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.tab-button:hover {
+    background: #e3f2fd;
+    border-color: #004699;
+    color: #004699;
+}
+
+.tab-button.active {
+    background: #004699;
+    border-color: #004699;
+    border-bottom: 2px solid #004699;
+    font-weight: bold;
+    color: #ffffff;
+    box-shadow: 0 -2px 8px rgba(0, 70, 153, 0.2);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        gap: 5px;
+    }
+    
+    .tab-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .table-container {
+        margin: 10px 0;
+    }
+}
+
+/* Legenda styling voor overzichtspagina */
+.tabs .legenda {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+
+.tabs .legenda h3 {
+    color: #004699;
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.tabs .legenda-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 24px;
+    margin-bottom: 8px;
+}
+
+.tabs .legenda-item span:first-child {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.tabs .legenda-item span:last-child {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .tabs .legenda {
+        padding: 12px 16px;
+        margin: 16px 0;
+    }
+
+    .tabs .legenda-item {
+        display: flex;
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+}
+
+/* Resultaten teller */
+.resultaten-teller {
+    margin: 20px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Type indicator in tabel */
+.type-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.type-indicator span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Verbeterde informatiepagina styling */
+.info-section {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 3rem;
+    line-height: 1.8;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.info-section h2 {
+    font-size: 2.2rem;
+    color: #004699;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #e9ecef;
+    letter-spacing: -0.5px;
+}
+
+.info-section h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin: 2.5rem 0 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.info-section p {
+    font-size: 1.15rem;
+    color: #333;
+    margin-bottom: 1.4rem;
+    line-height: 1.9;
+}
+
+.info-section ul, 
+.info-section ol {
+    margin: 1.4rem 0;
+    padding-left: 2.5rem;
+}
+
+.info-section li {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    color: #333;
+    line-height: 1.7;
+    position: relative;
+}
+
+.info-section ul li::marker {
+    color: #004699;
+}
+
+.zorg-type {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 5px solid #004699;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.zorg-type h3 {
+    color: #004699;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.feature-description {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin: 2rem 0;
+}
+
+.feature-description h3 {
+    color: #004699;
+    margin-top: 0;
+}
+
+.feature-description ul,
+.feature-description ol {
+    background: #f8f9fa;
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.contact-info {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.contact-info a {
+    color: #004699;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 0;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+    border-bottom-color: #004699;
+    text-decoration: none;
+}
+
+.intro-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+}
+
+/* Responsieve aanpassingen voor informatiepagina */
+@media (max-width: 768px) {
+    .info-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+
+    .info-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-section h3 {
+        font-size: 1.3rem;
+        margin: 2rem 0 1rem;
+    }
+
+    .info-section p,
+    .info-section li {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .zorg-type,
+    .feature-description,
+    .contact-info {
+        padding: 1.5rem;
+    }
+
+    .intro-text {
+        font-size: 1.15rem;
+        padding: 0;
+    }
+}
+
+/* Print-vriendelijke stijlen */
+@media print {
+    .info-section {
+        box-shadow: none;
+        margin: 2rem 0;
+        padding: 0;
+    }
+
+    .info-section h2 {
+        color: #000;
+        border-bottom-color: #000;
+    }
+
+    .info-section h3 {
+        color: #333;
+    }
+
+    .zorg-type,
+    .feature-description,
+    .contact-info {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
     }
 }
 

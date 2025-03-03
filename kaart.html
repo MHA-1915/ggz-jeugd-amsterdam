@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zorgkaart GGZ Jeugd Amsterdam</title>
-    <link rel="stylesheet" href="GGZjeugdAmsterdam.css">
+    <title>Zorgkaart - GGZ Jeugd Amsterdam</title>
+    <link rel="stylesheet" href="GGZjeugdamsterdam.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body class="kaart-pagina">
     <header>
@@ -13,77 +22,73 @@
 
     <nav class="main-nav">
         <ul>
+            <li><a href="informatie.html">Informatie</a></li>
             <li><a href="kaart.html" class="active">Zorgkaart</a></li>
             <li><a href="overzicht.html">Volledig Overzicht</a></li>
         </ul>
     </nav>
 
-    <main>
+    <div class="container">
         <section>
-            <h2>Zoek een zorginstelling</h2>
-            <form id="zoekformulier">
+            <h2>Zorgkaart Amsterdam</h2>
+            <p class="intro-text">
+                Op deze interactieve kaart vindt u alle GGZ-zorginstellingen en Ouder- en Kindteams in Amsterdam.
+                Gebruik de filters om specifieke zorg te vinden en klik op een marker voor meer informatie.
+            </p>
+
+            <!-- Zoekfilters -->
+            <form id="filter-form">
                 <div class="form-group">
-                    <label for="zorgtype">Type zorg</label>
-                    <select id="zorgtype" name="zorgtype">
-                        <option value="alle">Alle types</option>
+                    <label for="type-filter">Type zorg</label>
+                    <select id="type-filter">
+                        <option value="">Alle types</option>
+                        <option value="okt">Ouder- en Kindteam</option>
                         <option value="basis">Basis GGZ</option>
                         <option value="gespecialiseerd">Gespecialiseerde GGZ</option>
-                        <option value="hoogspecialistisch">Hoogspecialistische zorg</option>
+                        <option value="hoogspecialistisch">Hoogspecialistische Zorg</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="leeftijd">Leeftijdscategorie</label>
-                    <select id="leeftijd" name="leeftijd">
-                        <option value="alle">Alle leeftijden</option>
+                    <label for="leeftijd-filter">Leeftijdscategorie</label>
+                    <select id="leeftijd-filter">
+                        <option value="">Alle leeftijden</option>
                         <option value="0-4">0-4 jaar</option>
                         <option value="4-12">4-12 jaar</option>
                         <option value="12-18">12-18 jaar</option>
                         <option value="18-23">18-23 jaar</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="filter">Type instelling</label>
-                    <select id="filter" name="filter">
-                        <option value="alle">Alle instellingen</option>
-                        <option value="okt">Alleen OKT</option>
-                        <option value="ggz">Alleen GGZ</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="locatie">Zoek op locatie</label>
-                    <input type="text" id="locatie" name="locatie" placeholder="Bijv. Amsterdam Zuid">
-                </div>
                 <button type="submit">Zoeken</button>
             </form>
-        </section>
 
-        <div class="map-container">
+            <!-- Kaart container -->
             <div id="map"></div>
-        </div>
 
-        <div class="gefilterde-resultaten">
-            <div class="gefilterde-resultaten-header">
-                <h3>Gevonden zorginstellingen</h3>
-                <span id="resultaten-teller">Alle zorginstellingen</span>
+            <!-- Gefilterde resultaten -->
+            <div id="gefilterde-resultaten" class="gefilterde-resultaten" style="display: none;">
+                <div class="gefilterde-resultaten-header">
+                    <h3>Gevonden zorginstellingen</h3>
+                    <div id="resultaten-teller"></div>
+                </div>
+                <div class="table-container">
+                    <table id="gefilterde-zorginstellingen-tabel">
+                        <thead>
+                            <tr>
+                                <th>Naam</th>
+                                <th>Type</th>
+                                <th>Adres</th>
+                                <th>Telefoon</th>
+                                <th>Leeftijd</th>
+                                <th>Specialisaties</th>
+                                <th>Website</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table-container">
-                <table id="gefilterde-zorginstellingen-tabel">
-                    <thead>
-                        <tr>
-                            <th>Naam</th>
-                            <th>Type</th>
-                            <th>Adres</th>
-                            <th>Telefoon</th>
-                            <th>Leeftijd</th>
-                            <th>Specialisaties</th>
-                            <th>Website</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+        </section>
+    </div>
 
     <footer>
         <div>
@@ -93,29 +98,30 @@
             </div>
             <div>
                 <h3>Disclaimer</h3>
-                <p>Deze kaart is bedoeld als hulpmiddel. Aan de informatie kunnen geen rechten worden ontleend.</p>
+                <p>Deze website is bedoeld als hulpmiddel. Aan de informatie kunnen geen rechten worden ontleend.</p>
             </div>
         </div>
     </footer>
-
+    <script src="GGZjeugdamsterdam.js"></script>
     <script>
-        // Detecteer of we op GitHub Pages zijn
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        // Laad de juiste Google Maps API
-        const script = document.createElement('script');
-        script.src = isGitHubPages 
-            ? "https://maps.googleapis.com/maps/api/js?key=GITHUB_MAPS_API_KEY" 
-            : "https://maps.googleapis.com/maps/api/js";
-        document.body.appendChild(script);
-        // Wacht tot de API geladen is en initialiseer dan de kaart
-        script.onload = function() {
-            if (typeof google !== 'undefined') {
-                initMap();
-            } else {
-                console.error('Google Maps API niet correct geladen');
-            }
-        };
+        // Configuratie voor development
+        const API_BASE_URL = 'http://localhost:3000';
+
+        // Haal de API key op van de backend
+        fetch(`${API_BASE_URL}/api/maps-key`)
+            .then(response => response.json())
+            .then(data => {
+                // Laad de Google Maps API met de opgehaalde key
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error('Fout bij het ophalen van de API key:', error);
+                document.getElementById('map').innerHTML = '<p class="error">Er is een fout opgetreden bij het laden van de kaart. Vernieuw de pagina om het opnieuw te proberen.</p>';
+            });
     </script>
-    <script src="GGZjeugdAmsterdam.js"></script>
 </body>
 </html> 

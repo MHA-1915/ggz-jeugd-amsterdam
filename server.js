@@ -1,20 +1,21 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const path = require('path');
+require('dotenv').config();
+
 const app = express();
 
-// Laad environment variables
-dotenv.config();
+// Serve static files
+app.use(express.static(path.join(__dirname)));
 
-// Serve statische bestanden
-app.use(express.static(__dirname));
-
-// Route voor de API key
+// Route voor het ophalen van de Google Maps API key
 app.get('/api/maps-key', (req, res) => {
-    res.json({ key: process.env.GOOGLE_MAPS_API_KEY });
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+        return res.status(500).json({ error: 'API key niet gevonden' });
+    }
+    res.json({ key: apiKey });
 });
 
-// Start de server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server draait op http://localhost:${PORT}`);

@@ -42,7 +42,7 @@ const zorginstellingen = [
 const zorginstellingenData = [
     {
         naam: "Levvel",
-        type: "Hoogspecialistisch",
+        type: "gespecialiseerd",
         positie: { lat: 52.3481, lng: 4.8568 },
         adres: "Amsteldijk 196, 1079 LK Amsterdam",
         telefoon: "088-0547001",
@@ -51,49 +51,52 @@ const zorginstellingenData = [
         specialisaties: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie"
     },
     {
-        naam: "Arkin Jeugd & Gezin - West",
-        type: "Hoogspecialistisch",
-        positie: { lat: 52.3637058, lng: 4.8561758 },
+        naam: "Arkin Jeugd & Gezin",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3637, lng: 4.8562 },
         adres: "Baarsjesweg 224, 1058 AA Amsterdam",
         telefoon: "020-5905555",
         website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
         leeftijd: "0-23 jaar",
-        specialisaties: "Gezinstherapie, eetstoornissen, angst"
+        specialisaties: "Gezinstherapie, eetstoornissen, angst",
+        locaties: [
+            {
+                naam: "West",
+                adres: "Baarsjesweg 224, 1058 AA Amsterdam",
+                positie: { lat: 52.3637, lng: 4.8562 }
+            },
+            {
+                naam: "Diemen",
+                adres: "Wisselwerking 46-48, 1112 XR Diemen",
+                positie: { lat: 52.3348, lng: 4.9561 }
+            },
+            {
+                naam: "Noord",
+                adres: "Klaprozenweg 111, 1033 NN Amsterdam",
+                positie: { lat: 52.3912, lng: 4.8914 }
+            },
+            {
+                naam: "Zuidoost",
+                adres: "Bijlmerdreef 1169, 1103 TT Amsterdam Zuidoost",
+                positie: { lat: 52.3221158, lng: 4.9732716 }
+            }
+        ]
     },
     {
-        naam: "Arkin Jeugd & Gezin - Diemen",
-        type: "Hoogspecialistisch",
-        positie: { lat: 52.3348, lng: 4.9561 },
-        adres: "Wisselwerking 46-48, 1112 XR Diemen",
-        telefoon: "020-5905555",
-        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Gezinstherapie, eetstoornissen, angst"
-    },
-    {
-        naam: "Arkin Jeugd & Gezin - Noord",
-        type: "Hoogspecialistisch",
+        naam: "iHUB Familiezorg",
+        type: "gespecialiseerd, Basis GGZ",
         positie: { lat: 52.3912, lng: 4.8914 },
         adres: "Klaprozenweg 111, 1033 NN Amsterdam",
-        telefoon: "020-5905555",
-        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/ ",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Gezinstherapie, eetstoornissen, angst"
+        telefoon: "020-4444444",
+        website: "https://www.ihubfamiliezorg.nl",
+        aanmelden: "https://www.ihub.nl/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisaties: "Gezinstherapie, systeemtherapie, enkelvoudige specialistische jeugdhulp, Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek"
     },
     {
-        naam: "Arkin Jeugd & Gezin - Zuidoost",
-        type: "Hoogspecialistisch",
-        positie: { lat: 52.3221158, lng: 4.9732716 },
-        adres: "Bijlmerdreef 1169, 1103 TT Amsterdam Zuidoost",
-        telefoon: "020-5905555",
-        website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Gezinstherapie, eetstoornissen, angst"
-    },
-    {
-        naam: "GGZ inGeest Jeugd - De Nieuwe Valerius",
+        naam: "GGZ inGeest Jeugd",
         type: "gespecialiseerd",
-        positie: { lat: 52.3382971, lng: 4.8581411 },
+        positie: { lat: 52.3583, lng: 4.8181 },
         adres: "Willem van Outhoornstraat 12, 1067 HN Amsterdam",
         telefoon: "020-7884666",
         website: "https://www.ggzingeest.nl/jong",
@@ -101,314 +104,444 @@ const zorginstellingenData = [
         specialisaties: "Stemmingsstoornissen, psychose, persoonlijkheidsproblematiek"
     },
     {
-        naam: "OKT Centrum West",
+        naam: "OKT Amsterdam",
         type: "basis",
-        positie: { lat: 52.3784, lng: 4.8837 },
-        adres: "Lindengracht 204, 1015 KL Amsterdam",
         telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/centrum",
+        website: "https://oktamsterdam.nl",
         leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Centrum Oost",
-        type: "basis",
-        positie: { lat: 52.3765, lng: 4.9123 },
-        adres: "Kraijenhoffstraat 32, 1018 RL Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/centrum",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Noord Oost",
-        type: "basis",
-        positie: { lat: 52.3918, lng: 4.9322 },
-        adres: "Beverwijkstraat 3, 1024 VR Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/noordoost",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Oud Noord",
-        type: "basis",
-        positie: { lat: 52.3892, lng: 4.9212 },
-        adres: "Wingerdweg 52, 1032 AN Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/oudnoord",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Noord West",
-        type: "basis",
-        positie: { lat: 52.4011, lng: 4.9123 },
-        adres: "Aldebaranplein 2-F, 1033 GS Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/noordwest",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Oud Oost",
-        type: "basis",
-        positie: { lat: 52.3605, lng: 4.9284 },
-        adres: "Pontanusstraat 278, 1093 SH Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/oudoost",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Indische Buurt & Oostelijk Havengebied",
-        type: "basis",
-        positie: { lat: 52.3605, lng: 4.9436 },
-        adres: "Kramatplantsoen 101, 1095 LB Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/iboh",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT IJburg & Zeeburgereiland",
-        type: "basis",
-        positie: { lat: 52.3534, lng: 4.9983 },
-        adres: "Pampuslaan 26-32, 1087 LA Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/ijburg",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT De Pijp & Rivierenbuurt",
-        type: "basis",
-        positie: { lat: 52.3534, lng: 4.8983 },
-        adres: "2e Jan van der Heijdenstraat 75-77, 1074 XR Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/depijprivierenbuurt",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Buitenveldert & Zuidas",
-        type: "basis",
-        positie: { lat: 52.3314, lng: 4.8781 },
-        adres: "A.J. Ernststraat 112, 1082 LP Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/buitenveldertzuidas",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Bijlmer Centrum",
-        type: "basis",
-        positie: { lat: 52.3117, lng: 4.9478 },
-        adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/bijlmercentrum",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Bijlmer Oost",
-        type: "basis",
-        positie: { lat: 52.3117, lng: 4.9578 },
-        adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/bijlmeroost",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Gaasperdam",
-        type: "basis",
-        positie: { lat: 52.2989, lng: 4.9789 },
-        adres: "Reigersbos 309, 1107 EZ Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/gaasperdam",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Watergraafsmeer",
-        type: "basis",
-        positie: { lat: 52.3605, lng: 4.9284 },
-        adres: "Pontanusstraat 278, 1093 SH Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/watergraafsmeer",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Bos en Lommer",
-        type: "basis",
-        positie: { lat: 52.3789, lng: 4.8566 },
-        adres: "Tijl Uilenspiegelstraat 12, 1055 CK Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/bosenlommer",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Oud West & De Baarsjes",
-        type: "basis",
-        positie: { lat: 52.3665, lng: 4.8644 },
-        adres: "Brederodestraat 108, 1054 VH Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/oudwestdebaarsjes",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Westerpark",
-        type: "basis",
-        positie: { lat: 52.3897, lng: 4.8711 },
-        adres: "Revaleiland 1, 1014 ZG Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/westerpark",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Zuid",
-        type: "basis",
-        positie: { lat: 52.3534, lng: 4.8583 },
-        adres: "Theophile de Bockstraat 100 E, 1058 VC Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/zuid",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Weesp & Driemond",
-        type: "basis",
-        positie: { lat: 52.3075, lng: 5.0428 },
-        adres: "C J van Houtenlaan 1G, 1381 CN Weesp",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/weespdriemond",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Geuzenveld & Slotermeer",
-        type: "basis",
-        positie: { lat: 52.3789, lng: 4.8066 },
-        adres: "Slotermeerlaan 103f, 1063 JN Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/geuzenveldslotermeer",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Osdorp",
-        type: "basis",
-        positie: { lat: 52.3601, lng: 4.7945 },
-        adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/osdorp",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT De Aker & Nieuw-Sloten",
-        type: "basis",
-        positie: { lat: 52.3601, lng: 4.7945 },
-        adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/deakernieuwsloten",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
-    },
-    {
-        naam: "OKT Slotervaart",
-        type: "basis",
-        positie: { lat: 52.3642, lng: 4.8307 },
-        adres: "August Allebéplein 11, 1062 AA Amsterdam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl/slotervaart",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg"
+        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg",
+        locaties: [
+            {
+                naam: "Centrum West",
+                positie: { lat: 52.3784, lng: 4.8837 },
+                adres: "Lindengracht 204, 1015 KL Amsterdam",
+                website: "https://oktamsterdam.nl/centrum"
+            },
+            {
+                naam: "Centrum Oost",
+                positie: { lat: 52.3765, lng: 4.9123 },
+                adres: "Kraijenhoffstraat 32, 1018 RL Amsterdam",
+                website: "https://oktamsterdam.nl/centrum"
+            },
+            {
+                naam: "Noord Oost",
+                positie: { lat: 52.3918, lng: 4.9322 },
+                adres: "Beverwijkstraat 3, 1024 VR Amsterdam",
+                website: "https://oktamsterdam.nl/noordoost"
+            },
+            {
+                naam: "Oud Noord",
+                positie: { lat: 52.3892, lng: 4.9212 },
+                adres: "Wingerdweg 52, 1032 AN Amsterdam",
+                website: "https://oktamsterdam.nl/oudnoord"
+            },
+            {
+                naam: "Noord West",
+                positie: { lat: 52.4011, lng: 4.9123 },
+                adres: "Aldebaranplein 2-F, 1033 GS Amsterdam",
+                website: "https://oktamsterdam.nl/noordwest"
+            },
+            {
+                naam: "Oud Oost",
+                positie: { lat: 52.3605, lng: 4.9284 },
+                adres: "Pontanusstraat 278, 1093 SH Amsterdam",
+                website: "https://oktamsterdam.nl/oudoost"
+            },
+            {
+                naam: "Indische Buurt & Oostelijk Havengebied",
+                positie: { lat: 52.3605, lng: 4.9436 },
+                adres: "Kramatplantsoen 101, 1095 LB Amsterdam",
+                website: "https://oktamsterdam.nl/iboh"
+            },
+            {
+                naam: "IJburg & Zeeburgereiland",
+                positie: { lat: 52.3534, lng: 4.9983 },
+                adres: "Pampuslaan 26-32, 1087 LA Amsterdam",
+                website: "https://oktamsterdam.nl/ijburg"
+            },
+            {
+                naam: "De Pijp & Rivierenbuurt",
+                positie: { lat: 52.3534, lng: 4.8983 },
+                adres: "2e Jan van der Heijdenstraat 75-77, 1074 XR Amsterdam",
+                website: "https://oktamsterdam.nl/depijprivierenbuurt"
+            },
+            {
+                naam: "Buitenveldert & Zuidas",
+                positie: { lat: 52.3314, lng: 4.8781 },
+                adres: "A.J. Ernststraat 112, 1082 LP Amsterdam",
+                website: "https://oktamsterdam.nl/buitenveldertzuidas"
+            },
+            {
+                naam: "Bijlmer Centrum",
+                positie: { lat: 52.3117, lng: 4.9478 },
+                adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
+                website: "https://oktamsterdam.nl/bijlmercentrum"
+            },
+            {
+                naam: "Bijlmer Oost",
+                positie: { lat: 52.3117, lng: 4.9578 },
+                adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
+                website: "https://oktamsterdam.nl/bijlmeroost"
+            },
+            {
+                naam: "Gaasperdam",
+                positie: { lat: 52.2989, lng: 4.9789 },
+                adres: "Reigersbos 309, 1107 EZ Amsterdam",
+                website: "https://oktamsterdam.nl/gaasperdam"
+            },
+            {
+                naam: "Watergraafsmeer",
+                positie: { lat: 52.3605, lng: 4.9284 },
+                adres: "Pontanusstraat 278, 1093 SH Amsterdam",
+                website: "https://oktamsterdam.nl/watergraafsmeer"
+            },
+            {
+                naam: "Bos en Lommer",
+                positie: { lat: 52.3789, lng: 4.8566 },
+                adres: "Tijl Uilenspiegelstraat 12, 1055 CK Amsterdam",
+                website: "https://oktamsterdam.nl/bosenlommer"
+            },
+            {
+                naam: "Oud West & De Baarsjes",
+                positie: { lat: 52.3665, lng: 4.8644 },
+                adres: "Brederodestraat 108, 1054 VH Amsterdam",
+                website: "https://oktamsterdam.nl/oudwestdebaarsjes"
+            },
+            {
+                naam: "Westerpark",
+                positie: { lat: 52.3897, lng: 4.8711 },
+                adres: "Revaleiland 1, 1014 ZG Amsterdam",
+                website: "https://oktamsterdam.nl/westerpark"
+            },
+            {
+                naam: "Zuid",
+                positie: { lat: 52.3534, lng: 4.8583 },
+                adres: "Theophile de Bockstraat 100 E, 1058 VC Amsterdam",
+                website: "https://oktamsterdam.nl/zuid"
+            },
+            {
+                naam: "Weesp & Driemond",
+                positie: { lat: 52.3075, lng: 5.0428 },
+                adres: "C J van Houtenlaan 1G, 1381 CN Weesp",
+                website: "https://oktamsterdam.nl/weespdriemond"
+            },
+            {
+                naam: "Geuzenveld & Slotermeer",
+                positie: { lat: 52.3789, lng: 4.8066 },
+                adres: "Slotermeerlaan 103f, 1063 JN Amsterdam",
+                website: "https://oktamsterdam.nl/geuzenveldslotermeer"
+            },
+            {
+                naam: "Osdorp",
+                positie: { lat: 52.3601, lng: 4.7945 },
+                adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
+                website: "https://oktamsterdam.nl/osdorp"
+            },
+            {
+                naam: "De Aker & Nieuw-Sloten",
+                positie: { lat: 52.3601, lng: 4.7945 },
+                adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
+                website: "https://oktamsterdam.nl/deakernieuwsloten"
+            },
+            {
+                naam: "Slotervaart",
+                positie: { lat: 52.3642, lng: 4.8307 },
+                adres: "August Allebéplein 11, 1062 AA Amsterdam",
+                website: "https://oktamsterdam.nl/slotervaart"
+            }
+        ]
     },
     {
         naam: "iHub",
         type: "gespecialiseerd",
-        positie: { lat: 52.3401, lng: 4.8567 },
-        adres: "Anthony Fokkerweg 61, 1059 CP Amsterdam",
         telefoon: "088-1341000",
         website: "https://ihub.nu/",
+        aanmelden: "https://www.ihub.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, autisme, ADHD, gedragsproblemen"
+        specialisaties: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek",
+        locaties: [
+            {
+                naam: "iHub familiezorg West",
+                positie: { lat: 52.3637, lng: 4.8562 },
+                adres: "Dekinderenstraat 22, 1062DB, Amsterdam",
+                telefoon: "020 5558300",
+                website: "https://www.ihub.nl/locaties/familiezorg-amsterdam-west",
+            },
+            {
+                naam: "iHub Care Express",
+                positie: { lat: 52.3665, lng: 4.8789 },
+                adres: "Nassaukade 162HS, 1053 LL, Amsterdam",
+                telefoon: "020 5558300",
+                website: "https://www.ihub.nl/locaties/care-express",
+            },
+            {
+                naam: "iHub familiezorg Oost",
+                positie: { lat: 52.3605, lng: 4.9284 },
+                adres: "Eerste van Swindenstraat 555, 1093LC, Amsterdam",
+                telefoon: "020 5558300",
+                website: "https://www.ihub.nl/locaties/familiezorg-amsterdam-oost", 
+            },
+            {
+                naam: "iHub familiezorg Noord",
+                positie: { lat: 52.3912, lng: 4.8914 },
+                adres: "Rode Kruisstraat 32, 1025KN, Amsterdam",
+                telefoon: "020 5558300",
+                website: "https://www.ihub.nl/locaties/familiezorg-amsterdam-noord",
+            },
+            {
+                naam: "iHub familiezorg Zuidoost",
+                positie: { lat: 52.3117, lng: 4.9478 },
+                adres: "Hofgeest 341, 1102 ER, Amsterdam",
+                telefoon: "020 5558300",
+                website: "https://www.ihub.nl/locaties/familiezorg-amsterdam-zuidoost",
+            }
+        ]
     },
     {
         naam: "Family Supporters",
         type: "gespecialiseerd",
-        positie: { lat: 52.3397, lng: 4.8568 },
-        adres: "Anthony Fokkerweg 69, 1059 CP Amsterdam",
-        telefoon: "020-2258000",
+        positie: { lat: 52.3889, lng: 4.8876 },
+        adres: "Houtmankade 332, 1013 RR Amsterdam",
+        telefoon: "020-2371781",
         website: "https://www.familysupporters.nl/",
+        verwijzing: "https://www.familysupporters.nl/verwijzen/",
         leeftijd: "0-23 jaar",
         specialisaties: "Jeugd GGZ, systeemtherapie, gezinsbehandeling"
     },
     {
         naam: "PsyGRO",
         type: "gespecialiseerd",
-        positie: { lat: 52.3576, lng: 4.8905 },
-        adres: "Overtoom 538-540, 1054 LL Amsterdam",
-        telefoon: "020-6122411",
+        positie: { lat: 52.3076, lng: 4.8573 },
+        adres: "Doctor Willem Dreesweg 2, 1185 VB Amstelveen",
+        telefoon: "0299-607459",
         website: "https://www.psygro.nl/",
+        verwijzing: "https://inter-psy.nl/verwijzers/",
         leeftijd: "4-18 jaar",
         specialisaties: "Jeugd GGZ, angst, depressie, trauma"
     },
     {
         naam: "Invivo Kids",
-        type: "gespecialiseerd",
-        positie: { lat: 52.3492, lng: 4.8569 },
-        adres: "Johan Huizingalaan 763a, 1066 VH Amsterdam",
-        telefoon: "020-4080902",
+        type: "gespecialiseerd, Basis GGZ",
+        positie: { lat: 52.3076, lng: 4.8573 },
+        adres: "Veenplaats 19, 1182JW Amstelveen",
+        telefoon: "020-7670069",
         website: "https://www.invivokids.nl/",
+        aanmelden: "https://www.invivokids.nl/voor-u/voor-verwijzers/",
         leeftijd: "0-18 jaar",
         specialisaties: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen"
     },
     {
         naam: "Youz",
         type: "gespecialiseerd",
-        positie: { lat: 52.3397, lng: 4.8731 },
-        adres: "Transformatorweg 6, 1014 AK Amsterdam",
-        telefoon: "088-3588888",
+        positie: { lat: 52.3583, lng: 4.8481 },
+        adres: "Overschiestraat 57, 1062HN Amsterdam",
+        telefoon: "088-3588330",
         website: "https://youz.nl/",
+        aanmelden: "https://www.youz.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisaties: "Jeugd GGZ, verslaving, gedragsproblemen, autisme"
     },
     {
-        naam: "Leveo",
+        naam: "Carehouse",
         type: "gespecialiseerd",
-        positie: { lat: 52.3576, lng: 4.8889 },
-        adres: "Overtoom 435-437, 1054 KE Amsterdam",
-        telefoon: "020-6122675",
-        website: "https://www.leveo.nl/",
+        positie: { lat: 52.3812, lng: 4.8676 },
+        adres: "Van Hallstraat 10, 1051HH Amsterdam",
+        telefoon: "088-1232660",
+        website: "https://www.carehouse.nl/",
+        aanmelden: "https://www.carehouse.nl/aanmelden",
         leeftijd: "4-18 jaar",
-        specialisaties: "Jeugd GGZ, angst, depressie, trauma"
+        specialisaties: "Jeugd GGZ, angst, depressie, trauma, enkelvoudige specialistische jeugdhulp"
     },
     {
         naam: "Stichting JA",
-        type: "gespecialiseerd",
-        positie: { lat: 52.3548, lng: 4.9177 },
+        type: "gespecialiseerd, Basis GGZ",
+        positie: { lat: 52.3605, lng: 4.9184 },
         adres: "Eerste Oosterparkstraat 88, 1091 GZ Amsterdam",
         telefoon: "020-6659593",
         website: "https://www.stichtingja.nl/",
+        aanmelden: "https://www.stichtingja.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, gezinstherapie, traumabehandeling"
+        specialisaties: "Jeugd GGZ, gezinstherapie, traumabehandeling, psychosociaal functioneren, gezin en opvoeding"
     },
     {
         naam: "MOC 't Kabouterhuis",
         type: "gespecialiseerd",
-        positie: { lat: 52.3481, lng: 4.8568 },
-        adres: "Amsteldijk 196, 1079 LK Amsterdam",
-        telefoon: "020-6445351",
-        website: "https://www.kabouterhuis.nl/",
+        website: "https://www.kabouterhuis.nl",
+        aanmelden: "https://www.kabouterhuis.nl/aanmelden",
         leeftijd: "0-7 jaar",
-        specialisaties: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen, gezinsbehandeling"
+        specialisaties: "Ontwikkelingsproblemen, gedragsproblemen, opvoedingsproblemen, psychiatrische problemen, medisch orthopedagogische dagbehandeling",
+        locaties: [
+            {
+                naam: "Zuid",
+                positie: { lat: 52.3556, lng: 4.9167 },
+                telefoon: "020-6445351",
+                adres: "Amsteldijk 196, 1079 LK Amsterdam"
+            },
+            {
+                naam: "West",
+                positie: { lat: 52.3637, lng: 4.8562 },
+                telefoon: "020-6138585",
+                adres: "Albardagracht 1, 1063 NN Amsterdam"
+            },
+            {
+                naam: "Noord",
+                positie: { lat: 52.3912, lng: 4.8914 },
+                telefoon: "020-6304630",
+                adres: "Kopjachtplein 20, 1034 JG Amsterdam"
+            },
+            {
+                naam: "Zuid-oost",
+                positie: { lat: 52.3117, lng: 4.9478 },
+                telefoon: "020-4530191",
+                adres: "Leksmondplein 28, 1108 EL Amsterdam"
+            }
+        ]
+    },
+    {
+        naam: "STEP",
+        type: "Basis GGZ",
+        positie: { lat: 52.3625, lng: 4.9143 },
+        adres: "Amsterdam",
+        website: "https://stepjeugdhulp.nl",
+        aanmelden: "https://stepjeugdhulp.nl/#aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Enkelvoudige specialistische jeugdhulp"
+    },
+    {
+        naam: "RIOzorg Amsterdam Zuidoost",
+        type: "Basis GGZ",
+        positie: { lat: 52.3117, lng: 4.9478 },
+        adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam",
+        telefoon: "026 820 02 08",
+        website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/",
+        aanmelden: "https://riozorg.nl/aanmelden",
+        leeftijd: "4-18 jaar",
+        specialisaties: "Concentratieproblemen, AD(H)D, Gedragsproblemen, Autisme, Trauma, Angst, Tics, Dwang, Somberheid",
+        bijzonderheden: [
+            "Alleen BGGZ trajecten mogelijk op deze locatie",
+            "Behandeling kan fysiek of online",
+            "Locatie bevindt zich in GC Klein Gooioord op de 1e verdieping",
+            "Wachtruimte/grote tafel direct bovenaan de trap"
+        ],
+        email: "info@riozorg.nl",
+        hoofdkantoren: "Arnhem, Amersfoort, Den Haag"
+    },
+    {
+        naam: "RIOzorg Weesp",
+        type: "Basis GGZ",
+        positie: { lat: 52.3075, lng: 5.0428 },
+        adres: "C.J. van Houtenlaan 1G, 1381 CN Weesp",
+        telefoon: "026 820 02 08",
+        website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/",
+        aanmelden: "https://riozorg.nl/aanmelden",
+        leeftijd: "4-18 jaar",
+        specialisaties: "Concentratieproblemen, AD(H)D, Gedragsproblemen, Autisme, Trauma, Angst, Tics, Dwang, Somberheid",
+        bijzonderheden: [
+            "Alleen BGGZ trajecten mogelijk op deze locatie",
+            "Behandeling kan fysiek of online",
+            "Locatie bevindt zich in Gezondheidscentrum Aetsveld"
+        ],
+        email: "info@riozorg.nl",
+        hoofdkantoren: "Arnhem, Amersfoort, Den Haag"
+    },
+    {
+        naam: "Leger des Heils",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3925, lng: 4.9214 },
+        adres: "Hilversumstraat 338, 1024MB Amsterdam",
+        telefoon: "088-0654825",
+        website: "https://www.legerdesheils.nl/zorg/jongleren/amsterdam/jongeren-ambulant-amsterdam",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek"
+    },
+    {
+        naam: "Philadelphia",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3472, lng: 4.9112 },
+        adres: "Jekerstraat 84, 1078MG Amsterdam",
+        telefoon: "088-0830",
+        website: "https://www.philadelphia.nl",
+        aanmelden: "https://www.philadelphia.nl/aanmelden",
+        leeftijd: "0-19 jaar",
+        specialisaties: "Jeugdzorg, verstandelijke beperking, ontwikkelingsproblematiek"
+    },
+    {
+        naam: "Boomerang Zorg Jeugdhulp",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3912, lng: 4.8543 },
+        adres: "Tijnmuiden 34, 1046AL, Amsterdam",
+        telefoon: "020-3586739",
+        website: "https://www.boomerangzorg.nl",
+        aanmelden: "https://www.boomerangzorg.nl/aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Jeugdhulp, gezinsbehandeling, samenwerking Boomerang Zorg en Multi Plus Zorg"
+    },
+    {
+        naam: "Fibbe",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3123, lng: 4.9467 },
+        adres: "Johan Cruijff Boulevard 83, 1101DM, Amsterdam",
+        telefoon: "0623744058",
+        website: "https://fibbescl.nl",
+        aanmelden: "https://fibbescl.nl/aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Jeugd GGZ, gezinstherapie, traumabehandeling"
+    },
+    {
+        naam: "Timon",
+        type: "gespecialiseerd",
+        positie: { lat: 52.4012, lng: 4.9217 },
+        adres: "Modemstraat 20C, 1033 RW Amsterdam",
+        telefoon: "06-11793785",
+        website: "https://www.timon.nl",
+        aanmelden: "https://www.timon.nl/aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Jeugdhulp, pleegzorg, gezinsbegeleiding"
+    },
+    {
+        naam: "Groei&glunder",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3889, lng: 4.8876 },
+        adres: "Houtmankade 334-2, 1013 RR Amsterdam",
+        telefoon: "020-2615085",
+        website: "https://www.groeienglunder.nl",
+        aanmelden: "https://www.groeienglunder.nl/aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisaties: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning"
+    },
+    {
+        naam: "Terminal 18",
+        type: "gespecialiseerd",
+        positie: { lat: 52.3726, lng: 4.8584 },
+        adres: "Admiraal de Ruijterweg 454, 1055NG Amsterdam",
+        telefoon: "020-3088717",
+        website: "https://www.terminal18.nl",
+        aanmelden: "https://www.terminal18.nl/aanmelden",
+        leeftijd: "12-18 jaar",
+        specialisaties: "Jeugdhulp, jongerencoaching, toekomstbegeleiding"
+    },
+    {
+        naam: "Zigzag Kindzorg",
+        type: "gespecialiseerd",
+        telefoon: "085-2381729",
+        website: "https://www.zigzagkindzorg.nl",
+        aanmelden: "https://www.zigzagkindzorg.nl/aanmeldprocedure",
+        leeftijd: "0-18 jaar",
+        specialisaties: "Kindzorg, ontwikkelingsondersteuning, gezinsbegeleiding",
+        locaties: [
+            {
+                naam: "Zuid",
+                positie: { lat: 52.3481, lng: 4.8568 },
+                adres: "Amsteldijk 196, 1079 LK Amsterdam",
+                telefoon: "085-2381729"
+            },
+            {
+                naam: "West",
+                positie: { lat: 52.3637, lng: 4.8562 },
+                adres: "Albardagracht 1, 1063 NN Amsterdam",
+                telefoon: "085-2381729"
+            }
+        ]
     }
 ];
 
@@ -590,8 +723,34 @@ function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
     
     tbody.innerHTML = '';
 
+    // Maak een platte lijst van alle instellingen en hun locaties
+    const alleInstellingen = [];
+    
+    instellingen.forEach(instelling => {
+        if (instelling.locaties) {
+            // Voeg elke locatie toe als aparte rij
+            instelling.locaties.forEach(locatie => {
+                alleInstellingen.push({
+                    naam: instelling.naam === "OKT Amsterdam" ? 
+                        `OKT ${locatie.naam}` : 
+                        `${instelling.naam} - ${locatie.naam}`,
+                    type: instelling.type,
+                    adres: locatie.adres,
+                    telefoon: locatie.telefoon || instelling.telefoon,
+                    leeftijd: instelling.leeftijd,
+                    specialisaties: instelling.specialisaties,
+                    website: locatie.website || instelling.website,
+                    aanmelden: instelling.aanmelden
+                });
+            });
+        } else {
+            // Voor instellingen met één locatie
+            alleInstellingen.push(instelling);
+        }
+    });
+
     // Sorteer de instellingen alfabetisch
-    const gesorteerdeInstellingen = sorteerInstellingen(instellingen);
+    const gesorteerdeInstellingen = sorteerInstellingen(alleInstellingen);
 
     gesorteerdeInstellingen.forEach(instelling => {
         const isOKT = instelling.naam.toLowerCase().includes('okt');
@@ -605,11 +764,20 @@ function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
                     ${instelling.type}
                 </div>
             </td>
-            <td>${instelling.adres}</td>
-            <td><a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></td>
-            <td>${instelling.leeftijd}</td>
-            <td>${instelling.specialisaties}</td>
-            <td><a href="${instelling.website}" target="_blank" rel="noopener noreferrer">Website</a></td>
+            <td>${instelling.adres || 'Adres niet beschikbaar'}</td>
+            <td>${instelling.telefoon ? `<a href="tel:${instelling.telefoon.replace(/[^0-9+]/g, '')}">${instelling.telefoon}</a>` : 'Telefoon niet beschikbaar'}</td>
+            <td>${instelling.leeftijd || 'Niet gespecificeerd'}</td>
+            <td>${instelling.specialisaties || 'Niet gespecificeerd'}</td>
+            <td>
+                <div class="actie-knoppen">
+                    ${instelling.website ? 
+                        `<a href="${instelling.website}" target="_blank" rel="noopener noreferrer" class="knop website-knop">Website</a>` 
+                        : ''}
+                    ${instelling.aanmelden ? 
+                        `<a href="${instelling.aanmelden}" target="_blank" rel="noopener noreferrer" class="knop aanmeld-knop">Aanmelden</a>` 
+                        : ''}
+                </div>
+            </td>
         `;
         tbody.appendChild(row);
     });
@@ -617,7 +785,7 @@ function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
     // Update resultaten teller
     const resultatenTeller = document.getElementById('resultaten-teller');
     if (resultatenTeller) {
-        resultatenTeller.textContent = `${instellingen.length} ${instellingen.length === 1 ? 'resultaat' : 'resultaten'} gevonden`;
+        resultatenTeller.textContent = `${alleInstellingen.length} ${alleInstellingen.length === 1 ? 'resultaat' : 'resultaten'} gevonden`;
     }
 }
 
@@ -648,6 +816,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (resultatenTeller) {
             resultatenTeller.textContent = `${alleInstellingen.length} resultaten gevonden`;
         }
+    }
+});
+
+// Combineer alle zorginstellingen in één array
+const alleZorginstellingen = [...zorginstellingenData];
+
+// Voeg de instellingen uit de eerste array toe als ze nog niet bestaan
+zorginstellingen.forEach(instelling => {
+    const bestaatAl = alleZorginstellingen.some(
+        bestaand => bestaand.naam === instelling.naam && 
+        bestaand.adres === instelling.adres
+    );
+    
+    if (!bestaatAl) {
+        alleZorginstellingen.push({
+            ...instelling,
+            type: instelling.type || 'basis'
+        });
     }
 });
 
@@ -696,7 +882,7 @@ function initMap() {
         // Voeg markers en legenda toe nadat de kaart is geladen
         google.maps.event.addListenerOnce(map, 'idle', function() {
             console.log('Kaart is geladen, markers worden toegevoegd');
-            voegMarkersToe(zorginstellingenData);
+            voegMarkersToe(alleZorginstellingen);
             voegLegendaToe();
         });
     } catch (error) {
@@ -704,7 +890,7 @@ function initMap() {
     }
 }
 
-// Maak initMap beschikbaar in het window object voor de callback
+// Zorg ervoor dat initMap globaal beschikbaar is
 window.initMap = initMap;
 
 // Functie om de legenda toe te voegen
@@ -745,54 +931,130 @@ function voegMarkersToe(zorginstellingen) {
     markers = [];
 
     zorginstellingen.forEach(instelling => {
-        const isOKT = instelling.naam.toLowerCase().includes('okt');
-        const kleur = bepaalKleur(instelling.type, isOKT);
-        
-        const marker = new google.maps.Marker({
-            position: { 
-                lat: parseFloat(instelling.positie.lat), 
-                lng: parseFloat(instelling.positie.lng) 
-            },
-            map: map,
-            title: instelling.naam,
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                fillColor: kleur,
-                fillOpacity: 1,
-                strokeWeight: 1,
-                strokeColor: '#ffffff',
-                scale: 10
+        // Voor instellingen met locaties
+        if (instelling.locaties) {
+            instelling.locaties.forEach(locatie => {
+                if (!locatie.positie || !locatie.positie.lat || !locatie.positie.lng) {
+                    console.warn(`Geen geldige positie voor locatie: ${locatie.naam} van ${instelling.naam}`);
+                    return;
+                }
+
+                const isOKT = instelling.naam.toLowerCase().includes('okt');
+                const kleur = bepaalKleur(instelling.type, isOKT);
+
+                const marker = new google.maps.Marker({
+                    position: { 
+                        lat: parseFloat(locatie.positie.lat), 
+                        lng: parseFloat(locatie.positie.lng) 
+                    },
+                    map: map,
+                    title: isOKT ? `OKT ${locatie.naam}` : `${instelling.naam} - ${locatie.naam}`,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: kleur,
+                        fillOpacity: 1,
+                        strokeWeight: 1,
+                        strokeColor: '#ffffff',
+                        scale: 10
+                    }
+                });
+
+                // Info window content voor locatie
+                const contentString = `
+                    <div class="info-window">
+                        <h3>${isOKT ? `OKT ${locatie.naam}` : `${instelling.naam} - ${locatie.naam}`}</h3>
+                        <p><strong>Type:</strong> ${instelling.type}</p>
+                        <p><strong>Adres:</strong> ${locatie.adres}</p>
+                        <p><strong>Telefoon:</strong> <a href="tel:${locatie.telefoon}">${locatie.telefoon}</a></p>
+                        <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
+                        <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
+                        ${locatie.website ? `<p><strong>Website:</strong> <a href="${locatie.website}" target="_blank">Bezoek website</a></p>` : 
+                         instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
+                        ${instelling.aanmelden ? `<p><strong>Aanmelden:</strong> <a href="${instelling.aanmelden}" target="_blank">Direct aanmelden</a></p>` : ''}
+                    </div>
+                `;
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                    maxWidth: 300
+                });
+
+                marker.addListener('click', () => {
+                    if (currentInfoWindow) {
+                        currentInfoWindow.close();
+                    }
+                    infowindow.open(map, marker);
+                    currentInfoWindow = infowindow;
+                });
+
+                markers.push(marker);
+            });
+        } else {
+            // Voor instellingen met één locatie
+            if (!instelling.positie || !instelling.positie.lat || !instelling.positie.lng) {
+                // Check of het adres meerdere locaties bevat
+                if (instelling.adres && instelling.adres.includes(" en ")) {
+                    // Split het adres en maak voor elke locatie een marker
+                    const adressen = instelling.adres.split(" en ");
+                    adressen.forEach(adres => {
+                        // Hier zou je geocoding kunnen gebruiken om de positie te bepalen
+                        // Voor nu slaan we deze over omdat we geen positie hebben
+                        console.warn(`Geen positie beschikbaar voor extra locatie van ${instelling.naam}: ${adres}`);
+                    });
+                } else {
+                    console.warn(`Geen geldige positie voor instelling: ${instelling.naam}`);
+                }
+                return;
             }
-        });
 
-        // Info window content
-        const contentString = `
-            <div class="info-window">
-                <h3>${instelling.naam}</h3>
-                <p><strong>Type:</strong> ${instelling.type}</p>
-                <p><strong>Adres:</strong> ${instelling.adres}</p>
-                <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
-                <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-                <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
-                ${instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
-            </div>
-        `;
+            const isOKT = instelling.naam.toLowerCase().includes('okt');
+            const kleur = bepaalKleur(instelling.type, isOKT);
+            
+            const marker = new google.maps.Marker({
+                position: { 
+                    lat: parseFloat(instelling.positie.lat), 
+                    lng: parseFloat(instelling.positie.lng) 
+                },
+                map: map,
+                title: instelling.naam,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: kleur,
+                    fillOpacity: 1,
+                    strokeWeight: 1,
+                    strokeColor: '#ffffff',
+                    scale: 10
+                }
+            });
 
-        const infowindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 300
-        });
+            const contentString = `
+                <div class="info-window">
+                    <h3>${instelling.naam}</h3>
+                    <p><strong>Type:</strong> ${instelling.type}</p>
+                    <p><strong>Adres:</strong> ${instelling.adres}</p>
+                    <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
+                    <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
+                    <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
+                    ${instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
+                    ${instelling.aanmelden ? `<p><strong>Aanmelden:</strong> <a href="${instelling.aanmelden}" target="_blank">Direct aanmelden</a></p>` : ''}
+                </div>
+            `;
 
-        // Sluit het huidige infowindow als er een open is
-        marker.addListener('click', () => {
-            if (currentInfoWindow) {
-                currentInfoWindow.close();
-            }
-            infowindow.open(map, marker);
-            currentInfoWindow = infowindow;
-        });
+            const infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 300
+            });
 
-        markers.push(marker);
+            marker.addListener('click', () => {
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                }
+                infowindow.open(map, marker);
+                currentInfoWindow = infowindow;
+            });
+
+            markers.push(marker);
+        }
     });
 }
 

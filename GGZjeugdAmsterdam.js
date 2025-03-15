@@ -547,13 +547,13 @@ const zorginstellingenData = [
         specialisaties: "Kindzorg, ontwikkelingsondersteuning, gezinsbegeleiding",
         locaties: [
             {
-                naam: "Zuid",
+                naam: "Zigzag Zuid",
                 positie: { lat: 52.3481, lng: 4.8568 },
                 adres: "Amsteldijk 196, 1079 LK Amsterdam",
                 telefoon: "085-2381729"
             },
             {
-                naam: "West",
+                naam: "Zigzag West",
                 positie: { lat: 52.3637, lng: 4.8562 },
                 adres: "Albardagracht 1, 1063 NN Amsterdam",
                 telefoon: "085-2381729"
@@ -896,11 +896,13 @@ function voegMarkersEnInfoWindowsToe() {
     // Voeg markers toe voor alle zorginstellingen
     zorginstellingenData.forEach(instelling => {
         // Als de instelling locaties heeft, voeg dan voor elke locatie een marker toe
-        if (instelling.locaties) {
+        if (instelling.locaties && instelling.locaties.length > 0) {
             instelling.locaties.forEach(locatie => {
-                voegMarkerToe(locatie, instelling);
+                if (locatie.positie) {
+                    voegMarkerToe(locatie, instelling);
+                }
             });
-        } else {
+        } else if (instelling.positie) {
             // Anders voeg een marker toe voor de hoofdlocatie
             voegMarkerToe(instelling, instelling);
         }
@@ -962,6 +964,7 @@ function voegMarkerToe(locatie, instelling) {
 // Functie om de inhoud van het info window te maken
 function maakInfoWindowContent(locatie, instelling) {
     const type = instelling.type;
+    const telefoon = locatie.telefoon || instelling.telefoon;
     
     // Bepaal de website en aanmeld links
     const websiteLink = locatie.website || instelling.website;
@@ -969,15 +972,15 @@ function maakInfoWindowContent(locatie, instelling) {
     
     return `
         <div class="info-window">
-            <h3>${locatie.naam || instelling.naam}</h3>
+            <h3>${instelling.naam}${locatie.naam ? ` - ${locatie.naam}` : ''}</h3>
             <p><strong>Type:</strong> ${type}</p>
             <p><strong>Adres:</strong> ${locatie.adres || instelling.adres}</p>
-            <p><strong>Telefoon:</strong> ${instelling.telefoon}</p>
+            <p><strong>Telefoon:</strong> ${telefoon}</p>
             <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
             ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
             <div class="info-window-links">
                 ${websiteLink ? `<p><a href="${websiteLink}" target="_blank">Website</a></p>` : ''}
-                ${aanmeldLink ? `<p><a href="${aanmeldLink}" target="_blank">Aanmelden/Verwijzen</a></p>` : ''}
+                ${aanmeldLink && aanmeldLink !== websiteLink ? `<p><a href="${aanmeldLink}" target="_blank">Aanmelden/Verwijzen</a></p>` : ''}
             </div>
         </div>
     `;

@@ -1,10 +1,7 @@
 // Maps loader functie
 function loadGoogleMaps() {
-    // Base64 gecodeerde key (dit is nog steeds niet 100% veilig, maar beter dan plaintext)
-    const encodedKey = 'QUl6YVN5QUJLTC1PMUMwZjgtNUpCVWRWcUoxeVgwLWRHU2t0RVV3';
-    
     try {
-        const key = atob(encodedKey);
+        const key = atob(CONFIG.MAPS_API_KEY);
         const script = document.createElement('script');
         script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
         script.async = true;

@@ -745,6 +745,9 @@ function vulZorginstellingenTabel(instellingen) {
         if (instelling.locaties) {
             // Voor instellingen met meerdere locaties
             instelling.locaties.forEach(locatie => {
+                const websiteLink = locatie.website || instelling.website;
+                const aanmeldLink = instelling.aanmelden || instelling.verwijzing || websiteLink;
+                
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${instelling.naam} - ${locatie.naam}</td>
@@ -753,12 +756,18 @@ function vulZorginstellingenTabel(instellingen) {
                     <td>${instelling.telefoon}</td>
                     <td>${instelling.leeftijd}</td>
                     <td>${instelling.specialisaties}</td>
-                    <td><a href="${locatie.website || instelling.website}" target="_blank">Website</a></td>
+                    <td>
+                        ${websiteLink ? `<a href="${websiteLink}" target="_blank" class="btn btn-primary btn-sm">Website</a>` : ''}
+                        ${aanmeldLink && aanmeldLink !== websiteLink ? `<a href="${aanmeldLink}" target="_blank" class="btn btn-success btn-sm">Aanmelden/Verwijzen</a>` : ''}
+                    </td>
                 `;
                 tabelBody.appendChild(row);
             });
         } else {
             // Voor instellingen met één locatie
+            const websiteLink = instelling.website;
+            const aanmeldLink = instelling.aanmelden || instelling.verwijzing || websiteLink;
+            
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${instelling.naam}</td>
@@ -767,7 +776,10 @@ function vulZorginstellingenTabel(instellingen) {
                 <td>${instelling.telefoon}</td>
                 <td>${instelling.leeftijd}</td>
                 <td>${instelling.specialisaties}</td>
-                <td><a href="${instelling.website}" target="_blank">Website</a></td>
+                <td>
+                    ${websiteLink ? `<a href="${websiteLink}" target="_blank" class="btn btn-primary btn-sm">Website</a>` : ''}
+                    ${aanmeldLink && aanmeldLink !== websiteLink ? `<a href="${aanmeldLink}" target="_blank" class="btn btn-success btn-sm">Aanmelden/Verwijzen</a>` : ''}
+                </td>
             `;
             tabelBody.appendChild(row);
         }

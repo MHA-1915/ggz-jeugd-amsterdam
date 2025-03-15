@@ -716,150 +716,91 @@ function sorteerInstellingen(instellingen) {
     return [...instellingen].sort((a, b) => a.naam.localeCompare(b.naam));
 }
 
-// Functie om zorginstellingen tabel te vullen
-function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
-    // Bepaal welke tabel we moeten gebruiken
-    const tbody = isGefilterd ? 
-        document.querySelector('#gefilterde-zorginstellingen-tabel tbody') :
-        document.querySelector('#zorginstellingen-tabel tbody');
-    
-    if (!tbody) {
-        console.log('Geen tabel gevonden voor het vullen van zorginstellingen');
-        return;
-    }
-    
-    tbody.innerHTML = '';
+// Functie om de zorginstellingen tabel te vullen
+function vulZorginstellingenTabel(instellingen) {
+    const tabelBody = document.querySelector('#zorginstellingen-tabel tbody');
+    if (!tabelBody) return;
 
-    // Maak een platte lijst van alle instellingen en hun locaties
-    const alleInstellingen = [];
-    
+    // Leeg de tabel
+    tabelBody.innerHTML = '';
+
+    // Vul de tabel met instellingen
     instellingen.forEach(instelling => {
         if (instelling.locaties) {
-            // Voeg elke locatie toe als aparte rij
+            // Voor instellingen met meerdere locaties
             instelling.locaties.forEach(locatie => {
-                alleInstellingen.push({
-                    naam: instelling.naam === "OKT Amsterdam" ? 
-                        `OKT ${locatie.naam}` : 
-                        `${instelling.naam} - ${locatie.naam}`,
-                    type: instelling.type,
-                    adres: locatie.adres,
-                    telefoon: locatie.telefoon || instelling.telefoon,
-                    leeftijd: instelling.leeftijd,
-                    specialisaties: instelling.specialisaties,
-                    website: locatie.website || instelling.website,
-                    aanmelden: instelling.aanmelden
-                });
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${instelling.naam} - ${locatie.naam}</td>
+                    <td>${instelling.type}</td>
+                    <td>${locatie.adres}</td>
+                    <td>${instelling.telefoon}</td>
+                    <td>${instelling.leeftijd}</td>
+                    <td>${instelling.specialisaties}</td>
+                    <td><a href="${locatie.website || instelling.website}" target="_blank">Website</a></td>
+                `;
+                tabelBody.appendChild(row);
             });
         } else {
             // Voor instellingen met één locatie
-            alleInstellingen.push(instelling);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${instelling.naam}</td>
+                <td>${instelling.type}</td>
+                <td>${instelling.adres}</td>
+                <td>${instelling.telefoon}</td>
+                <td>${instelling.leeftijd}</td>
+                <td>${instelling.specialisaties}</td>
+                <td><a href="${instelling.website}" target="_blank">Website</a></td>
+            `;
+            tabelBody.appendChild(row);
         }
     });
 
-    // Sorteer de instellingen alfabetisch
-    const gesorteerdeInstellingen = sorteerInstellingen(alleInstellingen);
-
-    gesorteerdeInstellingen.forEach(instelling => {
-        const isOKT = instelling.naam.toLowerCase().includes('okt');
-        const kleur = bepaalKleur(instelling.type, isOKT);
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${instelling.naam}</td>
-            <td>
-                <div class="type-indicator">
-                    <span style="background: ${kleur}; width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
-                    ${instelling.type}
-                </div>
-            </td>
-            <td>${instelling.adres || 'Adres niet beschikbaar'}</td>
-            <td>${instelling.telefoon ? `<a href="tel:${instelling.telefoon.replace(/[^0-9+]/g, '')}">${instelling.telefoon}</a>` : 'Telefoon niet beschikbaar'}</td>
-            <td>${instelling.leeftijd || 'Niet gespecificeerd'}</td>
-            <td>${instelling.specialisaties || 'Niet gespecificeerd'}</td>
-            <td>
-                <div class="actie-knoppen">
-                    ${instelling.website ? 
-                        `<a href="${instelling.website}" target="_blank" rel="noopener noreferrer" class="knop website-knop">Website</a>` 
-                        : ''}
-                    ${instelling.aanmelden ? 
-                        `<a href="${instelling.aanmelden}" target="_blank" rel="noopener noreferrer" class="knop aanmeld-knop">Aanmelden</a>` 
-                        : ''}
-                </div>
-            </td>
-        `;
-        tbody.appendChild(row);
-    });
-
-    // Update resultaten teller en zichtbaarheid van gefilterde resultaten
+    // Update de resultaten teller
     const resultatenTeller = document.getElementById('resultaten-teller');
     if (resultatenTeller) {
-        resultatenTeller.textContent = `${alleInstellingen.length} ${alleInstellingen.length === 1 ? 'instelling' : 'instellingen'} gevonden`;
-    }
-
-    // Als we op de kaartpagina zijn, update dan de zichtbaarheid van de gefilterde resultaten
-    if (isGefilterd) {
-        const resultatenDiv = document.getElementById('gefilterde-resultaten');
-        if (resultatenDiv) {
-            resultatenDiv.style.display = alleInstellingen.length > 0 ? 'block' : 'none';
-        }
+        const aantalInstellingen = tabelBody.getElementsByTagName('tr').length;
+        resultatenTeller.textContent = `${aantalInstellingen} instelling${aantalInstellingen === 1 ? '' : 'en'} gevonden`;
     }
 }
 
 // Functie om de kaart te initialiseren
 function initMap() {
-    console.log('initMap wordt aangeroepen');
-    
-    const mapElement = document.getElementById('map');
-    if (!mapElement) {
-        console.error('Kaart element niet gevonden');
-        return;
-    }
-
     // Centreer de kaart op Amsterdam
     const amsterdam = { lat: 52.3676, lng: 4.9041 };
     
-    // Basis kaart opties
-    const mapOptions = {
+    // Maak een nieuwe kaart aan
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: amsterdam,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_CENTER,
-            style: google.maps.ZoomControlStyle.LARGE
-        },
-        minZoom: 10,
-        maxZoom: 18,
-        scaleControl: true,
         streetViewControl: true,
-        streetViewControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_BOTTOM
-        },
-        fullscreenControl: true,
-        fullscreenControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_TOP
-        },
-        gestureHandling: 'greedy'
-    };
+        fullscreenControl: true
+    });
 
-    try {
-        // Maak de kaart aan
-        map = new google.maps.Map(mapElement, mapOptions);
-        console.log('Kaart succesvol aangemaakt');
-        
-        // Voeg markers en legenda toe
-        voegMarkersToe(zorginstellingenData);
+    // Voeg markers toe voor alle zorginstellingen
+    voegMarkersEnInfoWindowsToe();
+
+    // Voeg de legenda toe als die nog niet is toegevoegd
+    if (!legendaToegevoegd) {
         voegLegendaToe();
-        
-        // Vul de tabel met alle zorginstellingen
-        vulZorginstellingenTabel(zorginstellingenData);
-    } catch (error) {
-        console.error('Fout bij het maken van de kaart:', error);
-        mapElement.innerHTML = '<p class="error">Er is een probleem met het laden van de kaart. Probeer de pagina te verversen.</p>';
+        legendaToegevoegd = true;
+    }
+
+    // Voeg event listeners toe voor de filters als we op de kaartpagina zijn
+    if (document.querySelector('.kaart-pagina')) {
+        const filterForm = document.getElementById('filter-form');
+        if (filterForm) {
+            filterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                zoekZorginstellingen();
+            });
+
+            // Voeg change event listeners toe voor directe updates
+            document.getElementById('type-filter').addEventListener('change', zoekZorginstellingen);
+            document.getElementById('leeftijd-filter').addEventListener('change', zoekZorginstellingen);
+        }
     }
 }
 
@@ -868,186 +809,133 @@ window.initMap = initMap;
 
 // Functie om de legenda toe te voegen
 function voegLegendaToe() {
-    if (legendaToegevoegd || !map) return;
-
     const legendaDiv = document.createElement('div');
     legendaDiv.className = 'legenda';
     legendaDiv.style.cssText = `
-        position: absolute;
-        bottom: 30px;
-        left: 10px;
         background: white;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        font-family: Arial, sans-serif;
-        z-index: 1000;
-    `;
-    
-    legendaDiv.innerHTML = `
-        <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #333;">Type zorginstelling</h4>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 12px; height: 12px; background: #4CAF50; border-radius: 50%; display: inline-block;"></span>
-                <span style="font-size: 12px; color: #555;">Ouder- en Kindteam (OKT)</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 12px; height: 12px; background: #FFC107; border-radius: 50%; display: inline-block;"></span>
-                <span style="font-size: 12px; color: #555;">Basis GGZ</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 12px; height: 12px; background: #FF5722; border-radius: 50%; display: inline-block;"></span>
-                <span style="font-size: 12px; color: #555;">Gespecialiseerde GGZ</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 12px; height: 12px; background: #E91E63; border-radius: 50%; display: inline-block;"></span>
-                <span style="font-size: 12px; color: #555;">Hoogspecialistische zorg</span>
-            </div>
-        </div>
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #999;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     `;
 
-    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legendaDiv);
-    legendaToegevoegd = true;
+    const legendaItems = [
+        { type: 'Ouder- en Kindteam', kleur: 'blue' },
+        { type: 'Basis GGZ', kleur: 'blue' },
+        { type: 'Gespecialiseerde GGZ', kleur: 'yellow' },
+        { type: 'Hoogspecialistische Zorg', kleur: 'red' }
+    ];
+
+    const titel = document.createElement('div');
+    titel.textContent = 'Legenda';
+    titel.style.fontWeight = 'bold';
+    titel.style.marginBottom = '5px';
+    legendaDiv.appendChild(titel);
+
+    legendaItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.style.margin = '5px 0';
+        itemDiv.style.display = 'flex';
+        itemDiv.style.alignItems = 'center';
+
+        const marker = document.createElement('img');
+        marker.src = `https://maps.google.com/mapfiles/ms/icons/${item.kleur}-dot.png`;
+        marker.style.width = '20px';
+        marker.style.height = '20px';
+        marker.style.marginRight = '5px';
+
+        const label = document.createElement('span');
+        label.textContent = item.type;
+
+        itemDiv.appendChild(marker);
+        itemDiv.appendChild(label);
+        legendaDiv.appendChild(itemDiv);
+    });
+
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legendaDiv);
 }
 
-// Functie om markers toe te voegen
-function voegMarkersToe(zorginstellingen) {
+// Functie om markers en info windows toe te voegen
+function voegMarkersEnInfoWindowsToe() {
     // Verwijder bestaande markers
     markers.forEach(marker => marker.setMap(null));
     markers = [];
 
-    zorginstellingen.forEach(instelling => {
-        // Voor instellingen met locaties
+    // Voeg markers toe voor alle zorginstellingen
+    zorginstellingenData.forEach(instelling => {
+        // Als de instelling locaties heeft, voeg dan voor elke locatie een marker toe
         if (instelling.locaties) {
             instelling.locaties.forEach(locatie => {
-                if (!locatie.positie || !locatie.positie.lat || !locatie.positie.lng) {
-                    console.warn(`Geen geldige positie voor locatie: ${locatie.naam} van ${instelling.naam}`);
-                    return;
-                }
-
-                const isOKT = instelling.naam.toLowerCase().includes('okt');
-                let kleur;
-                if (isOKT) {
-                    kleur = markerKleuren['Ouder- en Kindteam'];
-                } else {
-                    const type = instelling.type.toLowerCase().split(',')[0].trim();
-                    kleur = markerKleuren[type] || '#9E9E9E';
-                }
-
-                const marker = new google.maps.Marker({
-                    position: { 
-                        lat: parseFloat(locatie.positie.lat), 
-                        lng: parseFloat(locatie.positie.lng) 
-                    },
-                    map: map,
-                    title: isOKT ? `OKT ${locatie.naam}` : `${instelling.naam} - ${locatie.naam}`,
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        fillColor: kleur,
-                        fillOpacity: 1,
-                        strokeWeight: 2,
-                        strokeColor: '#ffffff',
-                        scale: 8
-                    }
-                });
-
-                // Info window content voor locatie
-                const contentString = `
-                    <div class="info-window">
-                        <h3>${isOKT ? `OKT ${locatie.naam}` : `${instelling.naam} - ${locatie.naam}`}</h3>
-                        <p><strong>Type:</strong> ${instelling.type}</p>
-                        <p><strong>Adres:</strong> ${locatie.adres}</p>
-                        <p><strong>Telefoon:</strong> <a href="tel:${locatie.telefoon}">${locatie.telefoon}</a></p>
-                        <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-                        <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
-                        ${locatie.website ? `<p><strong>Website:</strong> <a href="${locatie.website}" target="_blank">Bezoek website</a></p>` : 
-                         instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
-                        ${instelling.aanmelden ? `<p><strong>Aanmelden:</strong> <a href="${instelling.aanmelden}" target="_blank">Direct aanmelden</a></p>` : ''}
-                    </div>
-                `;
-
-                const infowindow = new google.maps.InfoWindow({
-                    content: contentString,
-                    maxWidth: 300
-                });
-
-                marker.addListener('click', () => {
-                    if (currentInfoWindow) {
-                        currentInfoWindow.close();
-                    }
-                    infowindow.open(map, marker);
-                    currentInfoWindow = infowindow;
-                });
-
-                markers.push(marker);
+                voegMarkerToe(locatie, instelling);
             });
         } else {
-            // Voor instellingen met één locatie
-            if (!instelling.positie || !instelling.positie.lat || !instelling.positie.lng) {
-                // Check of het adres meerdere locaties bevat
-                if (instelling.adres && instelling.adres.includes(" en ")) {
-                    // Split het adres en maak voor elke locatie een marker
-                    const adressen = instelling.adres.split(" en ");
-                    adressen.forEach(adres => {
-                        // Hier zou je geocoding kunnen gebruiken om de positie te bepalen
-                        // Voor nu slaan we deze over omdat we geen positie hebben
-                        console.warn(`Geen positie beschikbaar voor extra locatie van ${instelling.naam}: ${adres}`);
-                    });
-                } else {
-                    console.warn(`Geen geldige positie voor instelling: ${instelling.naam}`);
-                }
-                return;
-            }
-
-            const isOKT = instelling.naam.toLowerCase().includes('okt');
-            const kleur = bepaalKleur(instelling.type, isOKT);
-            
-            const marker = new google.maps.Marker({
-                position: { 
-                    lat: parseFloat(instelling.positie.lat), 
-                    lng: parseFloat(instelling.positie.lng) 
-                },
-                map: map,
-                title: instelling.naam,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: kleur,
-                    fillOpacity: 1,
-                    strokeWeight: 2,
-                    strokeColor: '#ffffff',
-                    scale: 8
-                }
-            });
-
-            const contentString = `
-                <div class="info-window">
-                    <h3>${instelling.naam}</h3>
-                    <p><strong>Type:</strong> ${instelling.type}</p>
-                    <p><strong>Adres:</strong> ${instelling.adres}</p>
-                    <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
-                    <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-                    <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
-                    ${instelling.website ? `<p><a href="${instelling.website}" target="_blank">Website bezoeken</a></p>` : ''}
-                    ${instelling.aanmelden ? `<p><strong>Aanmelden:</strong> <a href="${instelling.aanmelden}" target="_blank">Direct aanmelden</a></p>` : ''}
-                </div>
-            `;
-
-            const infowindow = new google.maps.InfoWindow({
-                content: contentString,
-                maxWidth: 300
-            });
-
-            marker.addListener('click', () => {
-                if (currentInfoWindow) {
-                    currentInfoWindow.close();
-                }
-                infowindow.open(map, marker);
-                currentInfoWindow = infowindow;
-            });
-
-            markers.push(marker);
+            // Anders voeg een marker toe voor de hoofdlocatie
+            voegMarkerToe(instelling, instelling);
         }
     });
+}
+
+// Functie om een enkele marker toe te voegen
+function voegMarkerToe(locatie, instelling) {
+    if (!locatie.positie) return;
+
+    const markerIcon = bepaalMarkerIcon(instelling.type);
+    const marker = new google.maps.Marker({
+        position: locatie.positie,
+        map: map,
+        title: locatie.naam || instelling.naam,
+        icon: markerIcon
+    });
+
+    // Maak een info window voor deze marker
+    const infoWindow = new google.maps.InfoWindow({
+        content: maakInfoWindowContent(locatie, instelling)
+    });
+
+    // Voeg click event toe
+    marker.addListener('click', () => {
+        // Sluit het huidige info window als er een open is
+        if (currentInfoWindow) {
+            currentInfoWindow.close();
+        }
+        // Open het nieuwe info window
+        infoWindow.open(map, marker);
+        currentInfoWindow = infoWindow;
+    });
+
+    markers.push(marker);
+}
+
+// Functie om het juiste marker icoon te bepalen
+function bepaalMarkerIcon(type) {
+    const baseUrl = 'https://maps.google.com/mapfiles/ms/icons/';
+    switch(type.toLowerCase()) {
+        case 'okt':
+        case 'basis':
+            return baseUrl + 'blue-dot.png';
+        case 'gespecialiseerd':
+            return baseUrl + 'yellow-dot.png';
+        case 'hoogspecialistisch':
+            return baseUrl + 'red-dot.png';
+        default:
+            return baseUrl + 'blue-dot.png';
+    }
+}
+
+// Functie om de inhoud van het info window te maken
+function maakInfoWindowContent(locatie, instelling) {
+    return `
+        <div class="info-window">
+            <h3>${locatie.naam || instelling.naam}</h3>
+            <p><strong>Type:</strong> ${instelling.type}</p>
+            <p><strong>Adres:</strong> ${locatie.adres || instelling.adres}</p>
+            <p><strong>Telefoon:</strong> ${instelling.telefoon}</p>
+            <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
+            ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
+            <p><a href="${locatie.website || instelling.website}" target="_blank">Website</a></p>
+        </div>
+    `;
 }
 
 // Functie om de kaart te updaten met gefilterde resultaten
@@ -1187,93 +1075,26 @@ function bepaalPagina() {
     return { isKaartPagina, isOverzichtPagina };
 }
 
-// Functie voor het toevoegen van een marker
-function voegMarkerToe(instelling) {
-    if (!instelling.positie) return;
-
-    const marker = new google.maps.Marker({
-        position: instelling.positie,
-        map: map,
-        title: instelling.naam,
-        icon: bepaalMarkerIcoon(instelling.type)
-    });
-
-    const infoWindow = new google.maps.InfoWindow({
-        content: maakInfoWindowContent(instelling)
-    });
-
-    marker.addListener('click', () => {
-        if (currentInfoWindow) {
-            currentInfoWindow.close();
-        }
-        infoWindow.open(map, marker);
-        currentInfoWindow = infoWindow;
-    });
-
-    markers.push(marker);
-}
-
-// Functie voor het bepalen van het juiste marker icoon
-function bepaalMarkerIcoon(type) {
-    const iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
-    if (type.toLowerCase().includes('basis')) {
-        return iconBase + 'blue-dot.png';
-    } else if (type.toLowerCase().includes('gespecialiseerd')) {
-        return iconBase + 'yellow-dot.png';
-    } else if (type.toLowerCase().includes('hoogspecialistisch')) {
-        return iconBase + 'red-dot.png';
-    } else if (type.toLowerCase().includes('okt') || type.toLowerCase().includes('ouder- en kindteam')) {
-        return iconBase + 'green-dot.png';
-    }
-    return iconBase + 'blue-dot.png';
-}
-
-// Functie voor het maken van de inhoud van het info window
-function maakInfoWindowContent(instelling) {
-    return `
-        <div class="info-window">
-            <h3>${instelling.naam}</h3>
-            <p><strong>Type:</strong> ${instelling.type}</p>
-            <p><strong>Adres:</strong> ${instelling.adres}</p>
-            <p><strong>Telefoon:</strong> ${instelling.telefoon || 'Niet beschikbaar'}</p>
-            <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-            ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
-            ${instelling.website ? `<p><a href="${instelling.website}" target="_blank">Website bezoeken</a></p>` : ''}
-        </div>
-    `;
-}
-
 // Initialiseer de pagina wanneer deze geladen is
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const { isKaartPagina, isOverzichtPagina } = bepaalPagina();
-    
+
     if (isKaartPagina) {
-        // Voeg event listener toe voor het zoekformulier
+        // De kaart wordt geïnitialiseerd door de maps-loader.js
+        // Voeg event listeners toe voor de filters
         const filterForm = document.getElementById('filter-form');
         if (filterForm) {
             filterForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 zoekZorginstellingen();
             });
-        }
 
-        // Voeg event listeners toe voor directe updates bij selectie
-        const typeFilter = document.getElementById('type-filter');
-        const leeftijdFilter = document.getElementById('leeftijd-filter');
-
-        if (typeFilter) {
-            typeFilter.addEventListener('change', zoekZorginstellingen);
+            // Voeg change event listeners toe voor directe updates
+            document.getElementById('type-filter').addEventListener('change', zoekZorginstellingen);
+            document.getElementById('leeftijd-filter').addEventListener('change', zoekZorginstellingen);
         }
-        if (leeftijdFilter) {
-            leeftijdFilter.addEventListener('change', zoekZorginstellingen);
-        }
-
-        // Initialiseer de gefilterde resultaten tabel
-        vulZorginstellingenTabel(zorginstellingenData, true);
-        
     } else if (isOverzichtPagina) {
-        // Initialiseer de overzichtspagina
-        vulZorginstellingenTabel(zorginstellingenData, false);
-        initializeTabs();
+        // Vul de tabel met alle zorginstellingen
+        vulZorginstellingenTabel(zorginstellingenData);
     }
 }); 

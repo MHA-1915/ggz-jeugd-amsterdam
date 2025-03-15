@@ -15,7 +15,6 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaAySKVKz3fTmiY_H76zvQzsPZ1WrDC4k&callback=initMap">
     </script>
 </head>
-
 <body>
     <!-- Header sectie -->
     <header>
@@ -28,7 +27,6 @@
             </ul>
         </nav>
     </header>
-
     <!-- Zoekfunctie sectie -->
     <section id="zoekfunctie">
         <h2>Zoek Jeugdhulp in Amsterdam</h2>
@@ -47,27 +45,20 @@
                 <option value="0-12">0-12 jaar</option>
                 <option value="12-18">12-18 jaar</option>
                 <option value="18-23">18-23 jaar</option>
-            </select>
-
             <label for="filter">Type instelling:</label>
             <select id="filter" name="filter">
                 <option value="alle">Alle instellingen</option>
                 <option value="okt">Alleen Ouder- en Kindteams</option>
                 <option value="ggz">Alleen GGZ instellingen</option>
-            </select>
-
             <label for="locatie">Voer locatie in:</label>
             <input type="text" id="locatie" name="locatie" placeholder="Bijvoorbeeld: Amsterdam Noord">
             <button type="submit">Zoek</button>
         </form>
     </section>
-
     <!-- Zorgkaart sectie (waar de kaart komt) -->
     <section id="zorgkaart">
         <h2>Zorginstellingen op de Kaart</h2>
         <div id="map"></div> <!-- Dit is de plek voor je interactieve kaart -->
-    </section>
-
     <!-- Zorginstellingen overzicht sectie -->
     <section id="overzicht">
         <h2>Overzicht Zorginstellingen</h2>
@@ -89,13 +80,10 @@
                 </tbody>
             </table>
         </div>
-    </section>
-
     <!-- Footer sectie -->
     <footer>
         <p>&copy; 2025 Interactieve Zorgkaart Amsterdam</p>
         <p>Contact: info@zorgkaartamsterdam.nl</p>
     </footer>
 </body>
-
 </html>

@@ -821,10 +821,10 @@ function voegLegendaToe() {
     `;
 
     const legendaItems = [
-        { type: 'Ouder- en Kindteam', kleur: 'blue' },
-        { type: 'Basis GGZ', kleur: 'blue' },
-        { type: 'Gespecialiseerde GGZ', kleur: 'yellow' },
-        { type: 'Hoogspecialistische Zorg', kleur: 'red' }
+        { type: 'Ouder- en Kindteam', kleur: '#FFC107' },
+        { type: 'Basis GGZ', kleur: '#4CAF50' },
+        { type: 'Gespecialiseerde GGZ', kleur: '#FF9800' },
+        { type: 'Hoogspecialistische Zorg', kleur: '#F44336' }
     ];
 
     const titel = document.createElement('div');
@@ -839,11 +839,13 @@ function voegLegendaToe() {
         itemDiv.style.display = 'flex';
         itemDiv.style.alignItems = 'center';
 
-        const marker = document.createElement('img');
-        marker.src = `https://maps.google.com/mapfiles/ms/icons/${item.kleur}-dot.png`;
-        marker.style.width = '20px';
-        marker.style.height = '20px';
-        marker.style.marginRight = '5px';
+        const marker = document.createElement('div');
+        marker.style.width = '12px';
+        marker.style.height = '12px';
+        marker.style.borderRadius = '50%';
+        marker.style.backgroundColor = item.kleur;
+        marker.style.border = '1px solid #FFFFFF';
+        marker.style.marginRight = '8px';
 
         const label = document.createElement('span');
         label.textContent = item.type;
@@ -909,18 +911,37 @@ function voegMarkerToe(locatie, instelling) {
 
 // Functie om het juiste marker icoon te bepalen
 function bepaalMarkerIcon(type) {
-    const baseUrl = 'https://maps.google.com/mapfiles/ms/icons/';
-    switch(type.toLowerCase()) {
-        case 'okt':
-        case 'basis':
-            return baseUrl + 'blue-dot.png';
-        case 'gespecialiseerd':
-            return baseUrl + 'yellow-dot.png';
-        case 'hoogspecialistisch':
-            return baseUrl + 'red-dot.png';
-        default:
-            return baseUrl + 'blue-dot.png';
+    // Definieer de kleuren voor verschillende types
+    const kleuren = {
+        'okt': '#FFC107',      // Geel voor OKT
+        'basis': '#4CAF50',    // Groen voor Basis GGZ
+        'gespecialiseerd': '#FF9800',  // Oranje voor Gespecialiseerde GGZ
+        'hoogspecialistisch': '#F44336'  // Rood voor Hoogspecialistische zorg
+    };
+
+    // Bepaal de kleur op basis van het type
+    let kleur = kleuren['basis']; // Standaard kleur
+    const typeLower = type.toLowerCase();
+    
+    if (typeLower.includes('okt')) {
+        kleur = kleuren['okt'];
+    } else if (typeLower.includes('basis')) {
+        kleur = kleuren['basis'];
+    } else if (typeLower.includes('gespecialiseerd')) {
+        kleur = kleuren['gespecialiseerd'];
+    } else if (typeLower.includes('hoogspecialistisch')) {
+        kleur = kleuren['hoogspecialistisch'];
     }
+
+    // Maak een SVG cirkel met de juiste kleur
+    return {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: kleur,
+        fillOpacity: 1,
+        strokeWeight: 1,
+        strokeColor: '#FFFFFF',
+        scale: 10
+    };
 }
 
 // Functie om de inhoud van het info window te maken

@@ -46,7 +46,8 @@ const zorginstellingenData = [
         positie: { lat: 52.3481, lng: 4.8568 },
         adres: "Amsteldijk 196, 1079 LK Amsterdam",
         telefoon: "088-0547001",
-        website: "https://www.levvel.nl/formulier/jongere-aanmelden",
+        website: "https://www.levvel.nl",
+        aanmelden: "https://www.levvel.nl/formulier/jongere-aanmelden",
         leeftijd: "0-18 jaar",
         specialisaties: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie",
         locaties: [
@@ -849,8 +850,7 @@ function voegLegendaToe() {
     `;
 
     const legendaItems = [
-        { type: 'Ouder- en Kindteam (OKT)', kleur: '#FFC107' },
-        { type: 'Basis GGZ', kleur: '#4CAF50' },
+        { type: 'Ouder- en Kindteam (OKT) / Basis GGZ', kleur: '#FFC107' },
         { type: 'Gespecialiseerde GGZ', kleur: '#FF9800' },
         { type: 'Hoogspecialistische Zorg', kleur: '#F44336' }
     ];
@@ -911,10 +911,10 @@ function voegMarkersEnInfoWindowsToe() {
 function voegMarkerToe(locatie, instelling) {
     if (!locatie.positie) return;
 
-    // Bepaal of het een OKT locatie is
-    const isOKT = locatie.naam?.startsWith('OKT') || instelling.naam?.startsWith('OKT');
+    // Bepaal het type zorginstelling
+    const type = instelling.type || 'Onbekend';
     
-    const markerIcon = bepaalMarkerIcon(isOKT ? 'Ouder- en Kindteam' : instelling.type);
+    const markerIcon = bepaalMarkerIcon(type);
     const marker = new google.maps.Marker({
         position: locatie.positie,
         map: map,
@@ -924,7 +924,7 @@ function voegMarkerToe(locatie, instelling) {
 
     // Maak een info window voor deze marker
     const infoWindow = new google.maps.InfoWindow({
-        content: maakInfoWindowContent(locatie, instelling, isOKT)
+        content: maakInfoWindowContent(locatie, instelling)
     });
 
     // Voeg click event toe
@@ -943,18 +943,16 @@ function voegMarkerToe(locatie, instelling) {
 
 // Functie om het juiste marker icoon te bepalen
 function bepaalMarkerIcon(type) {
-    // Bepaal eerst of het een OKT is
-    const isOKT = type.toLowerCase().includes('okt') || type.toLowerCase().includes('ouder- en kindteam');
+    // Standaardiseer de type-string
+    const typeString = type.toLowerCase();
     
     // Bepaal de kleur op basis van het type
     let kleur;
-    if (isOKT) {
-        kleur = '#FFC107'; // Geel voor OKT
-    } else if (type.toLowerCase().includes('basis')) {
-        kleur = '#4CAF50'; // Groen voor Basis GGZ
-    } else if (type.toLowerCase().includes('gespecialiseerd')) {
+    if (typeString.includes('okt') || typeString.includes('ouder- en kindteam') || typeString.includes('basis')) {
+        kleur = '#FFC107'; // Geel voor OKT en Basis GGZ
+    } else if (typeString.includes('gespecialiseerd')) {
         kleur = '#FF9800'; // Oranje voor Gespecialiseerde GGZ
-    } else if (type.toLowerCase().includes('hoogspecialistisch')) {
+    } else if (typeString.includes('hoogspecialistisch')) {
         kleur = '#F44336'; // Rood voor Hoogspecialistische zorg
     } else {
         kleur = '#9E9E9E'; // Grijs voor overige
@@ -972,8 +970,8 @@ function bepaalMarkerIcon(type) {
 }
 
 // Functie om de inhoud van het info window te maken
-function maakInfoWindowContent(locatie, instelling, isOKT) {
-    const type = isOKT ? 'Ouder- en Kindteam (OKT)' : instelling.type;
+function maakInfoWindowContent(locatie, instelling) {
+    const type = instelling.type;
     
     // Bepaal de website en aanmeld links
     const websiteLink = locatie.website || instelling.website;
@@ -1006,17 +1004,15 @@ function filterZorginstellingenOpType(type) {
     if (type === 'alle') return zorginstellingenData;
     
     return zorginstellingenData.filter(instelling => {
-        const isOKT = instelling.naam.toLowerCase().includes('okt');
+        const typeString = instelling.type.toLowerCase();
         
         switch(type) {
             case 'okt':
-                return isOKT;
-            case 'basis':
-                return instelling.type.toLowerCase() === 'basis' && !isOKT;
+                return typeString.includes('okt') || typeString.includes('ouder- en kindteam') || typeString.includes('basis');
             case 'gespecialiseerd':
-                return instelling.type.toLowerCase() === 'gespecialiseerd';
+                return typeString.includes('gespecialiseerd');
             case 'hoogspecialistisch':
-                return instelling.type.toLowerCase() === 'hoogspecialistisch';
+                return typeString.includes('hoogspecialistisch');
             default:
                 return true;
         }

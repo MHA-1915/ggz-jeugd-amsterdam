@@ -1,9 +1,8 @@
 // Maps loader functie
 function loadGoogleMaps() {
     try {
-        const key = atob(CONFIG.MAPS_API_KEY);
         const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&callback=initMap`;
         script.async = true;
         script.defer = true;
         script.onerror = () => {

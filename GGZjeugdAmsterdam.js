@@ -850,7 +850,7 @@ function voegLegendaToe() {
     `;
 
     const legendaItems = [
-        { type: 'Ouder- en Kindteam (OKT) / Basis GGZ', kleur: '#FFC107' },
+        { type: 'Ouder- en Kindteam (OKT) / Basis GGZ', kleur: '#4CAF50' },
         { type: 'Gespecialiseerde GGZ', kleur: '#FF9800' },
         { type: 'Hoogspecialistische Zorg', kleur: '#F44336' }
     ];
@@ -949,7 +949,7 @@ function bepaalMarkerIcon(type) {
     // Bepaal de kleur op basis van het type
     let kleur;
     if (typeString.includes('okt') || typeString.includes('ouder- en kindteam') || typeString.includes('basis')) {
-        kleur = '#FFC107'; // Geel voor OKT en Basis GGZ
+        kleur = '#4CAF50'; // Groen voor OKT en Basis GGZ
     } else if (typeString.includes('gespecialiseerd')) {
         kleur = '#FF9800'; // Oranje voor Gespecialiseerde GGZ
     } else if (typeString.includes('hoogspecialistisch')) {

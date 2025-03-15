@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Encoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google Maps API Key Encoder</h1>
+        
+        <div class="warning">
+            <strong>Let op:</strong> Deze tool is alleen bedoeld voor lokaal gebruik. 
+            Sluit deze pagina na gebruik om uw API key veilig te houden.
+        </div>
+
+        <div class="input-group">
+            <label for="apiKey">Plak uw Google Maps API key hier:</label><br>
+            <input type="text" id="apiKey" placeholder="Uw API key">
+        </div>
+
+        <button onclick="encodeApiKey()">Encodeer naar Base64</button>
+
+        <div class="result">
+            <strong>Gecodeerde API key:</strong><br>
+            <span id="result">-</span>
+        </div>
+
+        <div class="warning" style="margin-top: 20px;">
+            <strong>Instructies:</strong>
+            <ol>
+                <li>Plak uw Google Maps API key in het invoerveld</li>
+                <li>Klik op "Encodeer naar Base64"</li>
+                <li>Kopieer de gecodeerde key</li>
+                <li>Plak de gecodeerde key in js/config.js bij MAPS_API_KEY</li>
+            </ol>
+        </div>
+    </div>
+    <script src="js/encode-key.js"></script>
+</body>
+</html> 

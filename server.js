@@ -23,5 +23,5 @@ app.get('/api/maps-key', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server draait op http://localhost:${PORT}`);
+    console.log(`Server draait op hhttp://localhost:${PORT}`);
 }); 

@@ -19,4 +19,4 @@ function loadGoogleMaps() {
         document.getElementById('map').innerHTML = 
             '<p class="error">Er is een probleem met het laden van de kaart. Probeer de pagina te verversen.</p>';
     }
-} 
+}

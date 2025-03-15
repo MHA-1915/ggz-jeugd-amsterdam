@@ -102,18 +102,26 @@
             </div>
         </div>
     </footer>
-    <script src="config.js"></script>
     <script src="GGZjeugdAmsterdam.js"></script>
     <script>
-        // Laad de Google Maps API met de key uit config.js
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&callback=initMap`;
-        script.async = true;
-        script.defer = true;
-        script.onerror = () => {
-            document.getElementById('map').innerHTML = '<p class="error">Er is een probleem met het laden van de kaart. Probeer de pagina te verversen.</p>';
-        };
-        document.body.appendChild(script);
+        // Configuratie voor development
+        const API_BASE_URL = 'http://localhost:3000';
+
+        // Haal de API key op van de backend
+        fetch(`${API_BASE_URL}/api/maps-key`)
+            .then(response => response.json())
+            .then(data => {
+                // Laad de Google Maps API met de opgehaalde key
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error('Fout bij het ophalen van de API key:', error);
+                document.getElementById('map').innerHTML = '<p class="error">Er is een fout opgetreden bij het laden van de kaart. Vernieuw de pagina om het opnieuw te proberen.</p>';
+            });
     </script>
 </body>
-</html>
+</html> 

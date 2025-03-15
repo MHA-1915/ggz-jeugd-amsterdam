@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overzicht Zorginstellingen - GGZ Jeugd Amsterdam</title>
+    <link rel="stylesheet" href="GGZjeugdAmsterdam.css">
+</head>
+<body class="overzicht-pagina">
+    <header>
+        <h1>GGZ Jeugd Amsterdam</h1>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="informatie.html">Informatie</a></li>
+            <li><a href="kaart.html">Zorgkaart</a></li>
+            <li><a href="overzicht.html" class="active">Volledig Overzicht</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Overzicht Zorginstellingen</h1>
+        
+        <!-- Tab navigatie -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="alle">Alle Instellingen</button>
+            <button class="tab-button" data-tab="okt">Ouder- en Kindteams</button>
+            <button class="tab-button" data-tab="basis">Basis GGZ</button>
+            <button class="tab-button" data-tab="gespecialiseerd">Gespecialiseerde GGZ</button>
+            <button class="tab-button" data-tab="hoogspecialistisch">Hoogspecialistische Zorg</button>
+        </div>
+
+        <!-- Resultaten teller -->
+        <div id="resultaten-teller" class="resultaten-teller"></div>
+
+        <!-- Tab inhoud -->
+        <div class="tab-content active" id="alle">
+            <div class="table-container">
+                <table id="zorginstellingen-tabel">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Type</th>
+                            <th>Adres</th>
+                            <th>Telefoon</th>
+                            <th>Leeftijd</th>
+                            <th>Specialisaties</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="GGZjeugdAmsterdam.js"></script>
+</body>
+</html> 

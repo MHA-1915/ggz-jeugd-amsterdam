@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 app.get('/api/maps-key', (req, res) => {
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
-        console.error('Google Maps API key niet gevonden');
+        console.error('Google Maps API key niet gevonden in .env bestand');
         return res.status(500).json({ error: 'API key niet gevonden' });
     }
     res.json({ key: apiKey });
@@ -24,5 +24,5 @@ app.get('/api/maps-key', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server draait op hhttp://localhost:${PORT}`);
+    console.log(`Server draait op http://localhost:${PORT}`);
 }); 

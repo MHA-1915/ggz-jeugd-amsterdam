@@ -8,6 +8,7 @@ Een interactieve kaart die GGZ-zorginstellingen en Ouder- en Kindteams in Amster
 - Filtering op type zorg en leeftijdscategorie
 - Gedetailleerde informatie per instelling
 - Responsive design
+- Veilige API key handling via backend
 
 ## Installatie
 
@@ -17,9 +18,8 @@ git clone [repository-url]
 cd GGZjeugdAmsterdam
 ```
 
-2. Installeer de backend dependencies:
+2. Installeer de dependencies:
 ```bash
-cd server
 npm install
 ```
 
@@ -31,21 +31,14 @@ Vul je Google Maps API key in in het `.env` bestand.
 
 ## Gebruik
 
-1. Start de backend server:
+1. Start de server:
 ```bash
-cd server
-npm run dev
+node server.js
 ```
 
-2. Start de frontend server (in een nieuwe terminal):
-```bash
-cd ..
-python3 -m http.server 8080
+2. Open de website in je browser:
 ```
-
-3. Open de website in je browser:
-```
-http://localhost:8080/kaart.html
+http://localhost:3000/kaart.html
 ```
 
 ## Google Maps API Setup
@@ -59,31 +52,29 @@ http://localhost:8080/kaart.html
 
 ## Veiligheid
 
-- De API key wordt veilig beheerd via de backend
-- CORS is geconfigureerd voor lokale development
-- Gevoelige informatie is uitgesloten van versiecontrole
+- De API key wordt veilig beheerd via environment variables
+- API key wordt nooit direct in de frontend code gebruikt
+- Gevoelige bestanden (.env, config.js) zijn uitgesloten van versiecontrole
+- Backend route voor veilige API key distributie
 
 ## Development
 
 Voor development:
-1. Backend draait op `http://localhost:3000`
-2. Frontend is beschikbaar op `http://localhost:8080`
-3. Gebruik `nodemon` voor automatisch herladen van de backend
+1. Server draait op `http://localhost:3000`
+2. Gebruik `nodemon` voor automatisch herladen (optioneel):
+```bash
+npm install -g nodemon
+nodemon server.js
+```
 
 ## Productie
 
 Voor productie deployment:
-1. Pas de CORS origins aan in `server.js`
-2. Stel de juiste domeinbeperkingen in voor de Google Maps API key
-3. Gebruik een beveiligde hosting provider voor de backend
-4. Configureer SSL/TLS voor veilige communicatie
-
-## Lokaal Ontwikkelen
-
-1. Clone de repository
-2. Open een terminal in de projectmap
-3. Start een lokale server (bijvoorbeeld `python3 -m http.server`)
-4. Open `http://localhost:8000` in je browser
+1. Zorg dat alle gevoelige data in .env staat
+2. Controleer de .gitignore voor uitgesloten bestanden
+3. Stel de juiste domeinbeperkingen in voor de Google Maps API key
+4. Gebruik een beveiligde hosting provider
+5. Configureer SSL/TLS voor veilige communicatie
 
 ## Licentie
 
@@ -92,5 +83,4 @@ Dit project is beschikbaar onder de MIT-licentie.
 ## Contact
 
 Voor vragen of suggesties, neem contact op via:
-- Email: info@zorgkaartamsterdam.nl
-- GitHub Issues: https://github.com/mha-1915/ggz-jeugd-amsterdam/issues 
+- GitHub Issues: [repository-issues-url] 

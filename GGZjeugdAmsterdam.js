@@ -689,10 +689,10 @@ const oktGebieden = {
 
 // Kleuren voor verschillende type zorginstellingen
 const markerKleuren = {
-    'Ouder- en Kindteam': '#4CAF50',
-    'Basis GGZ': '#FFC107',
-    'Gespecialiseerde GGZ': '#FF5722',
-    'Hoogspecialistische Zorg': '#E91E63'
+    'Ouder- en Kindteam': '#4CAF50', // Groen
+    'basis': '#FFC107',              // Geel
+    'gespecialiseerd': '#FF5722',    // Oranje
+    'hoogspecialistisch': '#E91E63'  // Roze
 };
 
 // Functie om de kleur te bepalen op basis van het type zorg
@@ -718,8 +718,15 @@ function sorteerInstellingen(instellingen) {
 
 // Functie om zorginstellingen tabel te vullen
 function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
-    const tbody = document.querySelector(isGefilterd ? '#gefilterde-zorginstellingen-tabel tbody' : '#zorginstellingen-tabel tbody');
-    if (!tbody) return;
+    // Bepaal welke tabel we moeten gebruiken
+    const tbody = isGefilterd ? 
+        document.querySelector('#gefilterde-zorginstellingen-tabel tbody') :
+        document.querySelector('#zorginstellingen-tabel tbody');
+    
+    if (!tbody) {
+        console.log('Geen tabel gevonden voor het vullen van zorginstellingen');
+        return;
+    }
     
     tbody.innerHTML = '';
 
@@ -760,7 +767,7 @@ function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
             <td>${instelling.naam}</td>
             <td>
                 <div class="type-indicator">
-                    <span style="background: ${kleur};"></span>
+                    <span style="background: ${kleur}; width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
                     ${instelling.type}
                 </div>
             </td>
@@ -782,62 +789,22 @@ function vulZorginstellingenTabel(instellingen, isGefilterd = false) {
         tbody.appendChild(row);
     });
 
-    // Update resultaten teller
+    // Update resultaten teller en zichtbaarheid van gefilterde resultaten
     const resultatenTeller = document.getElementById('resultaten-teller');
     if (resultatenTeller) {
-        resultatenTeller.textContent = `${alleInstellingen.length} ${alleInstellingen.length === 1 ? 'resultaat' : 'resultaten'} gevonden`;
+        resultatenTeller.textContent = `${alleInstellingen.length} ${alleInstellingen.length === 1 ? 'instelling' : 'instellingen'} gevonden`;
+    }
+
+    // Als we op de kaartpagina zijn, update dan de zichtbaarheid van de gefilterde resultaten
+    if (isGefilterd) {
+        const resultatenDiv = document.getElementById('gefilterde-resultaten');
+        if (resultatenDiv) {
+            resultatenDiv.style.display = alleInstellingen.length > 0 ? 'block' : 'none';
+        }
     }
 }
 
-// Wacht tot het document geladen is
-document.addEventListener('DOMContentLoaded', function() {
-    const { isKaartPagina, isOverzichtPagina } = bepaalPagina();
-    
-    if (isKaartPagina) {
-        // Wacht tot de Google Maps API is geladen
-        if (window.google && window.google.maps) {
-            initMap();
-        } else {
-            window.initMap = initializeMap;
-        }
-    }
-    
-    // Als we op de overzichtpagina zijn
-    if (isOverzichtPagina) {
-        // Vul initieel alle zorginstellingen
-        const alleInstellingen = filterZorginstellingenOpType('alle');
-        vulZorginstellingenTabel(alleInstellingen, false);
-        
-        // Initialiseer de tabs
-        initializeTabs();
-        
-        // Update de resultaten teller
-        const resultatenTeller = document.getElementById('resultaten-teller');
-        if (resultatenTeller) {
-            resultatenTeller.textContent = `${alleInstellingen.length} resultaten gevonden`;
-        }
-    }
-});
-
-// Combineer alle zorginstellingen in één array
-const alleZorginstellingen = [...zorginstellingenData];
-
-// Voeg de instellingen uit de eerste array toe als ze nog niet bestaan
-zorginstellingen.forEach(instelling => {
-    const bestaatAl = alleZorginstellingen.some(
-        bestaand => bestaand.naam === instelling.naam && 
-        bestaand.adres === instelling.adres
-    );
-    
-    if (!bestaatAl) {
-        alleZorginstellingen.push({
-            ...instelling,
-            type: instelling.type || 'basis'
-        });
-    }
-});
-
-// Functie om de kaart te initialiseren (wordt aangeroepen door de Google Maps API)
+// Functie om de kaart te initialiseren
 function initMap() {
     console.log('initMap wordt aangeroepen');
     
@@ -862,31 +829,37 @@ function initMap() {
         },
         zoomControl: true,
         zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_CENTER
+            position: google.maps.ControlPosition.RIGHT_CENTER,
+            style: google.maps.ZoomControlStyle.LARGE
         },
+        minZoom: 10,
+        maxZoom: 18,
         scaleControl: true,
         streetViewControl: true,
         streetViewControlOptions: {
             position: google.maps.ControlPosition.RIGHT_BOTTOM
         },
-        fullscreenControl: true
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        },
+        gestureHandling: 'greedy'
     };
 
     try {
         // Maak de kaart aan
         map = new google.maps.Map(mapElement, mapOptions);
-        
-        // Log succesvol maken van de kaart
         console.log('Kaart succesvol aangemaakt');
         
-        // Voeg markers en legenda toe nadat de kaart is geladen
-        google.maps.event.addListenerOnce(map, 'idle', function() {
-            console.log('Kaart is geladen, markers worden toegevoegd');
-            voegMarkersToe(alleZorginstellingen);
-            voegLegendaToe();
-        });
+        // Voeg markers en legenda toe
+        voegMarkersToe(zorginstellingenData);
+        voegLegendaToe();
+        
+        // Vul de tabel met alle zorginstellingen
+        vulZorginstellingenTabel(zorginstellingenData);
     } catch (error) {
         console.error('Fout bij het maken van de kaart:', error);
+        mapElement.innerHTML = '<p class="error">Er is een probleem met het laden van de kaart. Probeer de pagina te verversen.</p>';
     }
 }
 
@@ -898,29 +871,42 @@ function voegLegendaToe() {
     if (legendaToegevoegd || !map) return;
 
     const legendaDiv = document.createElement('div');
-    legendaDiv.className = 'legenda-container';
+    legendaDiv.className = 'legenda';
+    legendaDiv.style.cssText = `
+        position: absolute;
+        bottom: 30px;
+        left: 10px;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: Arial, sans-serif;
+        z-index: 1000;
+    `;
+    
     legendaDiv.innerHTML = `
-        <div class="legenda">
-            <h3>Type zorginstelling</h3>
-            <div class="legenda-item">
-                <span style="background: #4CAF50"></span>
-                <span>Ouder- en Kindteam (OKT)</span>
+        <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #333;">Type zorginstelling</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 12px; height: 12px; background: #4CAF50; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 12px; color: #555;">Ouder- en Kindteam (OKT)</span>
             </div>
-            <div class="legenda-item">
-                <span style="background: #FFC107"></span>
-                <span>Basis GGZ</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 12px; height: 12px; background: #FFC107; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 12px; color: #555;">Basis GGZ</span>
             </div>
-            <div class="legenda-item">
-                <span style="background: #FF5722"></span>
-                <span>Gespecialiseerde GGZ</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 12px; height: 12px; background: #FF5722; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 12px; color: #555;">Gespecialiseerde GGZ</span>
             </div>
-            <div class="legenda-item">
-                <span style="background: #E91E63"></span>
-                <span>Hoogspecialistische zorg</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 12px; height: 12px; background: #E91E63; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 12px; color: #555;">Hoogspecialistische zorg</span>
             </div>
         </div>
     `;
-    map.controls[google.maps.ControlPosition.LEFT_TOP].push(legendaDiv);
+
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legendaDiv);
     legendaToegevoegd = true;
 }
 
@@ -940,7 +926,13 @@ function voegMarkersToe(zorginstellingen) {
                 }
 
                 const isOKT = instelling.naam.toLowerCase().includes('okt');
-                const kleur = bepaalKleur(instelling.type, isOKT);
+                let kleur;
+                if (isOKT) {
+                    kleur = markerKleuren['Ouder- en Kindteam'];
+                } else {
+                    const type = instelling.type.toLowerCase().split(',')[0].trim();
+                    kleur = markerKleuren[type] || '#9E9E9E';
+                }
 
                 const marker = new google.maps.Marker({
                     position: { 
@@ -953,9 +945,9 @@ function voegMarkersToe(zorginstellingen) {
                         path: google.maps.SymbolPath.CIRCLE,
                         fillColor: kleur,
                         fillOpacity: 1,
-                        strokeWeight: 1,
+                        strokeWeight: 2,
                         strokeColor: '#ffffff',
-                        scale: 10
+                        scale: 8
                     }
                 });
 
@@ -1021,9 +1013,9 @@ function voegMarkersToe(zorginstellingen) {
                     path: google.maps.SymbolPath.CIRCLE,
                     fillColor: kleur,
                     fillOpacity: 1,
-                    strokeWeight: 1,
+                    strokeWeight: 2,
                     strokeColor: '#ffffff',
-                    scale: 10
+                    scale: 8
                 }
             });
 
@@ -1035,7 +1027,7 @@ function voegMarkersToe(zorginstellingen) {
                     <p><strong>Telefoon:</strong> <a href="tel:${instelling.telefoon}">${instelling.telefoon}</a></p>
                     <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
                     <p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>
-                    ${instelling.website ? `<p><strong>Website:</strong> <a href="${instelling.website}" target="_blank">Bezoek website</a></p>` : ''}
+                    ${instelling.website ? `<p><a href="${instelling.website}" target="_blank">Website bezoeken</a></p>` : ''}
                     ${instelling.aanmelden ? `<p><strong>Aanmelden:</strong> <a href="${instelling.aanmelden}" target="_blank">Direct aanmelden</a></p>` : ''}
                 </div>
             `;
@@ -1093,9 +1085,8 @@ function initializeTabs() {
     if (!tabButtons.length) return; // Als we niet op de overzichtspagina zijn
     
     // Vul initieel de 'alle' tab
-    const alleInstellingen = filterZorginstellingenOpType('alle');
-    vulZorginstellingenTabel(alleInstellingen, false);
-    updateResultatenTeller(alleInstellingen.length);
+    vulZorginstellingenTabel(zorginstellingenData, false);
+    updateResultatenTeller(zorginstellingenData.length);
     
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -1107,7 +1098,14 @@ function initializeTabs() {
             
             // Filter en toon zorginstellingen
             const type = button.dataset.tab;
-            const gefilterd = filterZorginstellingenOpType(type);
+            const gefilterd = type === 'alle' ? 
+                zorginstellingenData : 
+                zorginstellingenData.filter(instelling => {
+                    const isOKT = instelling.naam.toLowerCase().includes('okt');
+                    if (type === 'okt') return isOKT;
+                    return instelling.type.toLowerCase().includes(type) && !isOKT;
+                });
+            
             vulZorginstellingenTabel(gefilterd, false);
             updateResultatenTeller(gefilterd.length);
         });
@@ -1118,7 +1116,7 @@ function initializeTabs() {
 function updateResultatenTeller(aantal) {
     const resultatenTeller = document.getElementById('resultaten-teller');
     if (resultatenTeller) {
-        resultatenTeller.textContent = `${aantal} ${aantal === 1 ? 'resultaat' : 'resultaten'} gevonden`;
+        resultatenTeller.textContent = `${aantal} ${aantal === 1 ? 'instelling' : 'instellingen'} gevonden`;
     }
 }
 
@@ -1127,17 +1125,39 @@ function zoekZorginstellingen() {
     const typeFilter = document.getElementById('type-filter');
     const leeftijdFilter = document.getElementById('leeftijd-filter');
     
-    const zorgtype = typeFilter ? typeFilter.value : 'alle';
-    const leeftijd = leeftijdFilter ? leeftijdFilter.value : 'alle';
+    const zorgtype = typeFilter ? typeFilter.value : '';
+    const leeftijd = leeftijdFilter ? leeftijdFilter.value : '';
 
     // Filter zorginstellingen op basis van criteria
     const gefilterd = zorginstellingenData.filter(instelling => {
-        const matchType = zorgtype === '' || instelling.type.toLowerCase().includes(zorgtype);
+        const isOKT = instelling.naam.toLowerCase().includes('okt');
         
+        // Type matching
+        let matchType = true;
+        if (zorgtype !== '') {
+            switch(zorgtype) {
+                case 'okt':
+                    matchType = isOKT;
+                    break;
+                case 'basis':
+                    matchType = instelling.type.toLowerCase().includes('basis') && !isOKT;
+                    break;
+                case 'gespecialiseerd':
+                    matchType = instelling.type.toLowerCase().includes('gespecialiseerd');
+                    break;
+                case 'hoogspecialistisch':
+                    matchType = instelling.type.toLowerCase().includes('hoogspecialistisch');
+                    break;
+            }
+        }
+        
+        // Leeftijd matching
         let matchLeeftijd = true;
         if (leeftijd !== '') {
             const [zoekMin, zoekMax] = leeftijd.split('-').map(Number);
-            const [instMin, instMax] = instelling.leeftijd.split(/[- ]/)[0].split('-').map(Number);
+            const leeftijdRange = instelling.leeftijd.split(/[- ]/)[0];
+            const [instMin, instMax] = leeftijdRange.split('-').map(num => parseInt(num) || 0);
+            
             matchLeeftijd = (zoekMin >= instMin && zoekMin <= instMax) || 
                           (zoekMax >= instMin && zoekMax <= instMax) ||
                           (zoekMin <= instMin && zoekMax >= instMax);
@@ -1146,9 +1166,18 @@ function zoekZorginstellingen() {
         return matchType && matchLeeftijd;
     });
 
-    // Update de kaart en tabel met gefilterde resultaten
+    // Update de kaart met gefilterde markers
     voegMarkersToe(gefilterd);
+    
+    // Update de gefilterde resultaten tabel
     vulZorginstellingenTabel(gefilterd, true);
+    
+    // Toon het aantal gevonden resultaten
+    const resultatenTeller = document.getElementById('resultaten-teller');
+    if (resultatenTeller) {
+        const aantal = gefilterd.length;
+        resultatenTeller.textContent = `${aantal} ${aantal === 1 ? 'instelling' : 'instellingen'} gevonden`;
+    }
 }
 
 // Functie om te bepalen op welke pagina we zijn
@@ -1156,4 +1185,95 @@ function bepaalPagina() {
     const isKaartPagina = document.querySelector('.kaart-pagina') !== null;
     const isOverzichtPagina = document.querySelector('.overzicht-pagina') !== null;
     return { isKaartPagina, isOverzichtPagina };
-} 
+}
+
+// Functie voor het toevoegen van een marker
+function voegMarkerToe(instelling) {
+    if (!instelling.positie) return;
+
+    const marker = new google.maps.Marker({
+        position: instelling.positie,
+        map: map,
+        title: instelling.naam,
+        icon: bepaalMarkerIcoon(instelling.type)
+    });
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: maakInfoWindowContent(instelling)
+    });
+
+    marker.addListener('click', () => {
+        if (currentInfoWindow) {
+            currentInfoWindow.close();
+        }
+        infoWindow.open(map, marker);
+        currentInfoWindow = infoWindow;
+    });
+
+    markers.push(marker);
+}
+
+// Functie voor het bepalen van het juiste marker icoon
+function bepaalMarkerIcoon(type) {
+    const iconBase = 'https://maps.google.com/mapfiles/ms/icons/';
+    if (type.toLowerCase().includes('basis')) {
+        return iconBase + 'blue-dot.png';
+    } else if (type.toLowerCase().includes('gespecialiseerd')) {
+        return iconBase + 'yellow-dot.png';
+    } else if (type.toLowerCase().includes('hoogspecialistisch')) {
+        return iconBase + 'red-dot.png';
+    } else if (type.toLowerCase().includes('okt') || type.toLowerCase().includes('ouder- en kindteam')) {
+        return iconBase + 'green-dot.png';
+    }
+    return iconBase + 'blue-dot.png';
+}
+
+// Functie voor het maken van de inhoud van het info window
+function maakInfoWindowContent(instelling) {
+    return `
+        <div class="info-window">
+            <h3>${instelling.naam}</h3>
+            <p><strong>Type:</strong> ${instelling.type}</p>
+            <p><strong>Adres:</strong> ${instelling.adres}</p>
+            <p><strong>Telefoon:</strong> ${instelling.telefoon || 'Niet beschikbaar'}</p>
+            <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
+            ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
+            ${instelling.website ? `<p><a href="${instelling.website}" target="_blank">Website bezoeken</a></p>` : ''}
+        </div>
+    `;
+}
+
+// Initialiseer de pagina wanneer deze geladen is
+document.addEventListener('DOMContentLoaded', function() {
+    const { isKaartPagina, isOverzichtPagina } = bepaalPagina();
+    
+    if (isKaartPagina) {
+        // Voeg event listener toe voor het zoekformulier
+        const filterForm = document.getElementById('filter-form');
+        if (filterForm) {
+            filterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                zoekZorginstellingen();
+            });
+        }
+
+        // Voeg event listeners toe voor directe updates bij selectie
+        const typeFilter = document.getElementById('type-filter');
+        const leeftijdFilter = document.getElementById('leeftijd-filter');
+
+        if (typeFilter) {
+            typeFilter.addEventListener('change', zoekZorginstellingen);
+        }
+        if (leeftijdFilter) {
+            leeftijdFilter.addEventListener('change', zoekZorginstellingen);
+        }
+
+        // Initialiseer de gefilterde resultaten tabel
+        vulZorginstellingenTabel(zorginstellingenData, true);
+        
+    } else if (isOverzichtPagina) {
+        // Initialiseer de overzichtspagina
+        vulZorginstellingenTabel(zorginstellingenData, false);
+        initializeTabs();
+    }
+}); 

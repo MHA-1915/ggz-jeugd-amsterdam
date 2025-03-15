@@ -1,1 +1,127 @@
-[Hier de volledige nieuwe HTML code zoals hierboven getoond]
+<!DOCTYPE html>
+ <html lang="nl">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Zorgkaart - GGZ Jeugd Amsterdam</title>
+     <link rel="stylesheet" href="GGZjeugdAmsterdam.css">
+     <style>
+         #map {
+             width: 100%;
+             height: 600px;
+             margin: 20px 0;
+             border-radius: 8px;
+             border: 1px solid #ccc;
+         }
+     </style>
+ </head>
+ <body class="kaart-pagina">
+     <header>
+         <h1>GGZ Jeugd Amsterdam</h1>
+     </header>
+ 
+     <nav class="main-nav">
+         <ul>
+             <li><a href="informatie.html">Informatie</a></li>
+             <li><a href="kaart.html" class="active">Zorgkaart</a></li>
+             <li><a href="overzicht.html">Volledig Overzicht</a></li>
+         </ul>
+     </nav>
+ 
+     <div class="container">
+         <section>
+             <h2>Zorgkaart Amsterdam</h2>
+             <p class="intro-text">
+                 Op deze interactieve kaart vindt u alle GGZ-zorginstellingen en Ouder- en Kindteams in Amsterdam.
+                 Gebruik de filters om specifieke zorg te vinden en klik op een marker voor meer informatie.
+             </p>
+ 
+             <!-- Zoekfilters -->
+             <form id="filter-form">
+                 <div class="form-group">
+                     <label for="type-filter">Type zorg</label>
+                     <select id="type-filter">
+                         <option value="">Alle types</option>
+                         <option value="okt">Ouder- en Kindteam</option>
+                         <option value="basis">Basis GGZ</option>
+                         <option value="gespecialiseerd">Gespecialiseerde GGZ</option>
+                         <option value="hoogspecialistisch">Hoogspecialistische Zorg</option>
+                     </select>
+                 </div>
+                 <div class="form-group">
+                     <label for="leeftijd-filter">Leeftijdscategorie</label>
+                     <select id="leeftijd-filter">
+                         <option value="">Alle leeftijden</option>
+                         <option value="0-4">0-4 jaar</option>
+                         <option value="4-12">4-12 jaar</option>
+                         <option value="12-18">12-18 jaar</option>
+                         <option value="18-23">18-23 jaar</option>
+                     </select>
+                 </div>
+                 <button type="submit">Zoeken</button>
+             </form>
+ 
+             <!-- Kaart container -->
+             <div id="map"></div>
+ 
+             <!-- Gefilterde resultaten -->
+             <div id="gefilterde-resultaten" class="gefilterde-resultaten" style="display: none;">
+                 <div class="gefilterde-resultaten-header">
+                     <h3>Gevonden zorginstellingen</h3>
+                     <div id="resultaten-teller"></div>
+                 </div>
+                 <div class="table-container">
+                     <table id="gefilterde-zorginstellingen-tabel">
+                         <thead>
+                             <tr>
+                                 <th>Naam</th>
+                                 <th>Type</th>
+                                 <th>Adres</th>
+                                 <th>Telefoon</th>
+                                 <th>Leeftijd</th>
+                                 <th>Specialisaties</th>
+                                 <th>Website</th>
+                             </tr>
+                         </thead>
+                         <tbody></tbody>
+                     </table>
+                 </div>
+             </div>
+         </section>
+     </div>
+ 
+     <footer>
+         <div>
+             <div>
+                 <h3>Contact</h3>
+                 <p>Voor vragen over verwijzingen kunt u contact opnemen met het aanmeldpunt van de betreffende instelling.</p>
+             </div>
+             <div>
+                 <h3>Disclaimer</h3>
+                 <p>Deze website is bedoeld als hulpmiddel. Aan de informatie kunnen geen rechten worden ontleend.</p>
+             </div>
+         </div>
+     </footer>
+     <script src="GGZjeugdAmsterdam.js"></script>
+     <script>
+         // Configuratie voor development
+         const API_BASE_URL = 'http://localhost:3000';
+ 
+         // Haal de API key op van de backend
+         fetch(`${API_BASE_URL}/api/maps-key`)
+             .then(response => response.json())
+             .then(data => {
+                 // Laad de Google Maps API met de opgehaalde key
+                 const script = document.createElement('script');
+                 script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&callback=initMap`;
+                 script.async = true;
+                 script.defer = true;
+                 document.body.appendChild(script);
+             })
+             .catch(error => {
+                 console.error('Fout bij het ophalen van de API key:', error);
+                 document.getElementById('map').innerHTML = '<p class="error">Er is een fout opgetreden bij het laden van de kaart. Vernieuw de pagina om het opnieuw te proberen.</p>';
+             });
+     </script>
+ </body>
+ </html> 

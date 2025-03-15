@@ -1,6 +1,9 @@
 // Maps loader functie
 function loadGoogleMaps() {
     try {
+        if (typeof MAPS_API_KEY === 'undefined') {
+            throw new Error('Google Maps API sleutel is niet geconfigureerd');
+        }
         const script = document.createElement('script');
         script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&callback=initMap`;
         script.async = true;

@@ -28,7 +28,7 @@ const zorginstellingen = [
     },
     {
         naam: "Arkin Jeugd & Gezin",
-        type: "Gespecialiseerde GGZ",
+        type: "Hoogspecialistische Zorg",
         adres: "Baarsjesweg 224, 1058 AA Amsterdam",
         telefoon: "020-590 1330",
         leeftijd: "12-23",
@@ -42,43 +42,59 @@ const zorginstellingen = [
 const zorginstellingenData = [
     {
         naam: "Levvel",
-        type: "gespecialiseerd",
+        type: "Hoogspecialistische Zorg",
         positie: { lat: 52.3481, lng: 4.8568 },
         adres: "Amsteldijk 196, 1079 LK Amsterdam",
         telefoon: "088-0547001",
         website: "https://www.levvel.nl/formulier/jongere-aanmelden",
         leeftijd: "0-18 jaar",
-        specialisaties: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie"
+        specialisaties: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie",
+        locaties: [
+            {
+                naam: "Levvel Hoofdlocatie",
+                positie: { lat: 52.3481, lng: 4.8568 },
+                adres: "Amsteldijk 196, 1079 LK Amsterdam",
+                website: "https://www.levvel.nl"
+            },
+            {
+                naam: "Levvel Jan van Breemen",
+                positie: { lat: 52.3662, lng: 4.8544 },
+                adres: "Dr. Jan van Breemenstraat 1, 1056 AB Amsterdam",
+                website: "https://www.levvel.nl"
+            }
+        ]
     },
     {
         naam: "Arkin Jeugd & Gezin",
-        type: "gespecialiseerd",
-        positie: { lat: 52.3637, lng: 4.8562 },
-        adres: "Baarsjesweg 224, 1058 AA Amsterdam",
+        type: "Hoogspecialistische Zorg",
         telefoon: "020-5905555",
         website: "https://arkinjeugdengezin.nl/verwijzers/client-verwijzen/",
         leeftijd: "0-23 jaar",
         specialisaties: "Gezinstherapie, eetstoornissen, angst",
         locaties: [
             {
-                naam: "West",
+                naam: "Arkin Jeugd & Gezin West",
+                positie: { lat: 52.3637, lng: 4.8562 },
                 adres: "Baarsjesweg 224, 1058 AA Amsterdam",
-                positie: { lat: 52.3637, lng: 4.8562 }
+                website: "https://arkinjeugdengezin.nl"
             },
             {
-                naam: "Diemen",
+                naam: "Arkin Jeugd & Gezin Diemen",
+                positie: { lat: 52.3348, lng: 4.9561 },
                 adres: "Wisselwerking 46-48, 1112 XR Diemen",
-                positie: { lat: 52.3348, lng: 4.9561 }
+                website: "https://arkinjeugdengezin.nl"
             },
             {
-                naam: "Noord",
+                naam: "Arkin Jeugd & Gezin Noord",
+                positie: { lat: 52.3912, lng: 4.8914 },
                 adres: "Klaprozenweg 111, 1033 NN Amsterdam",
-                positie: { lat: 52.3912, lng: 4.8914 }
+                website: "https://arkinjeugdengezin.nl"
             },
             {
-                naam: "Zuidoost",
+                naam: "Arkin Jeugd & Gezin Zuidoost",
+                positie: { lat: 52.3221158, lng: 4.9732716 },
                 adres: "Bijlmerdreef 1169, 1103 TT Amsterdam Zuidoost",
-                positie: { lat: 52.3221158, lng: 4.9732716 }
+                website: "https://arkinjeugdengezin.nl"
             }
         ]
     },
@@ -112,139 +128,139 @@ const zorginstellingenData = [
         specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg",
         locaties: [
             {
-                naam: "Centrum West",
+                naam: "OKT Centrum West",
                 positie: { lat: 52.3784, lng: 4.8837 },
                 adres: "Lindengracht 204, 1015 KL Amsterdam",
                 website: "https://oktamsterdam.nl/centrum"
             },
             {
-                naam: "Centrum Oost",
+                naam: "OKT Centrum Oost",
                 positie: { lat: 52.3765, lng: 4.9123 },
                 adres: "Kraijenhoffstraat 32, 1018 RL Amsterdam",
                 website: "https://oktamsterdam.nl/centrum"
             },
             {
-                naam: "Noord Oost",
+                naam: "OKT Noord Oost",
                 positie: { lat: 52.3918, lng: 4.9322 },
                 adres: "Beverwijkstraat 3, 1024 VR Amsterdam",
                 website: "https://oktamsterdam.nl/noordoost"
             },
             {
-                naam: "Oud Noord",
+                naam: "OKT Oud Noord",
                 positie: { lat: 52.3892, lng: 4.9212 },
                 adres: "Wingerdweg 52, 1032 AN Amsterdam",
                 website: "https://oktamsterdam.nl/oudnoord"
             },
             {
-                naam: "Noord West",
+                naam: "OKT Noord West",
                 positie: { lat: 52.4011, lng: 4.9123 },
                 adres: "Aldebaranplein 2-F, 1033 GS Amsterdam",
                 website: "https://oktamsterdam.nl/noordwest"
             },
             {
-                naam: "Oud Oost",
+                naam: "OKT Oud Oost",
                 positie: { lat: 52.3605, lng: 4.9284 },
                 adres: "Pontanusstraat 278, 1093 SH Amsterdam",
                 website: "https://oktamsterdam.nl/oudoost"
             },
             {
-                naam: "Indische Buurt & Oostelijk Havengebied",
+                naam: "OKT Indische Buurt & Oostelijk Havengebied",
                 positie: { lat: 52.3605, lng: 4.9436 },
                 adres: "Kramatplantsoen 101, 1095 LB Amsterdam",
                 website: "https://oktamsterdam.nl/iboh"
             },
             {
-                naam: "IJburg & Zeeburgereiland",
+                naam: "OKT IJburg & Zeeburgereiland",
                 positie: { lat: 52.3534, lng: 4.9983 },
                 adres: "Pampuslaan 26-32, 1087 LA Amsterdam",
                 website: "https://oktamsterdam.nl/ijburg"
             },
             {
-                naam: "De Pijp & Rivierenbuurt",
+                naam: "OKT De Pijp & Rivierenbuurt",
                 positie: { lat: 52.3534, lng: 4.8983 },
                 adres: "2e Jan van der Heijdenstraat 75-77, 1074 XR Amsterdam",
                 website: "https://oktamsterdam.nl/depijprivierenbuurt"
             },
             {
-                naam: "Buitenveldert & Zuidas",
+                naam: "OKT Buitenveldert & Zuidas",
                 positie: { lat: 52.3314, lng: 4.8781 },
                 adres: "A.J. Ernststraat 112, 1082 LP Amsterdam",
                 website: "https://oktamsterdam.nl/buitenveldertzuidas"
             },
             {
-                naam: "Bijlmer Centrum",
+                naam: "OKT Bijlmer Centrum",
                 positie: { lat: 52.3117, lng: 4.9478 },
                 adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
                 website: "https://oktamsterdam.nl/bijlmercentrum"
             },
             {
-                naam: "Bijlmer Oost",
+                naam: "OKT Bijlmer Oost",
                 positie: { lat: 52.3117, lng: 4.9578 },
                 adres: "Bijlmerdreef 1005 C, 1103 TW Amsterdam",
                 website: "https://oktamsterdam.nl/bijlmeroost"
             },
             {
-                naam: "Gaasperdam",
+                naam: "OKT Gaasperdam",
                 positie: { lat: 52.2989, lng: 4.9789 },
                 adres: "Reigersbos 309, 1107 EZ Amsterdam",
                 website: "https://oktamsterdam.nl/gaasperdam"
             },
             {
-                naam: "Watergraafsmeer",
+                naam: "OKT Watergraafsmeer",
                 positie: { lat: 52.3605, lng: 4.9284 },
                 adres: "Pontanusstraat 278, 1093 SH Amsterdam",
                 website: "https://oktamsterdam.nl/watergraafsmeer"
             },
             {
-                naam: "Bos en Lommer",
+                naam: "OKT Bos en Lommer",
                 positie: { lat: 52.3789, lng: 4.8566 },
                 adres: "Tijl Uilenspiegelstraat 12, 1055 CK Amsterdam",
                 website: "https://oktamsterdam.nl/bosenlommer"
             },
             {
-                naam: "Oud West & De Baarsjes",
+                naam: "OKT Oud West & De Baarsjes",
                 positie: { lat: 52.3665, lng: 4.8644 },
                 adres: "Brederodestraat 108, 1054 VH Amsterdam",
                 website: "https://oktamsterdam.nl/oudwestdebaarsjes"
             },
             {
-                naam: "Westerpark",
+                naam: "OKT Westerpark",
                 positie: { lat: 52.3897, lng: 4.8711 },
                 adres: "Revaleiland 1, 1014 ZG Amsterdam",
                 website: "https://oktamsterdam.nl/westerpark"
             },
             {
-                naam: "Zuid",
+                naam: "OKT Zuid",
                 positie: { lat: 52.3534, lng: 4.8583 },
                 adres: "Theophile de Bockstraat 100 E, 1058 VC Amsterdam",
                 website: "https://oktamsterdam.nl/zuid"
             },
             {
-                naam: "Weesp & Driemond",
+                naam: "OKT Weesp & Driemond",
                 positie: { lat: 52.3075, lng: 5.0428 },
                 adres: "C J van Houtenlaan 1G, 1381 CN Weesp",
                 website: "https://oktamsterdam.nl/weespdriemond"
             },
             {
-                naam: "Geuzenveld & Slotermeer",
+                naam: "OKT Geuzenveld & Slotermeer",
                 positie: { lat: 52.3789, lng: 4.8066 },
                 adres: "Slotermeerlaan 103f, 1063 JN Amsterdam",
                 website: "https://oktamsterdam.nl/geuzenveldslotermeer"
             },
             {
-                naam: "Osdorp",
+                naam: "OKT Osdorp",
                 positie: { lat: 52.3601, lng: 4.7945 },
                 adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
                 website: "https://oktamsterdam.nl/osdorp"
             },
             {
-                naam: "De Aker & Nieuw-Sloten",
+                naam: "OKT De Aker & Nieuw-Sloten",
                 positie: { lat: 52.3601, lng: 4.7945 },
                 adres: "Evertsweertplantsoen 3-A, 1069 RK Amsterdam",
                 website: "https://oktamsterdam.nl/deakernieuwsloten"
             },
             {
-                naam: "Slotervaart",
+                naam: "OKT Slotervaart",
                 positie: { lat: 52.3642, lng: 4.8307 },
                 adres: "August Allebéplein 11, 1062 AA Amsterdam",
                 website: "https://oktamsterdam.nl/slotervaart"
@@ -821,16 +837,16 @@ function voegLegendaToe() {
     `;
 
     const legendaItems = [
-        { type: 'Ouder- en Kindteam', kleur: '#FFC107' },
+        { type: 'Ouder- en Kindteam (OKT)', kleur: '#FFC107' },
         { type: 'Basis GGZ', kleur: '#4CAF50' },
         { type: 'Gespecialiseerde GGZ', kleur: '#FF9800' },
         { type: 'Hoogspecialistische Zorg', kleur: '#F44336' }
     ];
 
     const titel = document.createElement('div');
-    titel.textContent = 'Legenda';
+    titel.textContent = 'Type Zorginstelling';
     titel.style.fontWeight = 'bold';
-    titel.style.marginBottom = '5px';
+    titel.style.marginBottom = '10px';
     legendaDiv.appendChild(titel);
 
     legendaItems.forEach(item => {
@@ -844,7 +860,8 @@ function voegLegendaToe() {
         marker.style.height = '12px';
         marker.style.borderRadius = '50%';
         marker.style.backgroundColor = item.kleur;
-        marker.style.border = '1px solid #FFFFFF';
+        marker.style.border = '2px solid #FFFFFF';
+        marker.style.boxShadow = '0 0 2px rgba(0,0,0,0.3)';
         marker.style.marginRight = '8px';
 
         const label = document.createElement('span');
@@ -882,7 +899,10 @@ function voegMarkersEnInfoWindowsToe() {
 function voegMarkerToe(locatie, instelling) {
     if (!locatie.positie) return;
 
-    const markerIcon = bepaalMarkerIcon(instelling.type);
+    // Bepaal of het een OKT locatie is
+    const isOKT = locatie.naam?.startsWith('OKT') || instelling.naam?.startsWith('OKT');
+    
+    const markerIcon = bepaalMarkerIcon(isOKT ? 'Ouder- en Kindteam' : instelling.type);
     const marker = new google.maps.Marker({
         position: locatie.positie,
         map: map,
@@ -892,7 +912,7 @@ function voegMarkerToe(locatie, instelling) {
 
     // Maak een info window voor deze marker
     const infoWindow = new google.maps.InfoWindow({
-        content: maakInfoWindowContent(locatie, instelling)
+        content: maakInfoWindowContent(locatie, instelling, isOKT)
     });
 
     // Voeg click event toe
@@ -911,26 +931,21 @@ function voegMarkerToe(locatie, instelling) {
 
 // Functie om het juiste marker icoon te bepalen
 function bepaalMarkerIcon(type) {
-    // Definieer de kleuren voor verschillende types
-    const kleuren = {
-        'okt': '#FFC107',      // Geel voor OKT
-        'basis': '#4CAF50',    // Groen voor Basis GGZ
-        'gespecialiseerd': '#FF9800',  // Oranje voor Gespecialiseerde GGZ
-        'hoogspecialistisch': '#F44336'  // Rood voor Hoogspecialistische zorg
-    };
-
-    // Bepaal de kleur op basis van het type
-    let kleur = kleuren['basis']; // Standaard kleur
-    const typeLower = type.toLowerCase();
+    // Bepaal eerst of het een OKT is
+    const isOKT = type.toLowerCase().includes('okt') || type.toLowerCase().includes('ouder- en kindteam');
     
-    if (typeLower.includes('okt')) {
-        kleur = kleuren['okt'];
-    } else if (typeLower.includes('basis')) {
-        kleur = kleuren['basis'];
-    } else if (typeLower.includes('gespecialiseerd')) {
-        kleur = kleuren['gespecialiseerd'];
-    } else if (typeLower.includes('hoogspecialistisch')) {
-        kleur = kleuren['hoogspecialistisch'];
+    // Bepaal de kleur op basis van het type
+    let kleur;
+    if (isOKT) {
+        kleur = '#FFC107'; // Geel voor OKT
+    } else if (type.toLowerCase().includes('basis')) {
+        kleur = '#4CAF50'; // Groen voor Basis GGZ
+    } else if (type.toLowerCase().includes('gespecialiseerd')) {
+        kleur = '#FF9800'; // Oranje voor Gespecialiseerde GGZ
+    } else if (type.toLowerCase().includes('hoogspecialistisch')) {
+        kleur = '#F44336'; // Rood voor Hoogspecialistische zorg
+    } else {
+        kleur = '#9E9E9E'; // Grijs voor overige
     }
 
     // Maak een SVG cirkel met de juiste kleur
@@ -938,23 +953,32 @@ function bepaalMarkerIcon(type) {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: kleur,
         fillOpacity: 1,
-        strokeWeight: 1,
+        strokeWeight: 2,
         strokeColor: '#FFFFFF',
         scale: 10
     };
 }
 
 // Functie om de inhoud van het info window te maken
-function maakInfoWindowContent(locatie, instelling) {
+function maakInfoWindowContent(locatie, instelling, isOKT) {
+    const type = isOKT ? 'Ouder- en Kindteam (OKT)' : instelling.type;
+    
+    // Bepaal de website en aanmeld links
+    const websiteLink = locatie.website || instelling.website;
+    const aanmeldLink = instelling.aanmelden || instelling.verwijzing || websiteLink;
+    
     return `
         <div class="info-window">
             <h3>${locatie.naam || instelling.naam}</h3>
-            <p><strong>Type:</strong> ${instelling.type}</p>
+            <p><strong>Type:</strong> ${type}</p>
             <p><strong>Adres:</strong> ${locatie.adres || instelling.adres}</p>
             <p><strong>Telefoon:</strong> ${instelling.telefoon}</p>
             <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
             ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
-            <p><a href="${locatie.website || instelling.website}" target="_blank">Website</a></p>
+            <div class="info-window-links">
+                ${websiteLink ? `<p><a href="${websiteLink}" target="_blank">Website</a></p>` : ''}
+                ${aanmeldLink ? `<p><a href="${aanmeldLink}" target="_blank">Aanmelden/Verwijzen</a></p>` : ''}
+            </div>
         </div>
     `;
 }

@@ -722,7 +722,7 @@ function bepaalKleur(type, isOKT) {
         case 'gespecialiseerd':
             return '#FF5722'; // Oranje voor gespecialiseerde GGZ
         case 'hoogspecialistisch':
-            return '#E91E63'; // Roze voor hoogspecialistische zorg
+            return '#F44336'; // Rood voor Hoogspecialistische zorg
         default:
             return '#9E9E9E'; // Grijs voor overige
     }
@@ -918,7 +918,7 @@ function voegMarkerToe(locatie, instelling) {
     const marker = new google.maps.Marker({
         position: locatie.positie,
         map: map,
-        title: locatie.naam || instelling.naam,
+        title: `${instelling.naam}${locatie.naam ? ` - ${locatie.naam}` : ''}`,
         icon: markerIcon
     });
 

@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 app.get('/api/maps-key', (req, res) => {
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
+        console.error('Google Maps API key niet gevonden');
         return res.status(500).json({ error: 'API key niet gevonden' });
     }
     res.json({ key: apiKey });

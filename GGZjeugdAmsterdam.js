@@ -911,10 +911,30 @@ function voegMarkersEnInfoWindowsToe() {
 function voegMarkerToe(locatie, instelling) {
     if (!locatie.positie) return;
 
-    // Bepaal het type zorginstelling
-    const type = instelling.type || 'Onbekend';
+    // Bepaal het type zorginstelling en standaardiseer het
+    const type = (instelling.type || 'Onbekend').toLowerCase();
     
-    const markerIcon = bepaalMarkerIcon(type);
+    // Bepaal de kleur op basis van het type
+    let kleur;
+    if (type.includes('okt') || type.includes('ouder- en kindteam') || type.includes('basis')) {
+        kleur = '#4CAF50'; // Groen voor OKT en Basis GGZ
+    } else if (type.includes('gespecialiseerd')) {
+        kleur = '#FF9800'; // Oranje voor Gespecialiseerde GGZ
+    } else if (type.includes('hoogspecialistisch')) {
+        kleur = '#F44336'; // Rood voor Hoogspecialistische zorg
+    } else {
+        kleur = '#9E9E9E'; // Grijs voor overige
+    }
+
+    const markerIcon = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: kleur,
+        fillOpacity: 1,
+        strokeWeight: 2,
+        strokeColor: '#FFFFFF',
+        scale: 10
+    };
+
     const marker = new google.maps.Marker({
         position: locatie.positie,
         map: map,
@@ -929,44 +949,14 @@ function voegMarkerToe(locatie, instelling) {
 
     // Voeg click event toe
     marker.addListener('click', () => {
-        // Sluit het huidige info window als er een open is
         if (currentInfoWindow) {
             currentInfoWindow.close();
         }
-        // Open het nieuwe info window
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
     });
 
     markers.push(marker);
-}
-
-// Functie om het juiste marker icoon te bepalen
-function bepaalMarkerIcon(type) {
-    // Standaardiseer de type-string
-    const typeString = type.toLowerCase();
-    
-    // Bepaal de kleur op basis van het type
-    let kleur;
-    if (typeString.includes('okt') || typeString.includes('ouder- en kindteam') || typeString.includes('basis')) {
-        kleur = '#4CAF50'; // Groen voor OKT en Basis GGZ
-    } else if (typeString.includes('gespecialiseerd')) {
-        kleur = '#FF9800'; // Oranje voor Gespecialiseerde GGZ
-    } else if (typeString.includes('hoogspecialistisch')) {
-        kleur = '#F44336'; // Rood voor Hoogspecialistische zorg
-    } else {
-        kleur = '#9E9E9E'; // Grijs voor overige
-    }
-
-    // Maak een SVG cirkel met de juiste kleur
-    return {
-        path: google.maps.SymbolPath.CIRCLE,
-        fillColor: kleur,
-        fillOpacity: 1,
-        strokeWeight: 2,
-        strokeColor: '#FFFFFF',
-        scale: 10
-    };
 }
 
 // Functie om de inhoud van het info window te maken

@@ -4,8 +4,13 @@ require('dotenv').config();
 
 const app = express();
 
-// Serve static files
+// Serve static files vanuit de juiste directory
 app.use(express.static(path.join(__dirname)));
+
+// Voeg een route toe voor de hoofdpagina
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Route voor het ophalen van de Google Maps API key
 app.get('/api/maps-key', (req, res) => {
@@ -16,7 +21,7 @@ app.get('/api/maps-key', (req, res) => {
     res.json({ key: apiKey });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server draait op http://localhost:${PORT}`);
 }); 

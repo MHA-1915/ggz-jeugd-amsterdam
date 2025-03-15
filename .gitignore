@@ -1,49 +1,5 @@
-# Node.js
-node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-
-# Environment variables
 .env
-.env.local
-.env.*.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
+node_modules/
 .DS_Store
-Thumbs.db
-
-# OS generated files
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-
-# Logs
-*.log
-
-# Cache
-.cache/
-
-# macOS system files
-.AppleDouble
-.LSOverride
-
-# Config files met gevoelige informatie
 config.js
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-
-# Node modules (als je die later zou gebruiken)
-.env 
+*.log

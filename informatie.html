@@ -63,8 +63,8 @@
                     <div class="triage-question" data-step="3" style="display: none;">
                         <h3>3. Is het kind/de jongere momenteel in behandeling?</h3>
                         <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="in-behandeling" value="ja"><span>Ja, neem eerst contact op met de behandelaar</span></label>
-                            <label class="option-label"><input type="radio" name="in-behandeling" value="nee"><span>Nog niet in behandeling. Neem dan contact op met de crisisdienst Jeugd 020 590 4040</span></label>
+                            <label class="option-label"><input type="radio" name="in-behandeling" value="ja"><span>Ja, jongere is momenteel in behandeling bij GGZ instelling</span></label>
+                            <label class="option-label"><input type="radio" name="in-behandeling" value="nee"><span>Nee, jongere is momenteel nog niet onder behandeling</span></label>
                         </div>
                         <div class="navigation-buttons">
                             <button type="button" class="triage-prev-button" data-prev="2">Vorige</button>
@@ -455,17 +455,17 @@
                     case 'behandelaar':
                         adviesTitel = 'DIRECT BEHANDELAAR CONTACTEREN';
                         adviesTekst = `
-                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie bij iemand die in behandeling is.</p>
+                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie bij een jongere die momenteel in behandeling is bij een GGZ instelling.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <div class="crisis-action">
-                                <p>Neem direct contact op met de behandelaar of de crisisdienst van de instelling waar de behandeling plaatsvindt. Zij kennen de jongere en kunnen daardoor een betere crisisbeoordeling verrichten en passende interventie toepassen.</p>
+                                <p>Neem direct contact op met de behandelaar of de crisisdienst van de GGZ instelling waar de behandeling plaatsvindt. Zij kennen de jongere en kunnen daardoor een betere crisisbeoordeling verrichten en passende interventie toepassen.</p>
                             </div>
                         `;
                         break;
                     case 'crisisdienst':
                         adviesTitel = 'DIRECT CRISISDIENST BELLEN';
                         adviesTekst = `
-                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie.</p>
+                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie bij een jongere die momenteel niet in behandeling is.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <div class="crisis-action">
                                 <p>Neem direct contact op met de crisisdienst Jeugd:</p>

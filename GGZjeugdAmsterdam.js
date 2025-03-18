@@ -1126,6 +1126,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const { isKaartPagina, isOverzichtPagina } = bepaalPagina();
 
     if (isKaartPagina) {
+        // Verwerk URL parameters voor filters (voor triage tool doorverwijzing)
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeFilter = urlParams.get('type');
+        
+        if (typeFilter) {
+            // Stel het type-filter in
+            const typeSelect = document.getElementById('type-filter');
+            if (typeSelect) {
+                typeSelect.value = typeFilter;
+                // Trigger direct een zoekopdracht
+                setTimeout(() => {
+                    zoekZorginstellingen();
+                    document.getElementById('gefilterde-resultaten').style.display = 'block';
+                }, 1000); // Wacht even tot de kaart is geladen
+            }
+        }
+
         // De kaart wordt geïnitialiseerd door de maps-loader.js
         // Voeg event listeners toe voor de filters
         const filterForm = document.getElementById('filter-form');

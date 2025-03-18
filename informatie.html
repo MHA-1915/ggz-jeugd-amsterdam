@@ -121,6 +121,85 @@
             </div>
         </div>
 
+        <!-- Triage Tool (volledige breedte) -->
+        <section class="info-section full-width" id="triage-section">
+            <h2>Triage Tool</h2>
+            <p class="intro-text">
+                Gebruik onderstaande tool om te bepalen welk type zorg het meest geschikt kan zijn voor uw situatie. 
+                Dit is een hulpmiddel en vervangt geen professioneel advies.
+            </p>
+
+            <div class="triage-tool">
+                <form id="triage-form">
+                    <div class="triage-question">
+                        <h3>1. Wat is de leeftijd van het kind/de jongere?</h3>
+                        <div class="triage-options">
+                            <label><input type="radio" name="leeftijd" value="0-4"> 0-4 jaar</label>
+                            <label><input type="radio" name="leeftijd" value="4-12"> 4-12 jaar</label>
+                            <label><input type="radio" name="leeftijd" value="12-18"> 12-18 jaar</label>
+                            <label><input type="radio" name="leeftijd" value="18-23"> 18-23 jaar</label>
+                        </div>
+                    </div>
+
+                    <div class="triage-question">
+                        <h3>2. Hoe lang bestaan de klachten al?</h3>
+                        <div class="triage-options">
+                            <label><input type="radio" name="duur" value="kort"> Korter dan 3 maanden</label>
+                            <label><input type="radio" name="duur" value="middel"> 3-6 maanden</label>
+                            <label><input type="radio" name="duur" value="lang"> Langer dan 6 maanden</label>
+                        </div>
+                    </div>
+
+                    <div class="triage-question">
+                        <h3>3. Hoe ernstig zijn de klachten?</h3>
+                        <div class="triage-options">
+                            <label><input type="radio" name="ernst" value="licht"> Licht (beperkte invloed op dagelijks functioneren)</label>
+                            <label><input type="radio" name="ernst" value="matig"> Matig (merkbare invloed op dagelijks functioneren)</label>
+                            <label><input type="radio" name="ernst" value="ernstig"> Ernstig (sterke invloed op dagelijks functioneren)</label>
+                            <label><input type="radio" name="ernst" value="crisis"> Crisis (direct hulp nodig, gevaarlijke situatie)</label>
+                        </div>
+                    </div>
+
+                    <div class="triage-question">
+                        <h3>4. Selecteer de relevante problematiek (meerdere opties mogelijk)</h3>
+                        <div class="triage-options checkbox-options">
+                            <label><input type="checkbox" name="problematiek" value="angst"> Angst</label>
+                            <label><input type="checkbox" name="problematiek" value="depressie"> Somberheid/Depressie</label>
+                            <label><input type="checkbox" name="problematiek" value="gedrag"> Gedragsproblemen</label>
+                            <label><input type="checkbox" name="problematiek" value="trauma"> Trauma</label>
+                            <label><input type="checkbox" name="problematiek" value="adhd"> Concentratieproblemen/ADHD</label>
+                            <label><input type="checkbox" name="problematiek" value="autisme"> Autisme</label>
+                            <label><input type="checkbox" name="problematiek" value="verslaving"> Verslaving</label>
+                            <label><input type="checkbox" name="problematiek" value="ontwikkeling"> Ontwikkelingsproblemen</label>
+                            <label><input type="checkbox" name="problematiek" value="opvoeding"> Opvoedingsvragen</label>
+                            <label><input type="checkbox" name="problematiek" value="gezin"> Gezinsproblematiek</label>
+                        </div>
+                    </div>
+
+                    <div class="triage-question">
+                        <h3>5. Is er eerder hulp gezocht voor deze problematiek?</h3>
+                        <div class="triage-options">
+                            <label><input type="radio" name="eerdere-hulp" value="nee"> Nee, dit is de eerste keer</label>
+                            <label><input type="radio" name="eerdere-hulp" value="huisarts"> Ja, bij de huisarts</label>
+                            <label><input type="radio" name="eerdere-hulp" value="okt"> Ja, bij het Ouder- en Kindteam</label>
+                            <label><input type="radio" name="eerdere-hulp" value="ggz"> Ja, bij een GGZ-instelling</label>
+                        </div>
+                    </div>
+
+                    <button type="button" id="triage-submit" class="triage-button">Bekijk Advies</button>
+                </form>
+
+                <div id="triage-result" class="triage-result" style="display: none;">
+                    <h3>Advies</h3>
+                    <div id="triage-advice"></div>
+                    <div id="triage-zorgtype" class="triage-zorgtype"></div>
+                    <p class="disclaimer">Let op: Dit is een indicatie. Raadpleeg altijd een professional zoals uw huisarts of het Ouder- en Kindteam voor een definitief advies.</p>
+                    <button type="button" id="show-instellingen" class="triage-button">Toon bijpassende instellingen</button>
+                    <button type="button" id="reset-triage" class="triage-button secondary">Reset</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact sectie (volledige breedte) -->
         <section class="info-section full-width">
             <h2>Contact</h2>
@@ -146,5 +225,211 @@
     </footer>
 
     <script src="GGZjeugdAmsterdam.js"></script>
+    
+    <script>
+        // Triage Tool functionaliteit
+        document.addEventListener('DOMContentLoaded', function() {
+            const triageForm = document.getElementById('triage-form');
+            const triageResult = document.getElementById('triage-result');
+            const triageAdvice = document.getElementById('triage-advice');
+            const triageZorgtype = document.getElementById('triage-zorgtype');
+            const resetButton = document.getElementById('reset-triage');
+            const showInstellingenButton = document.getElementById('show-instellingen');
+            const triageSubmit = document.getElementById('triage-submit');
+            
+            if (triageSubmit) {
+                triageSubmit.addEventListener('click', function() {
+                    // Verzamel alle waarden uit het formulier
+                    const leeftijd = document.querySelector('input[name="leeftijd"]:checked')?.value;
+                    const duur = document.querySelector('input[name="duur"]:checked')?.value;
+                    const ernst = document.querySelector('input[name="ernst"]:checked')?.value;
+                    const problematiekCheckboxes = document.querySelectorAll('input[name="problematiek"]:checked');
+                    const eerdereHulp = document.querySelector('input[name="eerdere-hulp"]:checked')?.value;
+                    
+                    // Controleer of alle vereiste velden zijn ingevuld
+                    if (!leeftijd || !duur || !ernst || problematiekCheckboxes.length === 0 || !eerdereHulp) {
+                        alert('Vul alle velden in om een advies te ontvangen.');
+                        return;
+                    }
+                    
+                    // Verzamel de geselecteerde problematiek
+                    const problematiek = Array.from(problematiekCheckboxes).map(cb => cb.value);
+                    
+                    // Bepaal het passende zorgtype op basis van de input
+                    const zorgtype = bepaalZorgtype(leeftijd, duur, ernst, problematiek, eerdereHulp);
+                    
+                    // Genereer het advies
+                    const advies = genereerAdvies(zorgtype, leeftijd, problematiek);
+                    
+                    // Toon het resultaat
+                    triageAdvice.innerHTML = advies.tekst;
+                    triageZorgtype.innerHTML = `<strong>Geadviseerd zorgtype:</strong> ${advies.titel}`;
+                    triageZorgtype.className = `triage-zorgtype ${zorgtype}`;
+                    
+                    // Maak het resultaat zichtbaar
+                    triageResult.style.display = 'block';
+                    
+                    // Scroll naar het resultaat
+                    triageResult.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            // Reset button functionaliteit
+            if (resetButton) {
+                resetButton.addEventListener('click', function() {
+                    // Reset het formulier
+                    triageForm.reset();
+                    // Verberg het resultaat
+                    triageResult.style.display = 'none';
+                    // Scroll terug naar het begin van het formulier
+                    document.getElementById('triage-section').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            // Toon passende instellingen button functionaliteit
+            if (showInstellingenButton) {
+                showInstellingenButton.addEventListener('click', function() {
+                    const zorgtype = triageZorgtype.className.replace('triage-zorgtype ', '');
+                    
+                    // Bepaal het type voor de filter
+                    let filterType;
+                    switch(zorgtype) {
+                        case 'okt':
+                            filterType = 'okt';
+                            break;
+                        case 'basis':
+                            filterType = 'basis';
+                            break;
+                        case 'gespecialiseerd':
+                            filterType = 'gespecialiseerd';
+                            break;
+                        case 'hoogspecialistisch':
+                            filterType = 'hoogspecialistisch';
+                            break;
+                        default:
+                            filterType = '';
+                    }
+                    
+                    // Stuur de gebruiker naar de kaartpagina met de juiste filter
+                    window.location.href = `kaart.html?type=${filterType}`;
+                });
+            }
+            
+            // Functie om het zorgtype te bepalen op basis van de input
+            function bepaalZorgtype(leeftijd, duur, ernst, problematiek, eerdereHulp) {
+                // Crisis situatie (altijd hoogspecialistisch)
+                if (ernst === 'crisis') {
+                    return 'crisis';
+                }
+                
+                // Scoringsysteem (hoger = intensievere zorg nodig)
+                let score = 0;
+                
+                // Ernst van de klachten
+                if (ernst === 'licht') score += 1;
+                else if (ernst === 'matig') score += 2;
+                else if (ernst === 'ernstig') score += 3;
+                
+                // Duur van de klachten
+                if (duur === 'kort') score += 1;
+                else if (duur === 'middel') score += 2;
+                else if (duur === 'lang') score += 3;
+                
+                // Eerdere hulp
+                if (eerdereHulp === 'nee') score += 0;
+                else if (eerdereHulp === 'huisarts') score += 1;
+                else if (eerdereHulp === 'okt') score += 2;
+                else if (eerdereHulp === 'ggz') score += 3;
+                
+                // Complex/specifieke problematiek
+                const complexeProblematiek = ['trauma', 'autisme', 'verslaving'];
+                if (complexeProblematiek.some(p => problematiek.includes(p))) {
+                    score += 2;
+                }
+                
+                // Meerdere problemen
+                if (problematiek.length >= 3) {
+                    score += 2;
+                }
+                
+                // Bepaal zorgtype op basis van score
+                if (score <= 3) {
+                    return 'okt'; // OKT / basis aanpak
+                } else if (score <= 6) {
+                    return 'basis'; // Basis GGZ
+                } else if (score <= 9) {
+                    return 'gespecialiseerd'; // Gespecialiseerde GGZ
+                } else {
+                    return 'hoogspecialistisch'; // Hoogspecialistische zorg
+                }
+            }
+            
+            // Functie om een advies te genereren op basis van het zorgtype
+            function genereerAdvies(zorgtype, leeftijd, problematiek) {
+                let advies = {};
+                
+                switch(zorgtype) {
+                    case 'crisis':
+                        advies.titel = 'Crisis interventie nodig';
+                        advies.tekst = `
+                            <p>Op basis van uw antwoorden lijkt er sprake te zijn van een crisissituatie waarbij direct hulp nodig is.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <ul>
+                                <li>Neem bij direct gevaar contact op met 112</li>
+                                <li>Neem contact op met de huisarts of huisartsenpost</li>
+                                <li>Of bel de crisisdienst: <a href="tel:020-7885333">020-7885333</a></li>
+                            </ul>
+                        `;
+                        break;
+                    case 'okt':
+                        advies.titel = 'Ouder- en Kindteam (OKT)';
+                        advies.tekst = `
+                            <p>Op basis van uw antwoorden lijkt het Ouder- en Kindteam (OKT) het meest passend. Het OKT biedt laagdrempelige ondersteuning voor ouders en kinderen.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <ul>
+                                <li>Neem contact op met het OKT in uw buurt</li>
+                                <li>Bespreek de situatie met uw huisarts</li>
+                            </ul>
+                        `;
+                        break;
+                    case 'basis':
+                        advies.titel = 'Basis GGZ';
+                        advies.tekst = `
+                            <p>Op basis van uw antwoorden lijkt de Basis GGZ het meest passend. De Basis GGZ biedt kortdurende behandeling voor lichte tot matige psychische klachten.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <ul>
+                                <li>Vraag uw huisarts om een verwijzing naar de Basis GGZ</li>
+                                <li>Of neem contact op met het Ouder- en Kindteam voor advies</li>
+                            </ul>
+                        `;
+                        break;
+                    case 'gespecialiseerd':
+                        advies.titel = 'Gespecialiseerde GGZ';
+                        advies.tekst = `
+                            <p>Op basis van uw antwoorden lijkt de Gespecialiseerde GGZ het meest passend. De gespecialiseerde GGZ biedt intensievere behandeling voor complexere psychische problemen.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <ul>
+                                <li>Vraag uw huisarts om een verwijzing naar de Specialistische GGZ</li>
+                                <li>Uw huisarts kan u helpen bij het vinden van de meest geschikte instelling</li>
+                            </ul>
+                        `;
+                        break;
+                    case 'hoogspecialistisch':
+                        advies.titel = 'Hoogspecialistische Zorg';
+                        advies.tekst = `
+                            <p>Op basis van uw antwoorden lijkt Hoogspecialistische zorg het meest passend. Hoogspecialistische zorg is gericht op complexe problematiek en biedt gespecialiseerde behandelingen.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <ul>
+                                <li>Vraag uw huisarts om een verwijzing naar Hoogspecialistische zorg</li>
+                                <li>Uw huisarts kan u helpen bij het vinden van de meest geschikte instelling</li>
+                            </ul>
+                        `;
+                        break;
+                }
+                
+                return advies;
+            }
+        });
+    </script>
 </body>
 </html>

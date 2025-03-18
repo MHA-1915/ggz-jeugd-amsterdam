@@ -1114,6 +1114,7 @@ main section {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 15px;
 }
 
 .triage-options .option-label {
@@ -1128,6 +1129,7 @@ main section {
     margin-right: 10px;
     margin-bottom: 10px;
     width: auto;
+    position: relative;
 }
 
 .triage-options .option-label:hover {
@@ -1140,17 +1142,18 @@ main section {
 }
 
 .triage-options .option-label span {
-    flex: 1;
+    display: inline-block;
+    vertical-align: middle;
 }
 
-/* Styling voor geselecteerde opties */
+/* Styling voor geselecteerde opties - zonder :has() selector voor betere compatibiliteit */
 .triage-options input[type="radio"]:checked,
 .triage-options input[type="checkbox"]:checked {
     accent-color: #4CAF50;
 }
 
-/* Styling voor de geselecteerde labels */
-.triage-options .option-label:has(input:checked) {
+/* Gebruik JavaScript om deze class toe te voegen aan geselecteerde labels */
+.triage-options .option-label.selected {
     background-color: #4CAF50;
     color: white;
     border-color: #4CAF50;
@@ -1239,10 +1242,21 @@ main section {
 @media (max-width: 768px) {
     .triage-options {
         flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .triage-options .option-label {
+        width: 100%;
+        margin-right: 0;
     }
     
     .checkbox-options {
         grid-template-columns: 1fr;
+    }
+
+    .navigation-buttons {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 

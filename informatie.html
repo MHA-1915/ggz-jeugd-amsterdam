@@ -255,6 +255,50 @@
             const nextButtons = document.querySelectorAll('.triage-next-button');
             const prevButtons = document.querySelectorAll('.triage-prev-button');
             
+            // Functie om geselecteerde labels te markeren
+            function initSelectableLabels() {
+                // Voeg event listeners toe voor alle radio buttons
+                document.querySelectorAll('.triage-options input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        // Verwijder selected class van alle labels in dezelfde groep
+                        const name = this.getAttribute('name');
+                        document.querySelectorAll(`.triage-options input[name="${name}"]`).forEach(input => {
+                            input.closest('.option-label').classList.remove('selected');
+                        });
+                        
+                        // Voeg selected class toe aan het geselecteerde label
+                        if (this.checked) {
+                            this.closest('.option-label').classList.add('selected');
+                        }
+                    });
+                    
+                    // Initiële status instellen
+                    if (radio.checked) {
+                        radio.closest('.option-label').classList.add('selected');
+                    }
+                });
+                
+                // Voeg event listeners toe voor alle checkboxes
+                document.querySelectorAll('.triage-options input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const label = this.closest('.option-label');
+                        if (this.checked) {
+                            label.classList.add('selected');
+                        } else {
+                            label.classList.remove('selected');
+                        }
+                    });
+                    
+                    // Initiële status instellen
+                    if (checkbox.checked) {
+                        checkbox.closest('.option-label').classList.add('selected');
+                    }
+                });
+            }
+            
+            // Initialize selecteerbare labels
+            initSelectableLabels();
+            
             // Voeg event listeners toe aan de navigatieknoppen
             nextButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -366,6 +410,11 @@
                 resetButton.addEventListener('click', function() {
                     // Reset het formulier
                     triageForm.reset();
+                    
+                    // Verwijder alle selected classes
+                    document.querySelectorAll('.option-label').forEach(label => {
+                        label.classList.remove('selected');
+                    });
                     
                     // Verberg het resultaat
                     triageResult.style.display = 'none';

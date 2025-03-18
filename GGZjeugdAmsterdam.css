@@ -1064,6 +1064,44 @@ main section {
     margin-bottom: 25px;
     border-bottom: 1px solid #e9ecef;
     padding-bottom: 15px;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.triage-next-button, 
+.triage-prev-button {
+    background-color: #004699;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.triage-next-button {
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+}
+
+.triage-prev-button {
+    background-color: #6c757d;
+}
+
+.triage-next-button:hover, 
+.triage-submit:hover {
+    background-color: #003366;
+}
+
+.triage-prev-button:hover {
+    background-color: #5a6268;
 }
 
 .triage-question h3 {

@@ -131,7 +131,7 @@
 
             <div class="triage-tool">
                 <form id="triage-form">
-                    <div class="triage-question">
+                    <div class="triage-question" data-step="1" style="display: block;">
                         <h3>1. Wat is de leeftijd van het kind/de jongere?</h3>
                         <div class="triage-options">
                             <label><input type="radio" name="leeftijd" value="0-4"> 0-4 jaar</label>
@@ -139,18 +139,23 @@
                             <label><input type="radio" name="leeftijd" value="12-18"> 12-18 jaar</label>
                             <label><input type="radio" name="leeftijd" value="18-23"> 18-23 jaar</label>
                         </div>
+                        <button type="button" class="triage-next-button" data-next="2">Volgende</button>
                     </div>
 
-                    <div class="triage-question">
+                    <div class="triage-question" data-step="2" style="display: none;">
                         <h3>2. Hoe lang bestaan de klachten al?</h3>
                         <div class="triage-options">
                             <label><input type="radio" name="duur" value="kort"> Korter dan 3 maanden</label>
                             <label><input type="radio" name="duur" value="middel"> 3-6 maanden</label>
                             <label><input type="radio" name="duur" value="lang"> Langer dan 6 maanden</label>
                         </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="triage-prev-button" data-prev="1">Vorige</button>
+                            <button type="button" class="triage-next-button" data-next="3">Volgende</button>
+                        </div>
                     </div>
 
-                    <div class="triage-question">
+                    <div class="triage-question" data-step="3" style="display: none;">
                         <h3>3. Hoe ernstig zijn de klachten?</h3>
                         <div class="triage-options">
                             <label><input type="radio" name="ernst" value="licht"> Licht (beperkte invloed op dagelijks functioneren)</label>
@@ -158,9 +163,13 @@
                             <label><input type="radio" name="ernst" value="ernstig"> Ernstig (sterke invloed op dagelijks functioneren)</label>
                             <label><input type="radio" name="ernst" value="crisis"> Crisis (direct hulp nodig, gevaarlijke situatie)</label>
                         </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="triage-prev-button" data-prev="2">Vorige</button>
+                            <button type="button" class="triage-next-button" data-next="4">Volgende</button>
+                        </div>
                     </div>
 
-                    <div class="triage-question">
+                    <div class="triage-question" data-step="4" style="display: none;">
                         <h3>4. Selecteer de relevante problematiek (meerdere opties mogelijk)</h3>
                         <div class="triage-options checkbox-options">
                             <label><input type="checkbox" name="problematiek" value="angst"> Angst</label>
@@ -174,9 +183,13 @@
                             <label><input type="checkbox" name="problematiek" value="opvoeding"> Opvoedingsvragen</label>
                             <label><input type="checkbox" name="problematiek" value="gezin"> Gezinsproblematiek</label>
                         </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="triage-prev-button" data-prev="3">Vorige</button>
+                            <button type="button" class="triage-next-button" data-next="5">Volgende</button>
+                        </div>
                     </div>
 
-                    <div class="triage-question">
+                    <div class="triage-question" data-step="5" style="display: none;">
                         <h3>5. Is er eerder hulp gezocht voor deze problematiek?</h3>
                         <div class="triage-options">
                             <label><input type="radio" name="eerdere-hulp" value="nee"> Nee, dit is de eerste keer</label>
@@ -184,9 +197,11 @@
                             <label><input type="radio" name="eerdere-hulp" value="okt"> Ja, bij het Ouder- en Kindteam</label>
                             <label><input type="radio" name="eerdere-hulp" value="ggz"> Ja, bij een GGZ-instelling</label>
                         </div>
+                        <div class="navigation-buttons">
+                            <button type="button" class="triage-prev-button" data-prev="4">Vorige</button>
+                            <button type="button" id="triage-submit" class="triage-button">Bekijk Advies</button>
+                        </div>
                     </div>
-
-                    <button type="button" id="triage-submit" class="triage-button">Bekijk Advies</button>
                 </form>
 
                 <div id="triage-result" class="triage-result" style="display: none;">
@@ -236,21 +251,88 @@
             const resetButton = document.getElementById('reset-triage');
             const showInstellingenButton = document.getElementById('show-instellingen');
             const triageSubmit = document.getElementById('triage-submit');
+            const triageQuestions = document.querySelectorAll('.triage-question');
+            const nextButtons = document.querySelectorAll('.triage-next-button');
+            const prevButtons = document.querySelectorAll('.triage-prev-button');
+            
+            // Voeg event listeners toe aan de navigatieknoppen
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = parseInt(this.closest('.triage-question').dataset.step);
+                    const nextStep = parseInt(this.dataset.next);
+                    
+                    // Controleer of de huidige vraag is beantwoord
+                    if (validateStep(currentStep)) {
+                        // Verberg huidige vraag
+                        document.querySelector(`.triage-question[data-step="${currentStep}"]`).style.display = 'none';
+                        // Toon volgende vraag
+                        document.querySelector(`.triage-question[data-step="${nextStep}"]`).style.display = 'block';
+                    }
+                });
+            });
+            
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = parseInt(this.closest('.triage-question').dataset.step);
+                    const prevStep = parseInt(this.dataset.prev);
+                    
+                    // Verberg huidige vraag
+                    document.querySelector(`.triage-question[data-step="${currentStep}"]`).style.display = 'none';
+                    // Toon vorige vraag
+                    document.querySelector(`.triage-question[data-step="${prevStep}"]`).style.display = 'block';
+                });
+            });
+            
+            // Functie om te controleren of een stap is voltooid
+            function validateStep(step) {
+                switch(step) {
+                    case 1:
+                        // Controleer of een leeftijd is geselecteerd
+                        if (!document.querySelector('input[name="leeftijd"]:checked')) {
+                            alert('Selecteer een leeftijdscategorie.');
+                            return false;
+                        }
+                        return true;
+                    case 2:
+                        // Controleer of een duur is geselecteerd
+                        if (!document.querySelector('input[name="duur"]:checked')) {
+                            alert('Selecteer hoe lang de klachten bestaan.');
+                            return false;
+                        }
+                        return true;
+                    case 3:
+                        // Controleer of een ernst is geselecteerd
+                        if (!document.querySelector('input[name="ernst"]:checked')) {
+                            alert('Selecteer hoe ernstig de klachten zijn.');
+                            return false;
+                        }
+                        return true;
+                    case 4:
+                        // Controleer of tenminste één problematiek is geselecteerd
+                        if (document.querySelectorAll('input[name="problematiek"]:checked').length === 0) {
+                            alert('Selecteer tenminste één vorm van problematiek.');
+                            return false;
+                        }
+                        return true;
+                    default:
+                        return true;
+                }
+            }
             
             if (triageSubmit) {
                 triageSubmit.addEventListener('click', function() {
+                    // Controleer of alle vereiste velden zijn ingevuld
+                    if (!document.querySelector('input[name="eerdere-hulp"]:checked')) {
+                        alert('Geef aan of er eerder hulp is gezocht.');
+                        return;
+                    }
+                    
                     // Verzamel alle waarden uit het formulier
                     const leeftijd = document.querySelector('input[name="leeftijd"]:checked')?.value;
                     const duur = document.querySelector('input[name="duur"]:checked')?.value;
                     const ernst = document.querySelector('input[name="ernst"]:checked')?.value;
                     const problematiekCheckboxes = document.querySelectorAll('input[name="problematiek"]:checked');
                     const eerdereHulp = document.querySelector('input[name="eerdere-hulp"]:checked')?.value;
-                    
-                    // Controleer of alle vereiste velden zijn ingevuld
-                    if (!leeftijd || !duur || !ernst || problematiekCheckboxes.length === 0 || !eerdereHulp) {
-                        alert('Vul alle velden in om een advies te ontvangen.');
-                        return;
-                    }
                     
                     // Verzamel de geselecteerde problematiek
                     const problematiek = Array.from(problematiekCheckboxes).map(cb => cb.value);
@@ -269,6 +351,11 @@
                     // Maak het resultaat zichtbaar
                     triageResult.style.display = 'block';
                     
+                    // Verberg alle vragen
+                    triageQuestions.forEach(question => {
+                        question.style.display = 'none';
+                    });
+                    
                     // Scroll naar het resultaat
                     triageResult.scrollIntoView({ behavior: 'smooth' });
                 });
@@ -279,8 +366,15 @@
                 resetButton.addEventListener('click', function() {
                     // Reset het formulier
                     triageForm.reset();
+                    
                     // Verberg het resultaat
                     triageResult.style.display = 'none';
+                    
+                    // Verberg alle vragen behalve de eerste
+                    triageQuestions.forEach((question, index) => {
+                        question.style.display = index === 0 ? 'block' : 'none';
+                    });
+                    
                     // Scroll terug naar het begin van het formulier
                     document.getElementById('triage-section').scrollIntoView({ behavior: 'smooth' });
                 });

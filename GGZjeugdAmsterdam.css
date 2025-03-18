@@ -1136,24 +1136,7 @@ main section {
     background-color: #f0f8f0;
 }
 
-.triage-options .option-label input {
-    margin: 0;
-    padding: 0;
-    width: auto;
-    min-width: 20px;
-    height: auto;
-    flex: 0 0 auto;
-}
-
-.triage-options .option-label span {
-    margin-left: 10px;
-    display: inline-block;
-    font-size: 16px;
-    line-height: 1.4;
-    flex: 1;
-}
-
-/* Styling voor geselecteerde opties - zonder :has() selector voor betere compatibiliteit */
+/* Styling voor geselecteerde opties */
 .triage-options input[type="radio"]:checked,
 .triage-options input[type="checkbox"]:checked {
     accent-color: #4CAF50;
@@ -1165,6 +1148,85 @@ main section {
     color: white;
     border-color: #4CAF50;
     font-weight: 500;
+}
+
+/* Custom radiobuttons styling voor meer controle */
+.triage-options .option-label input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.2s;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.triage-options .option-label input[type="radio"]:checked {
+    border-color: #4CAF50;
+    background-color: white;
+}
+
+.triage-options .option-label input[type="radio"]:checked::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #4CAF50;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: block;
+}
+
+.triage-options .option-label span {
+    margin-left: 10px;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1.4;
+    flex: 1;
+    padding-top: 2px;
+}
+
+/* Custom checkboxes styling voor meer controle */
+.triage-options .option-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+    outline: none;
+    transition: all 0.2s;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.triage-options .option-label input[type="checkbox"]:checked {
+    border-color: #4CAF50;
+    background-color: #4CAF50;
+}
+
+.triage-options .option-label input[type="checkbox"]:checked::before {
+    content: '';
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    display: block;
 }
 
 .checkbox-options {
@@ -1262,4 +1324,3 @@ main section {
     color: #666;
     margin-top: 15px;
 }
-

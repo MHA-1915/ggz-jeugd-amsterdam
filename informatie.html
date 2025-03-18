@@ -29,135 +29,6 @@
             </p>
         </section>
 
-        <!-- Triage Tool (volledige breedte) -->
-        <section class="info-section full-width" id="triage-section">
-            <h2>Triage Tool</h2>
-            <p class="intro-text">
-                Deze tool helpt u bepalen welk type zorg het meest geschikt kan zijn voor uw situatie. 
-                Beantwoord onderstaande vragen zo nauwkeurig mogelijk. Bij een crisissituatie wordt direct advies gegeven.
-            </p>
-
-            <div class="triage-tool">
-                <form id="triage-form">
-                    <div class="triage-question" data-step="1" style="display: block;">
-                        <h3>1. Is er sprake van een crisissituatie?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="crisis-check" value="ja"><span>Ja, er is sprake van een crisissituatie</span></label>
-                            <label class="option-label"><input type="radio" name="crisis-check" value="nee"><span>Nee, er is geen sprake van een crisissituatie</span></label>
-                        </div>
-                        <button type="button" class="triage-next-button" data-next="2">Volgende</button>
-                    </div>
-
-                    <div class="triage-question" data-step="2" style="display: none;">
-                        <h3>2. Is er sprake van een levensbedreigende situatie?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="levensbedreigend" value="ja"><span>Ja, bel direct 112</span></label>
-                            <label class="option-label"><input type="radio" name="levensbedreigend" value="nee"><span>Nee</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="1">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="3">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="3" style="display: none;">
-                        <h3>3. Is het kind/de jongere momenteel in behandeling?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="in-behandeling" value="ja"><span>Ja, jongere is momenteel in behandeling bij GGZ instelling</span></label>
-                            <label class="option-label"><input type="radio" name="in-behandeling" value="nee"><span>Nee, jongere is momenteel nog niet onder behandeling</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="2">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="4">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="4" style="display: none;">
-                        <h3>4. Wat is de leeftijd van het kind/de jongere?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="leeftijd" value="0-4"><span>0-4 jaar</span></label>
-                            <label class="option-label"><input type="radio" name="leeftijd" value="4-12"><span>4-12 jaar</span></label>
-                            <label class="option-label"><input type="radio" name="leeftijd" value="12-18"><span>12-18 jaar</span></label>
-                            <label class="option-label"><input type="radio" name="leeftijd" value="18-23"><span>18-23 jaar</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="3">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="5">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="5" style="display: none;">
-                        <h3>5. Hoe lang bestaan de klachten al?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="duur" value="kort"><span>Korter dan 3 maanden</span></label>
-                            <label class="option-label"><input type="radio" name="duur" value="middel"><span>3-6 maanden</span></label>
-                            <label class="option-label"><input type="radio" name="duur" value="lang"><span>Langer dan 6 maanden</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="4">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="6">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="6" style="display: none;">
-                        <h3>6. Hoe ernstig zijn de klachten?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="ernst" value="licht"><span>Licht (beperkte invloed op functioneren)</span></label>
-                            <label class="option-label"><input type="radio" name="ernst" value="matig"><span>Matig (merkbare invloed op functioneren)</span></label>
-                            <label class="option-label"><input type="radio" name="ernst" value="ernstig"><span>Ernstig (sterke invloed op functioneren)</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="5">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="7">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="7" style="display: none;">
-                        <h3>7. Selecteer de relevante problematiek (meerdere opties mogelijk)</h3>
-                        <div class="triage-options checkbox-options">
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="angst"><span>Angst</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="depressie"><span>Somberheid/Depressie</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="gedrag"><span>Gedragsproblemen</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="trauma"><span>Trauma</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="adhd"><span>Concentratieproblemen/ADHD</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="autisme"><span>Autisme</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="verslaving"><span>Verslaving</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="ontwikkeling"><span>Ontwikkelingsproblemen</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="opvoeding"><span>Opvoedingsvragen</span></label>
-                            <label class="option-label"><input type="checkbox" name="problematiek" value="gezin"><span>Gezinsproblematiek</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="6">Vorige</button>
-                            <button type="button" class="triage-next-button" data-next="8">Volgende</button>
-                        </div>
-                    </div>
-
-                    <div class="triage-question" data-step="8" style="display: none;">
-                        <h3>8. Is er eerder hulp gezocht voor deze problematiek?</h3>
-                        <div class="triage-options">
-                            <label class="option-label"><input type="radio" name="eerdere-hulp" value="nee"><span>Nee, dit is de eerste keer</span></label>
-                            <label class="option-label"><input type="radio" name="eerdere-hulp" value="huisarts"><span>Ja, bij de huisarts</span></label>
-                            <label class="option-label"><input type="radio" name="eerdere-hulp" value="okt"><span>Ja, bij het Ouder- en Kindteam</span></label>
-                            <label class="option-label"><input type="radio" name="eerdere-hulp" value="ggz"><span>Ja, bij een GGZ-instelling</span></label>
-                        </div>
-                        <div class="navigation-buttons">
-                            <button type="button" class="triage-prev-button" data-prev="7">Vorige</button>
-                            <button type="button" id="triage-submit" class="triage-button">Bekijk Advies</button>
-                        </div>
-                    </div>
-                </form>
-
-                <div id="triage-result" class="triage-result" style="display: none;">
-                    <h3>Advies</h3>
-                    <div id="triage-advice"></div>
-                    <div id="triage-zorgtype" class="triage-zorgtype"></div>
-                    <p class="disclaimer">Dit is een indicatie. Raadpleeg altijd uw huisarts of het Ouder- en Kindteam voor een definitief advies.</p>
-                    <button type="button" id="show-instellingen" class="triage-button">Toon bijpassende instellingen</button>
-                    <button type="button" id="reset-triage" class="triage-button secondary">Reset</button>
-                </div>
-            </div>
-        </section>
-
         <!-- Twee-kolommen sectie -->
         <div class="columns">
             <!-- Linker kolom -->
@@ -202,6 +73,135 @@
 
             <!-- Rechter kolom -->
             <div class="column">
+                <!-- Triage Tool in de rechterkolom -->
+                <section class="info-section" id="triage-section">
+                    <h2>Triage Tool</h2>
+                    <p class="intro-text">
+                        Deze tool helpt u bepalen welk type zorg het meest geschikt kan zijn voor uw situatie. 
+                        Beantwoord onderstaande vragen zo nauwkeurig mogelijk.
+                    </p>
+
+                    <div class="triage-tool">
+                        <form id="triage-form">
+                            <div class="triage-question" data-step="1" style="display: block;">
+                                <h3>1. Is er sprake van een crisissituatie?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="crisis-check" value="ja"><span>Ja, er is sprake van een crisissituatie</span></label>
+                                    <label class="option-label"><input type="radio" name="crisis-check" value="nee"><span>Nee, er is geen sprake van een crisissituatie</span></label>
+                                </div>
+                                <button type="button" class="triage-next-button" data-next="2">Volgende</button>
+                            </div>
+
+                            <div class="triage-question" data-step="2" style="display: none;">
+                                <h3>2. Is er sprake van een levensbedreigende situatie?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="levensbedreigend" value="ja"><span>Ja, bel direct 112</span></label>
+                                    <label class="option-label"><input type="radio" name="levensbedreigend" value="nee"><span>Nee</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="1">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="3">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="3" style="display: none;">
+                                <h3>3. Is het kind/de jongere momenteel in behandeling?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="in-behandeling" value="ja"><span>Ja, jongere is momenteel in behandeling bij GGZ instelling</span></label>
+                                    <label class="option-label"><input type="radio" name="in-behandeling" value="nee"><span>Nee, jongere is momenteel nog niet onder behandeling</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="2">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="4">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="4" style="display: none;">
+                                <h3>4. Wat is de leeftijd van het kind/de jongere?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="leeftijd" value="0-4"><span>0-4 jaar</span></label>
+                                    <label class="option-label"><input type="radio" name="leeftijd" value="4-12"><span>4-12 jaar</span></label>
+                                    <label class="option-label"><input type="radio" name="leeftijd" value="12-18"><span>12-18 jaar</span></label>
+                                    <label class="option-label"><input type="radio" name="leeftijd" value="18-23"><span>18-23 jaar</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="3">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="5">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="5" style="display: none;">
+                                <h3>5. Hoe lang bestaan de klachten al?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="duur" value="kort"><span>Korter dan 3 maanden</span></label>
+                                    <label class="option-label"><input type="radio" name="duur" value="middel"><span>3-6 maanden</span></label>
+                                    <label class="option-label"><input type="radio" name="duur" value="lang"><span>Langer dan 6 maanden</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="4">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="6">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="6" style="display: none;">
+                                <h3>6. Hoe ernstig zijn de klachten?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="ernst" value="licht"><span>Licht (beperkte invloed op functioneren)</span></label>
+                                    <label class="option-label"><input type="radio" name="ernst" value="matig"><span>Matig (merkbare invloed op functioneren)</span></label>
+                                    <label class="option-label"><input type="radio" name="ernst" value="ernstig"><span>Ernstig (sterke invloed op functioneren)</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="5">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="7">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="7" style="display: none;">
+                                <h3>7. Selecteer de relevante problematiek (meerdere opties mogelijk)</h3>
+                                <div class="triage-options checkbox-options">
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="angst"><span>Angst</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="depressie"><span>Somberheid/Depressie</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="gedrag"><span>Gedragsproblemen</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="trauma"><span>Trauma</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="adhd"><span>Concentratieproblemen/ADHD</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="autisme"><span>Autisme</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="verslaving"><span>Verslaving</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="ontwikkeling"><span>Ontwikkelingsproblemen</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="opvoeding"><span>Opvoedingsvragen</span></label>
+                                    <label class="option-label"><input type="checkbox" name="problematiek" value="gezin"><span>Gezinsproblematiek</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="6">Vorige</button>
+                                    <button type="button" class="triage-next-button" data-next="8">Volgende</button>
+                                </div>
+                            </div>
+
+                            <div class="triage-question" data-step="8" style="display: none;">
+                                <h3>8. Is er eerder hulp gezocht voor deze problematiek?</h3>
+                                <div class="triage-options">
+                                    <label class="option-label"><input type="radio" name="eerdere-hulp" value="nee"><span>Nee, dit is de eerste keer</span></label>
+                                    <label class="option-label"><input type="radio" name="eerdere-hulp" value="huisarts"><span>Ja, bij de huisarts</span></label>
+                                    <label class="option-label"><input type="radio" name="eerdere-hulp" value="okt"><span>Ja, bij het Ouder- en Kindteam</span></label>
+                                    <label class="option-label"><input type="radio" name="eerdere-hulp" value="ggz"><span>Ja, bij een GGZ-instelling</span></label>
+                                </div>
+                                <div class="navigation-buttons">
+                                    <button type="button" class="triage-prev-button" data-prev="7">Vorige</button>
+                                    <button type="button" id="triage-submit" class="triage-button">Bekijk Advies</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div id="triage-result" class="triage-result" style="display: none;">
+                            <h3>Advies</h3>
+                            <div id="triage-advice"></div>
+                            <div id="triage-zorgtype" class="triage-zorgtype"></div>
+                            <p class="disclaimer">Dit is een indicatie. Raadpleeg altijd uw huisarts of het Ouder- en Kindteam voor een definitief advies.</p>
+                            <button type="button" id="show-instellingen" class="triage-button">Toon bijpassende instellingen</button>
+                            <button type="button" id="reset-triage" class="triage-button secondary">Reset</button>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="info-section">
                     <h2>Zorgstructuur in Amsterdam</h2>
                     <div class="zorg-type">

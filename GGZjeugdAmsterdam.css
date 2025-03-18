@@ -1340,3 +1340,59 @@ main section {
         padding: 6px 10px;
     }
 }
+
+/* Triage Tool Styling in rechterkolom */
+.column .triage-tool {
+    max-width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.column #triage-section h2, 
+.column #triage-section .intro-text {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.column .triage-tool .checkbox-options {
+    grid-template-columns: 1fr;
+}
+
+.column .triage-result {
+    max-width: 100%;
+    margin: 15px 0;
+}
+
+@media (max-width: 768px) {
+    .columns {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .columns .column:first-child {
+        order: 2;
+    }
+    
+    .columns .column:last-child {
+        order: 1;
+    }
+}
+
+/* Aangepaste styling voor kleinere knoppen in de tool */
+.column .triage-button,
+.column .triage-next-button, 
+.column .triage-prev-button {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/* Kleinere tekstgrootte in rechterkolom triage */
+.column .triage-options .option-label span {
+    font-size: 14px;
+}
+
+.column .triage-question h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}

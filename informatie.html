@@ -438,31 +438,86 @@
             // Functie voor het tonen van direct crisisadvies
             function toonDirectCrisisAdvies(type) {
                 let adviesTekst = '';
+                let adviesTitel = '';
                 
                 switch(type) {
                     case '112':
+                        adviesTitel = 'DIRECT 112 BELLEN';
                         adviesTekst = `
-                            <p><strong>U heeft aangegeven dat er sprake is van een levensbedreigende situatie</strong></p>
-                            <p>Bel direct 112 voor acute hulp.</p>
+                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een levensbedreigende situatie.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <div class="crisis-action">
+                                <p>Bel direct 112 voor acute hulp.</p>
+                                <a href="tel:112" class="emergency-button">Bel 112</a>
+                            </div>
                         `;
                         break;
                     case 'behandelaar':
+                        adviesTitel = 'DIRECT BEHANDELAAR CONTACTEREN';
                         adviesTekst = `
-                            <p><strong>U heeft aangegeven dat er sprake is van een crisissituatie bij iemand die in behandeling is</strong></p>
-                            <p>Neem direct contact op met de behandelaar of de crisisdienst van de instelling waar de behandeling plaatsvindt.</p>
+                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie bij iemand die in behandeling is.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <div class="crisis-action">
+                                <p>Neem direct contact op met de behandelaar of de crisisdienst van de instelling waar de behandeling plaatsvindt. Zij kennen de jongere en kunnen daardoor een betere crisisbeoordeling verrichten en passende interventie toepassen.</p>
+                            </div>
                         `;
                         break;
                     case 'crisisdienst':
+                        adviesTitel = 'DIRECT CRISISDIENST BELLEN';
                         adviesTekst = `
-                            <p><strong>U heeft aangegeven dat er sprake is van een crisissituatie</strong></p>
-                            <p>Neem direct contact op met de crisisdienst Jeugd: <a href="tel:0205904040">020 590 4040</a></p>
+                            <p class="crisis-alert">U heeft aangegeven dat er sprake is van een crisissituatie.</p>
+                            <p><strong>Wat te doen:</strong></p>
+                            <div class="crisis-action">
+                                <p>Neem direct contact op met de crisisdienst Jeugd:</p>
+                                <a href="tel:0205904040" class="emergency-button">Bel 020 590 4040</a>
+                            </div>
                         `;
                         break;
                 }
                 
+                // Voeg CSS voor crisisadvies toe
+                const style = document.createElement('style');
+                style.textContent = `
+                    .crisis-alert {
+                        background-color: #f44336;
+                        color: white;
+                        padding: 12px 15px;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        font-size: 16px;
+                        margin-bottom: 15px;
+                    }
+                    
+                    .crisis-action {
+                        background-color: #ffebee;
+                        border-left: 4px solid #f44336;
+                        padding: 15px;
+                        margin: 15px 0;
+                        border-radius: 4px;
+                    }
+                    
+                    .emergency-button {
+                        display: inline-block;
+                        background-color: #f44336;
+                        color: white;
+                        font-weight: bold;
+                        padding: 12px 20px;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        margin-top: 10px;
+                        transition: background-color 0.3s;
+                    }
+                    
+                    .emergency-button:hover {
+                        background-color: #d32f2f;
+                        text-decoration: none;
+                    }
+                `;
+                document.head.appendChild(style);
+                
                 // Toon het resultaat
                 triageAdvice.innerHTML = adviesTekst;
-                triageZorgtype.innerHTML = `<strong>Geadviseerd:</strong> Direct hulp zoeken`;
+                triageZorgtype.innerHTML = `<strong>Geadviseerd:</strong> ${adviesTitel}`;
                 triageZorgtype.className = `triage-zorgtype crisis`;
                 
                 // Maak het resultaat zichtbaar
@@ -643,7 +698,7 @@
                             <ul>
                                 <li>Neem bij direct gevaar contact op met 112</li>
                                 <li>Neem contact op met de huisarts of huisartsenpost</li>
-                                <li>Of bel de crisisdienst: <a href="tel:020-7885333">020-7885333</a></li>
+                                <li>Of bel de crisisdienst Jeugd: <a href="tel:0205904040">020 590 4040</a></li>
                             </ul>
                         `;
                         break;
@@ -653,8 +708,9 @@
                             <p>Op basis van uw antwoorden lijkt het Ouder- en Kindteam (OKT) het meest passend. Het OKT biedt laagdrempelige ondersteuning voor ouders en kinderen.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <ul>
-                                <li>Neem contact op met het OKT in uw buurt</li>
-                                <li>Bespreek de situatie met uw huisarts</li>
+                                <li>Neem contact op met het OKT in uw buurt. <a href="https://oktamsterdam.nl/contact/" target="_blank">Vind uw OKT</a></li>
+                                <li>U kunt zonder verwijzing bij het OKT terecht</li>
+                                <li>Het OKT kan indien nodig doorverwijzen naar meer specialistische zorg</li>
                             </ul>
                         `;
                         break;
@@ -664,10 +720,31 @@
                             <p>Op basis van uw antwoorden lijkt de Basis GGZ het meest passend. De Basis GGZ biedt kortdurende behandeling voor lichte tot matige psychische klachten.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <ul>
+                                <li>Maak een afspraak bij uw huisarts om uw zorgen te bespreken</li>
                                 <li>Vraag uw huisarts om een verwijzing naar de Basis GGZ</li>
-                                <li>Of neem contact op met het Ouder- en Kindteam voor advies</li>
+                                <li>U kunt ook contact opnemen met het Ouder- en Kindteam voor advies</li>
                             </ul>
                         `;
+                        
+                        // Voeg leeftijdsspecifiek advies toe
+                        if (leeftijd === "0-4") {
+                            advies.tekst += `
+                                <p><strong>Specifiek voor jonge kinderen (0-4 jaar):</strong></p>
+                                <ul>
+                                    <li>Consultatiebureaus kunnen ook adviseren over de ontwikkeling van uw kind</li>
+                                    <li>Zoek naar praktijken met expertise in jonge kinderen</li>
+                                </ul>
+                            `;
+                        } else if (leeftijd === "18-23") {
+                            advies.tekst += `
+                                <p><strong>Specifiek voor jongvolwassenen (18-23 jaar):</strong></p>
+                                <ul>
+                                    <li>Let op: na 18 jaar valt de zorg onder de volwassenen-GGZ en gelden andere regels</li>
+                                    <li>Controleer of uw verzekering de gekozen behandeling vergoedt</li>
+                                </ul>
+                            `;
+                        }
+                        
                         break;
                     case 'gespecialiseerd':
                         advies.titel = 'Gespecialiseerde GGZ';
@@ -675,10 +752,32 @@
                             <p>Op basis van uw antwoorden lijkt de Gespecialiseerde GGZ het meest passend. De gespecialiseerde GGZ biedt intensievere behandeling voor complexere psychische problemen.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <ul>
+                                <li>Maak een afspraak bij uw huisarts om uw zorgen te bespreken</li>
                                 <li>Vraag uw huisarts om een verwijzing naar de Specialistische GGZ</li>
                                 <li>Uw huisarts kan u helpen bij het vinden van de meest geschikte instelling</li>
                             </ul>
                         `;
+                        
+                        // Voeg probleemspecifiek advies toe
+                        if (problematiek.includes('trauma')) {
+                            advies.tekst += `
+                                <p><strong>Specifiek voor traumaproblematiek:</strong></p>
+                                <ul>
+                                    <li>Zoek naar een instelling met expertise in traumabehandeling, zoals EMDR of traumagerichte CGT</li>
+                                </ul>
+                            `;
+                        }
+                        
+                        if (problematiek.includes('autisme')) {
+                            advies.tekst += `
+                                <p><strong>Specifiek voor autisme:</strong></p>
+                                <ul>
+                                    <li>Zoek naar instellingen die zijn gespecialiseerd in autismespectrumstoornissen</li>
+                                    <li>Informeer bij uw huisarts naar mogelijkheden voor diagnostiek en behandeling</li>
+                                </ul>
+                            `;
+                        }
+                        
                         break;
                     case 'hoogspecialistisch':
                         advies.titel = 'Hoogspecialistische Zorg';
@@ -686,12 +785,35 @@
                             <p>Op basis van uw antwoorden lijkt Hoogspecialistische zorg het meest passend. Hoogspecialistische zorg is gericht op complexe problematiek en biedt gespecialiseerde behandelingen.</p>
                             <p><strong>Wat te doen:</strong></p>
                             <ul>
+                                <li>Maak een afspraak bij uw huisarts om uw zorgen te bespreken</li>
                                 <li>Vraag uw huisarts om een verwijzing naar Hoogspecialistische zorg</li>
-                                <li>Uw huisarts kan u helpen bij het vinden van de meest geschikte instelling</li>
+                                <li>Mogelijk is er eerst een intake bij een reguliere GGZ-instelling nodig voordat u wordt doorverwezen</li>
                             </ul>
+                            <p>Hoogspecialistische GGZ-instellingen in Amsterdam zijn onder andere het Levvel, De Bascule en het Centrum voor Kinder- en Jeugdpsychiatrie.</p>
                         `;
+                        
+                        // Als er meerdere problemen zijn, voeg extra informatie toe
+                        if (problematiek.length >= 3) {
+                            advies.tekst += `
+                                <p><strong>Bij meervoudige problematiek:</strong></p>
+                                <ul>
+                                    <li>Zoek naar instellingen die een multidisciplinaire aanpak bieden</li>
+                                    <li>Er kan een combinatie van behandelingen nodig zijn</li>
+                                </ul>
+                            `;
+                        }
+                        
                         break;
                 }
+                
+                // Voeg extra informatie toe over wachttijden
+                advies.tekst += `
+                    <p><strong>Belangrijke informatie:</strong></p>
+                    <ul>
+                        <li>Er kunnen wachttijden zijn voor GGZ-zorg. Vraag bij aanmelding naar de verwachte wachttijd.</li>
+                        <li>Neem bij verergering van klachten tijdens de wachttijd contact op met uw huisarts.</li>
+                    </ul>
+                `;
                 
                 return advies;
             }

@@ -1032,27 +1032,45 @@ function initializeTabs() {
             
             // Filter en toon zorginstellingen
             const type = button.dataset.tab;
+            console.log('Geselecteerd type:', type);
+            
             const gefilterd = type === 'alle' ? 
                 zorginstellingenData : 
                 zorginstellingenData.filter(instelling => {
-                    // Normaliseer het type voor vergelijking
-                    const instellingTypes = instelling.type.toLowerCase().split(',').map(t => t.trim());
+                    const instellingTypes = instelling.type ? instelling.type.toLowerCase().split(',').map(t => t.trim()) : [];
+                    const instellingNaam = instelling.naam ? instelling.naam.toLowerCase() : '';
+                    
+                    console.log('Instelling:', instelling.naam);
+                    console.log('Types:', instellingTypes);
                     
                     switch(type) {
                         case 'okt':
-                            return instelling.naam.toLowerCase().includes('okt') || 
-                                   instellingTypes.some(t => t.includes('ouder- en kindteam') || t.includes('okt'));
+                            return instellingNaam.includes('okt') || 
+                                   instellingTypes.some(t => t.includes('ouder- en kindteam') || 
+                                                          t.includes('okt') ||
+                                                          t.includes('ouder en kindteam') ||
+                                                          t === 'basis');
                         case 'basis':
-                            return instellingTypes.some(t => t.includes('basis') || t.includes('basis ggz') || t.includes('basis-ggz'));
+                            return instellingTypes.some(t => t === 'basis' || 
+                                                          t.includes('basis ggz') || 
+                                                          t.includes('basis-ggz') ||
+                                                          t.includes('basis ggz jeugd'));
                         case 'gespecialiseerd':
-                            return instellingTypes.some(t => t.includes('gespecialiseerd') || t.includes('gespecialiseerde ggz') || t.includes('gespecialiseerde-ggz'));
+                            return instellingTypes.some(t => t === 'gespecialiseerd' || 
+                                                          t.includes('gespecialiseerde') || 
+                                                          t.includes('gespecialiseerde ggz') || 
+                                                          t.includes('gespecialiseerde-ggz'));
                         case 'hoogspecialistisch':
-                            return instellingTypes.some(t => t.includes('hoogspecialistisch') || t.includes('hoogspecialistische zorg') || t.includes('hoogspecialistische-zorg'));
+                            return instellingTypes.some(t => t === 'hoogspecialistisch' || 
+                                                          t.includes('hoogspecialistische') || 
+                                                          t.includes('hoogspecialistische zorg') || 
+                                                          t.includes('hoogspecialistische-zorg'));
                         default:
                             return true;
                     }
                 });
             
+            console.log('Gefilterde resultaten:', gefilterd.length);
             vulZorginstellingenTabel(gefilterd);
             updateResultatenTeller(gefilterd.length);
         });

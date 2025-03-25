@@ -1037,6 +1037,7 @@ function initializeTabs() {
             const gefilterd = type === 'alle' ? 
                 zorginstellingenData : 
                 zorginstellingenData.filter(instelling => {
+                    // Normaliseer het type voor vergelijking
                     const instellingTypes = instelling.type ? instelling.type.toLowerCase().split(',').map(t => t.trim()) : [];
                     const instellingNaam = instelling.naam ? instelling.naam.toLowerCase() : '';
                     
@@ -1045,26 +1046,32 @@ function initializeTabs() {
                     
                     switch(type) {
                         case 'okt':
-                            return instellingNaam.includes('okt') || 
-                                   instellingTypes.some(t => t.includes('ouder- en kindteam') || 
-                                                          t.includes('okt') ||
-                                                          t.includes('ouder en kindteam') ||
-                                                          t === 'basis');
+                            // Check voor OKT's
+                            if (instellingNaam.includes('okt')) return true;
+                            if (instellingTypes.some(t => t.includes('ouder- en kindteam') || t.includes('okt'))) return true;
+                            return false;
+                            
                         case 'basis':
-                            return instellingTypes.some(t => t === 'basis' || 
-                                                          t.includes('basis ggz') || 
-                                                          t.includes('basis-ggz') ||
-                                                          t.includes('basis ggz jeugd'));
+                            // Check voor Basis GGZ, maar exclude OKT's
+                            if (instellingNaam.includes('okt')) return false;
+                            return instellingTypes.some(t => 
+                                t === 'basis' || 
+                                t.includes('basis ggz') || 
+                                t.includes('basis-ggz') ||
+                                t.includes('basis ggz jeugd'));
+                            
                         case 'gespecialiseerd':
-                            return instellingTypes.some(t => t === 'gespecialiseerd' || 
-                                                          t.includes('gespecialiseerde') || 
-                                                          t.includes('gespecialiseerde ggz') || 
-                                                          t.includes('gespecialiseerde-ggz'));
+                            return instellingTypes.some(t => 
+                                t === 'gespecialiseerd' || 
+                                t.includes('gespecialiseerde') || 
+                                t.includes('gespecialiseerde ggz'));
+                            
                         case 'hoogspecialistisch':
-                            return instellingTypes.some(t => t === 'hoogspecialistisch' || 
-                                                          t.includes('hoogspecialistische') || 
-                                                          t.includes('hoogspecialistische zorg') || 
-                                                          t.includes('hoogspecialistische-zorg'));
+                            return instellingTypes.some(t => 
+                                t === 'hoogspecialistisch' || 
+                                t.includes('hoogspecialistische') || 
+                                t.includes('hoogspecialistische zorg'));
+                            
                         default:
                             return true;
                     }

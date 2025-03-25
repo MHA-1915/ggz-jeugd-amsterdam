@@ -1019,7 +1019,7 @@ function initializeTabs() {
     if (!tabButtons.length) return; // Als we niet op de overzichtspagina zijn
     
     // Vul initieel de 'alle' tab
-    vulZorginstellingenTabel(zorginstellingenData, false);
+    vulZorginstellingenTabel(zorginstellingenData);
     updateResultatenTeller(zorginstellingenData.length);
     
     tabButtons.forEach(button => {
@@ -1036,27 +1036,24 @@ function initializeTabs() {
                 zorginstellingenData : 
                 zorginstellingenData.filter(instelling => {
                     // Normaliseer het type voor vergelijking
-                    const instellingType = instelling.type.toLowerCase();
+                    const instellingTypes = instelling.type.toLowerCase().split(',').map(t => t.trim());
                     
                     switch(type) {
                         case 'okt':
                             return instelling.naam.toLowerCase().includes('okt') || 
-                                   instellingType.includes('ouder- en kindteam');
+                                   instellingTypes.some(t => t.includes('ouder- en kindteam') || t.includes('okt'));
                         case 'basis':
-                            return instellingType.includes('basis') || 
-                                   instellingType.includes('basis ggz');
+                            return instellingTypes.some(t => t.includes('basis') || t.includes('basis ggz') || t.includes('basis-ggz'));
                         case 'gespecialiseerd':
-                            return instellingType.includes('gespecialiseerd') || 
-                                   instellingType.includes('gespecialiseerde ggz');
+                            return instellingTypes.some(t => t.includes('gespecialiseerd') || t.includes('gespecialiseerde ggz') || t.includes('gespecialiseerde-ggz'));
                         case 'hoogspecialistisch':
-                            return instellingType.includes('hoogspecialistisch') || 
-                                   instellingType.includes('hoogspecialistische zorg');
+                            return instellingTypes.some(t => t.includes('hoogspecialistisch') || t.includes('hoogspecialistische zorg') || t.includes('hoogspecialistische-zorg'));
                         default:
                             return true;
                     }
                 });
             
-            vulZorginstellingenTabel(gefilterd, false);
+            vulZorginstellingenTabel(gefilterd);
             updateResultatenTeller(gefilterd.length);
         });
     });
@@ -1120,7 +1117,7 @@ function zoekZorginstellingen() {
     voegMarkersToe(gefilterd);
     
     // Update de gefilterde resultaten tabel
-    vulZorginstellingenTabel(gefilterd, true);
+    vulZorginstellingenTabel(gefilterd);
     
     // Toon het aantal gevonden resultaten
     const resultatenTeller = document.getElementById('resultaten-teller');

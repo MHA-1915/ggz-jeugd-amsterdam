@@ -1427,3 +1427,105 @@ main section {
         font-size: 0.9rem;
     }
 }
+
+.zoekbalk-container {
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.zoekbalk-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.zoekbalk-input:focus {
+    border-color: #004699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,70,153,0.1);
+}
+
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
+
+#zorginstellingen-tabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#zorginstellingen-tabel th {
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: #004699;
+    border-bottom: 2px solid #e9ecef;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#zorginstellingen-tabel th:hover {
+    background: #e9ecef;
+}
+
+#zorginstellingen-tabel td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.3s ease;
+}
+
+#zorginstellingen-tabel tr:hover {
+    background-color: #f8f9fa;
+}
+
+#zorginstellingen-tabel td a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+#zorginstellingen-tabel td a.btn-primary {
+    background: #004699;
+    color: white;
+}
+
+#zorginstellingen-tabel td a.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+#zorginstellingen-tabel td a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    #zorginstellingen-tabel th,
+    #zorginstellingen-tabel td {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    #zorginstellingen-tabel td a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}

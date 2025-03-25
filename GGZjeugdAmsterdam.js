@@ -1035,9 +1035,25 @@ function initializeTabs() {
             const gefilterd = type === 'alle' ? 
                 zorginstellingenData : 
                 zorginstellingenData.filter(instelling => {
-                    const isOKT = instelling.naam.toLowerCase().includes('okt');
-                    if (type === 'okt') return isOKT;
-                    return instelling.type.toLowerCase().includes(type) && !isOKT;
+                    // Normaliseer het type voor vergelijking
+                    const instellingType = instelling.type.toLowerCase();
+                    
+                    switch(type) {
+                        case 'okt':
+                            return instelling.naam.toLowerCase().includes('okt') || 
+                                   instellingType.includes('ouder- en kindteam');
+                        case 'basis':
+                            return instellingType.includes('basis') || 
+                                   instellingType.includes('basis ggz');
+                        case 'gespecialiseerd':
+                            return instellingType.includes('gespecialiseerd') || 
+                                   instellingType.includes('gespecialiseerde ggz');
+                        case 'hoogspecialistisch':
+                            return instellingType.includes('hoogspecialistisch') || 
+                                   instellingType.includes('hoogspecialistische zorg');
+                        default:
+                            return true;
+                    }
                 });
             
             vulZorginstellingenTabel(gefilterd, false);

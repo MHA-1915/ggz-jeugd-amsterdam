@@ -1195,7 +1195,25 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('leeftijd-filter').addEventListener('change', zoekZorginstellingen);
         }
     } else if (isOverzichtPagina) {
-        // Vul de tabel met alle zorginstellingen
-        vulZorginstellingenTabel(zorginstellingenData);
+        // Initialiseer de tabs
+        initializeTabs();
+        
+        // Voeg zoekfunctionaliteit toe
+        const zoekbalk = document.getElementById('zoekbalk');
+        if (zoekbalk) {
+            zoekbalk.addEventListener('input', (e) => {
+                const zoekterm = e.target.value.toLowerCase();
+                const gefilterd = zorginstellingenData.filter(instelling => {
+                    const naam = instelling.naam.toLowerCase();
+                    const adres = (instelling.adres || '').toLowerCase();
+                    const specialisaties = (instelling.specialisaties || '').toLowerCase();
+                    return naam.includes(zoekterm) || 
+                           adres.includes(zoekterm) || 
+                           specialisaties.includes(zoekterm);
+                });
+                vulZorginstellingenTabel(gefilterd);
+                updateResultatenTeller(gefilterd.length);
+            });
+        }
     }
 }); 

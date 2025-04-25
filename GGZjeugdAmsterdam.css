@@ -844,7 +844,153 @@ main section {
 }
 
 .overzicht-pagina .info-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.overzicht-pagina .intro-text {
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.overzicht-pagina .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.overzicht-pagina .tab-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.overzicht-pagina .tab-button:hover {
+    background-color: #e0e0e0;
+}
+
+.overzicht-pagina .tab-button.active {
+    background-color: #EC0000;
+    color: white;
+}
+
+.overzicht-pagina .search-container {
+    margin-bottom: 1.5rem;
+}
+
+.overzicht-pagina .search-container input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     width: 100%;
+    font-size: 1rem;
+}
+
+.overzicht-pagina .search-container input:focus {
+    outline: none;
+    border-color: #EC0000;
+    box-shadow: 0 0 0 2px rgba(236,0,0,0.1);
+}
+
+.overzicht-pagina .resultaten-teller {
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.overzicht-pagina .table-responsive {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.overzicht-pagina #zorginstellingen-tabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.overzicht-pagina #zorginstellingen-tabel th {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.overzicht-pagina #zorginstellingen-tabel td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.overzicht-pagina #zorginstellingen-tabel tr:hover {
+    background-color: #f8f9fa;
+}
+
+.overzicht-pagina #zorginstellingen-tabel td a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+.overzicht-pagina #zorginstellingen-tabel td a.btn-primary {
+    background-color: #EC0000;
+    color: white;
+}
+
+.overzicht-pagina #zorginstellingen-tabel td a.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.overzicht-pagina #zorginstellingen-tabel td a:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .overzicht-pagina .tabs {
+        flex-direction: column;
+    }
+    
+    .overzicht-pagina .tab-button {
+        width: 100%;
+    }
+    
+    .overzicht-pagina .table-responsive {
+        margin: 0 -1rem;
+        border-radius: 0;
+    }
+    
+    .overzicht-pagina #zorginstellingen-tabel th,
+    .overzicht-pagina #zorginstellingen-tabel td {
+        padding: 0.75rem;
+    }
+    
+    .overzicht-pagina #zorginstellingen-tabel td a {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
 }
 
 /* Responsive aanpassingen */

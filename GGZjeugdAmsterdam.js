@@ -8,489 +8,280 @@ let legendaToegevoegd = false; // Nieuwe variabele om bij te houden of de legend
 const zorginstellingenData = [
     {
         naam: "Arkin Jeugd & Gezin",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
+        adres: "Baarsjesweg 224, 1058 AA Amsterdam",
         telefoon: "020 590 55 55",
         website: "https://www.arkin.nl",
         aanmelden: "https://www.arkin.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Gezinstherapie, eetstoornissen, complexe problematiek",
+        specialisatie: "Gezinstherapie, eetstoornissen, complexe problematiek",
         locaties: [
-            {
-                naam: "Arkin Amsterdam West",
-                adres: "Baarsjesweg 224, 1058 AA Amsterdam",
-                website: "https://www.arkin.nl"
-            },
-            {
-                naam: "Arkin Diemen",
-                adres: "Wisselwerking 46-48, 1112 XR Diemen",
-                website: "https://www.arkin.nl"
-            },
-            {
-                naam: "Arkin Amsterdam Noord",
-                adres: "Klaprozenweg 111, 1033 NN Amsterdam",
-                website: "https://www.arkin.nl"
-            },
-            {
-                naam: "Arkin Amsterdam Zuidoost",
-                adres: "Bijlmerdreef 1169, 1103 TT Amsterdam Zuidoost",
-                website: "https://www.arkin.nl"
-            }
+            { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl" },
+            { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl" },
+            { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl" },
+            { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl" }
         ]
     },
     {
         naam: "Boomerang Zorg Jeugdhulp",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Tijnmuiden 34, 1046AL Amsterdam",
         telefoon: "020 358 67 39",
         website: "https://www.boomerangzorg.nl",
         aanmelden: "https://www.boomerangzorg.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugdhulp, gezinsbehandeling, samenwerking Boomerang Zorg en Multi Plus Zorg"
+        specialisatie: "Jeugdhulp, gezinsbehandeling, samenwerking Boomerang Zorg en Multi Plus Zorg"
     },
     {
         naam: "CareHouse",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Van Hallstraat 10, 1051 HH Amsterdam",
         telefoon: "088-1232660",
         website: "https://www.carehouse.nl",
         aanmelden: "https://www.carehouse.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking",
+        specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking",
         locaties: [
-            {
-                naam: "CareHouse Amsterdam Centrum",
-                adres: "Van Hallstraat 10, 1051 HH Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam Nieuw-West",
-                adres: "Johan Cruijff Boulevard 83, 1101 DM Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam Noord",
-                adres: "Strekkerweg 77, 1033 DA Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam IJburg",
-                adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam Oost",
-                adres: "President Brandstraat 32, 1091 XH Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam West",
-                adres: "Baarsjesweg 224, 1058 AA Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam Zuid",
-                adres: "Admiraal de Ruijterweg 454, 1055 NG Amsterdam",
-                website: "https://www.carehouse.nl"
-            },
-            {
-                naam: "CareHouse Amsterdam Zuidoost",
-                adres: "Bijlmerdreef 1169, 1103 TT Amsterdam",
-                website: "https://www.carehouse.nl"
-            }
+            { naam: "CareHouse Amsterdam Centrum", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Nieuw-West", adres: "Johan Cruijff Boulevard 83, 1101 DM Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Zuid", adres: "Admiraal de Ruijterweg 454, 1055 NG Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.carehouse.nl" }
         ]
     },
     {
-        naam: "Cordaan",
-        type: "Hoogspecialistische Jeugdhulp",
-        adres: "De Ruijterkade 7, 1013 AA Amsterdam",
-        telefoon: "(020) 630 62 62",
-        website: "https://www.cordaan.nl/jeugd/",
-        aanmelden: "https://www.cordaan.nl/jeugd/",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, verstandelijke beperking, ontwikkelingsproblematiek, complexe problematiek"
-    },
-    {
         naam: "De Opgroeipraktijk",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Strekkerweg 77, 1033 DA Amsterdam",
         telefoon: "088-1232680",
         website: "https://www.deopgroeipraktijk.nl",
         aanmelden: "https://www.deopgroeipraktijk.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, opvoedondersteuning, gezinsbehandeling",
+        specialisatie: "Jeugd GGZ, opvoedondersteuning, gezinsbehandeling",
         locaties: [
-            {
-                naam: "De Opgroeipraktijk Amsterdam Noord",
-                adres: "Strekkerweg 77, 1033 DA Amsterdam",
-                website: "https://www.deopgroeipraktijk.nl"
-            },
-            {
-                naam: "De Opgroeipraktijk Amsterdam IJburg",
-                adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam",
-                website: "https://www.deopgroeipraktijk.nl"
-            },
-            {
-                naam: "De Opgroeipraktijk Amsterdam Nieuw West",
-                adres: "Osdorpplein 470, 1068 SZ Amsterdam",
-                website: "https://www.deopgroeipraktijk.nl"
-            },
-            {
-                naam: "De Opgroeipraktijk Amsterdam Oost",
-                adres: "President Brandstraat 32, 1091 XH Amsterdam",
-                website: "https://www.deopgroeipraktijk.nl"
-            },
-            {
-                naam: "De Opgroeipraktijk Amsterdam West",
-                adres: "Van Hallstraat 10, 1051 HH Amsterdam",
-                website: "https://www.deopgroeipraktijk.nl"
-            }
+            { naam: "De Opgroeipraktijk Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
+            { naam: "De Opgroeipraktijk Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
+            { naam: "De Opgroeipraktijk Amsterdam Nieuw West", adres: "Osdorpplein 470, 1068 SZ Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
+            { naam: "De Opgroeipraktijk Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
+            { naam: "De Opgroeipraktijk Amsterdam West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.deopgroeipraktijk.nl" }
         ]
     },
     {
         naam: "FamilySupporters",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam",
         telefoon: "085-0250099",
         website: "https://familysupporters.nl",
         aanmelden: "https://familysupporters.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, gezinsbehandeling, jeugdhulp",
+        specialisatie: "Opvoedondersteuning, gezinsbehandeling, jeugdhulp",
         locaties: [
-            {
-                naam: "FamilySupporters Amsterdam",
-                adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam",
-                website: "https://familysupporters.nl"
-            },
-            {
-                naam: "FamilySupporters Amstelveen",
-                adres: "Veenplaats 19, 1182 JW Amstelveen",
-                website: "https://familysupporters.nl"
-            }
+            { naam: "FamilySupporters Amsterdam", adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam", website: "https://familysupporters.nl" },
+            { naam: "FamilySupporters Amstelveen", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://familysupporters.nl" }
         ]
     },
     {
         naam: "Fibbe",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Johan Cruijff Boulevard 83, 1101DM Amsterdam",
         telefoon: "06-23744058",
         website: "https://fibbescl.nl",
         aanmelden: "https://fibbescl.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, gezinstherapie, traumabehandeling"
+        specialisatie: "Jeugd GGZ, gezinstherapie, traumabehandeling"
     },
     {
         naam: "Groei&glunder",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Houtmankade 334-2, 1013 RR Amsterdam",
         telefoon: "020-2615085",
         website: "https://www.groeienglunder.nl",
         aanmelden: "https://groeienglunder.nl/59-2/",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning"
+        specialisatie: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning"
     },
     {
-        naam: "iHUB",
-        type: "Hoogspecialistische Jeugdhulp",
+        naam: "iHUB Care Express",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
+        adres: "Nassaukade 162H, 1053 LL Amsterdam",
         telefoon: "020 555 83 00",
         website: "https://ihub.nl",
         aanmelden: "https://www.ihub.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek",
+        specialisatie: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek"
+    },
+    {
+        naam: "iHUB Familiezorg",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
+        adres: "Strekkerweg 77, 1033 DA Amsterdam",
+        telefoon: "020 555 83 00",
+        website: "https://www.ihub.nl",
+        aanmelden: "https://www.ihub.nl/aanmelden",
+        leeftijd: "0-23 jaar",
+        specialisatie: "Gezinstherapie, systeemtherapie, complexe problematiek",
         locaties: [
-            {
-                naam: "iHUB Care Express",
-                adres: "Nassaukade 162H, 1053 LL Amsterdam",
-                website: "https://ihub.nl"
-            },
-            {
-                naam: "iHUB Amsterdam-Noord",
-                adres: "Strekkerweg 77, 1033 DA Amsterdam",
-                website: "https://www.ihub.nl"
-            },
-            {
-                naam: "iHUB Amsterdam-Oost",
-                adres: "President Brandstraat 32, 1091 XH Amsterdam",
-                website: "https://www.ihub.nl"
-            },
-            {
-                naam: "iHUB Amsterdam-West",
-                adres: "Van Hallstraat 10, 1051 HH Amsterdam",
-                website: "https://www.ihub.nl"
-            },
-            {
-                naam: "iHUB Amsterdam-Zuidoost",
-                adres: "Bijlmerdreef 1169, 1103 TT Amsterdam",
-                website: "https://www.ihub.nl"
-            },
-            {
-                naam: "iHUB Amstelveen (Amstelland)",
-                adres: "Veenplaats 19, 1182 JW Amstelveen",
-                website: "https://www.ihub.nl"
-            }
+            { naam: "iHUB Amsterdam-Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.ihub.nl" },
+            { naam: "iHUB Amsterdam-Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.ihub.nl" },
+            { naam: "iHUB Amsterdam-West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.ihub.nl" },
+            { naam: "iHUB Amsterdam-Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.ihub.nl" },
+            { naam: "iHUB Amstelveen (Amstelland)", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://www.ihub.nl" }
         ]
     },
     {
         naam: "Invivo Kids",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Veenplaats 19, 1182JW Amstelveen",
         telefoon: "020-7670069",
         website: "https://www.invivokids.nl/",
         aanmelden: "https://www.invivokids.nl/voor-u/voor-verwijzers/",
         leeftijd: "0-18 jaar",
-        specialisaties: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen"
+        specialisatie: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen"
     },
     {
         naam: "Leger des Heils",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Hilversumstraat 338, 1024MB Amsterdam",
         telefoon: "020 6301111",
         website: "https://www.legerdesheils.nl/",
         aanmelden: "https://www.legerdesheils.nl/zorglocaties",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek"
+        specialisatie: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek"
     },
     {
         naam: "Leveo",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam",
         telefoon: "088-1232660",
         website: "https://www.leveo.nl",
         aanmelden: "https://www.leveo.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, complexe problematiek, gezinsbehandeling, systeemtherapie"
+        specialisatie: "Jeugd GGZ, complexe problematiek, gezinsbehandeling, systeemtherapie"
     },
     {
         naam: "Levvel",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Fred. Roeskestraat 73, 1076 EC Amsterdam",
         telefoon: "088-0547001",
         website: "https://www.levvel.nl",
         aanmelden: "https://www.levvel.nl/formulier/jongere-aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie"
-    },
-    {
-        naam: "OKT Amsterdam",
-        type: "Ouder- en Kindteam",
-        telefoon: "020-5555961",
-        website: "https://oktamsterdam.nl",
-        aanmelden: "https://oktamsterdam.nl/contact/",
-        leeftijd: "0-23 jaar",
-        specialisaties: "Opvoedondersteuning, jeugdhulp, preventieve zorg",
-        locaties: [
-            {
-                naam: "OKT Centrum",
-                adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Zuidoost",
-                adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT West",
-                adres: "Baarsjesweg 224, 1058 AA Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Oost",
-                adres: "Eerste Oosterparkstraat 88, 1091 GZ Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Noord",
-                adres: "Hilversumstraat 338, 1024MB Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Nieuw-West",
-                adres: "Johan Cruijff Boulevard 83, 1101DM Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Noord-Oost",
-                adres: "Modemstraat 20C, 1033 RW Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Zuid",
-                adres: "Admiraal de Ruijterweg 454, 1055NG Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Zuid-Oost",
-                adres: "Houtmankade 334-2, 1013 RR Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Westpoort",
-                adres: "Van Hallstraat 10, 1051HH Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Zuid-West",
-                adres: "Overschiestraat 57, 1062HN Amsterdam",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Amstelveen",
-                adres: "Veenplaats 19, 1182JW Amstelveen",
-                website: "https://oktamsterdam.nl"
-            },
-            {
-                naam: "OKT Amstelveen-Zuid",
-                adres: "Doctor Willem Dreesweg 2, 1185 VB Amstelveen",
-                website: "https://oktamsterdam.nl"
-            }
-        ]
+        specialisatie: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie"
     },
     {
         naam: "Philadelphia",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Jekerstraat 84, 1078MG Amsterdam",
         telefoon: "088-0830",
         website: "https://www.philadelphia.nl",
         aanmelden: "https://www.philadelphia.nl/aanmelden",
         leeftijd: "0-19 jaar",
-        specialisaties: "Jeugdzorg, verstandelijke beperking, ontwikkelingsproblematiek"
+        specialisatie: "Jeugdzorg, verstandelijke beperking, ontwikkelingsproblematiek"
     },
     {
         naam: "PsyGRO",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Doctor Willem Dreesweg 2, 1185 VB Amstelveen",
         telefoon: "0299-607459",
         website: "https://www.psygro.nl/",
         aanmelden: "https://inter-psy.nl/verwijzers/",
         leeftijd: "4-18 jaar",
-        specialisaties: "Jeugd GGZ, angst, depressie, trauma"
+        specialisatie: "Jeugd GGZ, angst, depressie, trauma"
     },
     {
         naam: "RIOzorg",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam",
         telefoon: "026 820 02 08",
-        website: "https://riozorg.nl",
+        website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/",
         aanmelden: "https://riozorg.secuform.nl",
         leeftijd: "4-18 jaar",
-        specialisaties: "Concentratieproblemen, AD(H)D, Gedragsproblemen, Autisme, Trauma, Angst, Tics, Dwang, Somberheid",
+        specialisatie: "Concentratieproblemen, AD(H)D, Gedragsproblemen, Autisme, Trauma, Angst, Tics, Dwang, Somberheid",
         locaties: [
-            {
-                naam: "RIOzorg Amsterdam Zuidoost",
-                adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam",
-                website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/"
-            },
-            {
-                naam: "RIOzorg Weesp",
-                adres: "C.J. van Houtenlaan 1G, 1381 CN Weesp",
-                website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/"
-            }
+            { naam: "RIOzorg Amsterdam Zuidoost", adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/" },
+            { naam: "RIOzorg Weesp", adres: "C.J. van Houtenlaan 1G, 1381 CN Weesp", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/" }
         ]
     },
     {
         naam: "STEP",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Amsterdam",
         website: "https://stepjeugdhulp.nl",
         aanmelden: "https://stepjeugdhulp.nl/#aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Enkelvoudige specialistische jeugdhulp"
+        specialisatie: "Enkelvoudige specialistische jeugdhulp"
     },
     {
         naam: "Stichting JA",
-        type: "Hoogspecialistische Jeugdhulp",
+        type: "Hoogspecialistische Jeugdhulp (HSJH)",
         adres: "Eerste Oosterparkstraat 88, 1091 GZ Amsterdam",
         telefoon: "020-6659593",
         website: "https://www.ja-amsterdam.nl",
         aanmelden: "https://aanmelden.ja-amsterdam.nl",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, gezinstherapie, traumabehandeling, psychosociaal functioneren, gezin en opvoeding"
+        specialisatie: "Jeugd GGZ, gezinstherapie, traumabehandeling, psychosociaal functioneren, gezin en opvoeding"
     },
     {
         naam: "Terminal 18",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Admiraal de Ruijterweg 454, 1055NG Amsterdam",
         telefoon: "020-3088717",
         website: "https://www.terminal18.nl",
         aanmelden: "https://www.terminal18.nl/aanmelden",
         leeftijd: "12-18 jaar",
-        specialisaties: "Jeugdhulp, jongerencoaching, toekomstbegeleiding"
+        specialisatie: "Jeugdhulp, jongerencoaching, toekomstbegeleiding"
     },
     {
         naam: "Timon",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Modemstraat 20C, 1033 RW Amsterdam",
         telefoon: "06-11793785",
         website: "https://www.timon.nl",
         aanmelden: "https://www.timon.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugdhulp, pleegzorg, gezinsbegeleiding"
+        specialisatie: "Jeugdhulp, pleegzorg, gezinsbegeleiding"
     },
     {
         naam: "Youz",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Overschiestraat 57, 1062HN Amsterdam",
         telefoon: "088-3588330",
         website: "https://youz.nl/",
         aanmelden: "https://www.youz.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisaties: "Jeugd GGZ, verslaving, gedragsproblemen, autisme"
+        specialisatie: "Jeugd GGZ, verslaving, gedragsproblemen, autisme"
     },
     {
         naam: "Zigzag Kindzorg",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Albardagracht 1, 1063 NN Amsterdam",
         telefoon: "020 49 41 296",
         website: "https://www.zigzagkindzorg.nl",
         aanmelden: "https://www.zigzagkindzorg.nl/aanmelden",
         leeftijd: "0-7 jaar",
-        specialisaties: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking, ergotherapie, logopedie, fysiotherapie",
+        specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking, ergotherapie, logopedie, fysiotherapie",
         locaties: [
-            {
-                naam: "Zigzag Kindzorg Amsterdam-West",
-                adres: "Albardagracht 1, 1063 NN Amsterdam",
-                website: "https://www.zigzagkindzorg.nl"
-            },
-            {
-                naam: "Zigzag Kindzorg Amsterdam-Zuid",
-                adres: "Amsteldijk 196, 1079 LK Amsterdam",
-                website: "https://www.zigzagkindzorg.nl"
-            }
+            { naam: "Zigzag Kindzorg Amsterdam-West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://www.zigzagkindzorg.nl" },
+            { naam: "Zigzag Kindzorg Amsterdam-Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://www.zigzagkindzorg.nl" }
         ]
     },
     {
         naam: "Kabouterhuis",
-        type: "Enkelvoudige Specialistische Jeugdhulp",
+        type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
+        adres: "Marne 127, 1186 PJ Amstelveen",
+        telefoon: "020 810 03 60",
         website: "https://kabouterhuis.nl",
         aanmelden: "https://kabouterhuis.nl/over-ons/contact/vestigingen/aanmelden/",
         leeftijd: "0-7 jaar",
-        specialisaties: "Autisme, ADHD, ontwikkelingsstoornissen, onderzoek, hulp thuis, kinderopvang en school, groepsbehandeling, therapie",
+        specialisatie: "Autisme, ADHD, ontwikkelingsstoornissen, onderzoek, hulp thuis, kinderopvang en school, groepsbehandeling, therapie",
         locaties: [
-            {
-                naam: "Kabouterhuis Amstelveen",
-                adres: "Marne 127, 1186 PJ Amstelveen",
-                telefoon: "020 810 03 60",
-                website: "https://kabouterhuis.nl"
-            },
-            {
-                naam: "Kabouterhuis Amsterdam Zuid",
-                adres: "Amsteldijk 196, 1079 LK Amsterdam",
-                telefoon: "020 644 53 51",
-                website: "https://kabouterhuis.nl"
-            },
-            {
-                naam: "Kabouterhuis Amsterdam Noord",
-                adres: "Kopjachtplein 20, 1034 JG Amsterdam",
-                telefoon: "020 630 46 30",
-                website: "https://kabouterhuis.nl"
-            },
-            {
-                naam: "Kabouterhuis Amsterdam West",
-                adres: "Albardagracht 1, 1063 NN Amsterdam",
-                telefoon: "020 613 85 85",
-                website: "https://kabouterhuis.nl"
-            },
-            {
-                naam: "Kabouterhuis Amsterdam Zuidoost",
-                adres: "Leksmondplein 28, 1108 EL Amsterdam",
-                telefoon: "020 453 01 91",
-                website: "https://kabouterhuis.nl"
-            }
+            { naam: "Kabouterhuis Amstelveen", adres: "Marne 127, 1186 PJ Amstelveen", website: "https://kabouterhuis.nl" },
+            { naam: "Kabouterhuis Amsterdam Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://kabouterhuis.nl" },
+            { naam: "Kabouterhuis Amsterdam Noord", adres: "Kopjachtplein 20, 1034 JG Amsterdam", website: "https://kabouterhuis.nl" },
+            { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl" },
+            { naam: "Kabouterhuis Amsterdam Zuidoost", adres: "Leksmondplein 28, 1108 EL Amsterdam", website: "https://kabouterhuis.nl" }
         ]
     }
 ];

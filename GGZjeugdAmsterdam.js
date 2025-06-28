@@ -631,6 +631,8 @@ function voegMarkersEnInfoWindowsToe() {
             voegMarkerToe(instelling, instelling);
         }
     });
+
+    console.log("Aantal instellingen:", zorginstellingenData.length);
 }
 
 // Functie om een enkele marker toe te voegen
@@ -639,14 +641,14 @@ function voegMarkerToe(locatie, instelling) {
 
     // Bepaal de kleur op basis van het type
     let kleur;
-    if (instelling.type.includes("OKT") || instelling.type.includes("Ouder- en Kindteam")) {
-        kleur = "#4CAF50"; // Groen voor OKT
-    } else if (instelling.type.includes("Enkelvoudige Specialistische Jeugdhulp")) {
-        kleur = "#FF9800"; // Oranje voor ESJH
-    } else if (instelling.type.includes("Hoogspecialistische Jeugdhulp")) {
-        kleur = "#F44336"; // Rood voor HSJH
+    if (instelling.type.includes('OKT') || instelling.type.includes('Ouder- en Kindteam')) {
+        kleur = '#4CAF50'; // Groen voor OKT
+    } else if (instelling.type.includes('Enkelvoudige Specialistische Jeugdhulp')) {
+        kleur = '#FF9800'; // Oranje voor ESJH
+    } else if (instelling.type.includes('Hoogspecialistische Jeugdhulp')) {
+        kleur = '#F44336'; // Rood voor HSJH
     } else {
-        kleur = "#9E9E9E"; // Grijs voor overige
+        kleur = '#9E9E9E'; // Grijs voor overige
     }
     const markerIcon = {
         path: google.maps.SymbolPath.CIRCLE,
@@ -677,6 +679,8 @@ function voegMarkerToe(locatie, instelling) {
         infoWindow.open(map, marker);
         currentInfoWindow = infoWindow;
     });
+
+    console.log("Marker toevoegen:", locatie.positie, instelling.naam);
 
     markers.push(marker);
 }
@@ -785,8 +789,11 @@ function updateResultatenTeller(aantal) {
 
 // Functie voor het zoeken van zorginstellingen
 function zoekZorginstellingen() {
-    const zoekTerm = document.getElementById('zoekbalk').value.toLowerCase();
-    
+    if (!document.getElementById('zoekbalk')) return;
+
+    const zoekbalk = document.getElementById('zoekbalk');
+    const zoekTerm = zoekbalk.value.toLowerCase();
+
     // Filter zorginstellingen op basis van zoekterm
     const gefilterd = zorginstellingenData.filter(instelling => {
         // Check naam

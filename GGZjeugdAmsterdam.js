@@ -19,9 +19,9 @@ const zorginstellingenData = [
         specialisatie: "Gezinstherapie, eetstoornissen, complexe problematiek",
         positie: { lat: 52.370216, lng: 4.873425 },        locaties: [
             { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.370216, lng: 4.873425 } },
-            { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl" },
-            { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl" },
-            { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl" }
+            { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl", positie: { lat: 52.334722, lng: 4.962778 } },
+            { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.313889, lng: 4.948889 } }
         ]
     },
     {
@@ -46,13 +46,13 @@ const zorginstellingenData = [
         specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking",
         locaties: [
             { naam: "CareHouse Amsterdam Centrum", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.370216, lng: 4.873425 } },
-            { naam: "CareHouse Amsterdam Nieuw-West", adres: "Johan Cruijff Boulevard 83, 1101 DM Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam Zuid", adres: "Admiraal de Ruijterweg 454, 1055 NG Amsterdam", website: "https://www.carehouse.nl" },
-            { naam: "CareHouse Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.carehouse.nl" }
+            { naam: "CareHouse Amsterdam Nieuw-West", adres: "Johan Cruijff Boulevard 83, 1101 DM Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.355556, lng: 4.785556 } },
+            { naam: "CareHouse Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "CareHouse Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.360833, lng: 4.998889 } },
+            { naam: "CareHouse Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.357778, lng: 4.927778 } },
+            { naam: "CareHouse Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.370216, lng: 4.873425 } },
+            { naam: "CareHouse Amsterdam Zuid", adres: "Admiraal de Ruijterweg 454, 1055 NG Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.352778, lng: 4.858889 } },
+            { naam: "CareHouse Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.313889, lng: 4.948889 } }
         ]
     },
     {
@@ -65,11 +65,11 @@ const zorginstellingenData = [
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugd GGZ, opvoedondersteuning, gezinsbehandeling",
         locaties: [
-            { naam: "De Opgroeipraktijk Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
-            { naam: "De Opgroeipraktijk Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
-            { naam: "De Opgroeipraktijk Amsterdam Nieuw West", adres: "Osdorpplein 470, 1068 SZ Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
-            { naam: "De Opgroeipraktijk Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.deopgroeipraktijk.nl" },
-            { naam: "De Opgroeipraktijk Amsterdam West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.deopgroeipraktijk.nl" }
+            { naam: "De Opgroeipraktijk Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.deopgroeipraktijk.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "De Opgroeipraktijk Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.deopgroeipraktijk.nl", positie: { lat: 52.360833, lng: 4.998889 } },
+            { naam: "De Opgroeipraktijk Amsterdam Nieuw West", adres: "Osdorpplein 470, 1068 SZ Amsterdam", website: "https://www.deopgroeipraktijk.nl", positie: { lat: 52.355556, lng: 4.785556 } },
+            { naam: "De Opgroeipraktijk Amsterdam Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.deopgroeipraktijk.nl", positie: { lat: 52.357778, lng: 4.927778 } },
+            { naam: "De Opgroeipraktijk Amsterdam West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.deopgroeipraktijk.nl", positie: { lat: 52.370216, lng: 4.873425 } }
         ]
     },
     {
@@ -82,8 +82,8 @@ const zorginstellingenData = [
         leeftijd: "0-23 jaar",
         specialisatie: "Opvoedondersteuning, gezinsbehandeling, jeugdhulp",
         locaties: [
-            { naam: "FamilySupporters Amsterdam", adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam", website: "https://familysupporters.nl" },
-            { naam: "FamilySupporters Amstelveen", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://familysupporters.nl" }
+            { naam: "FamilySupporters Amsterdam", adres: "Burgemeester Eliasstraat 1, 1055 NA Amsterdam", website: "https://familysupporters.nl", positie: { lat: 52.352778, lng: 4.858889 } },
+            { naam: "FamilySupporters Amstelveen", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://familysupporters.nl", positie: { lat: 52.308889, lng: 4.863889 } }
         ]
     },
     {
@@ -91,7 +91,7 @@ const zorginstellingenData = [
         type: "Enkelvoudige Specialistische Jeugdhulp (ESJH)",
         adres: "Johan Cruijff Boulevard 83, 1101DM Amsterdam",
         telefoon: "06-23744058",
-        website: "https://fibbescl.nl",
+        website: "https://fibbescl.nl", positie: { lat: 52.355556, lng: 4.785556 },
         aanmelden: "https://fibbescl.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugd GGZ, gezinstherapie, traumabehandeling"
@@ -104,7 +104,8 @@ const zorginstellingenData = [
         website: "https://www.groeienglunder.nl",
         aanmelden: "https://groeienglunder.nl/59-2/",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning"
+        specialisatie: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning",
+        positie: { lat: 52.370216, lng: 4.873425 }
     },
     {
         naam: "iHUB Care Express",
@@ -114,7 +115,8 @@ const zorginstellingenData = [
         website: "https://ihub.nl",
         aanmelden: "https://www.ihub.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek"
+        specialisatie: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek",
+        positie: { lat: 52.370216, lng: 4.873425 }
     },
     {
         naam: "iHUB Familiezorg",
@@ -125,12 +127,13 @@ const zorginstellingenData = [
         aanmelden: "https://www.ihub.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "Gezinstherapie, systeemtherapie, complexe problematiek",
+        positie: { lat: 52.395833, lng: 4.933889 },
         locaties: [
-            { naam: "iHUB Amsterdam-Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.ihub.nl" },
-            { naam: "iHUB Amsterdam-Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.ihub.nl" },
-            { naam: "iHUB Amsterdam-West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.ihub.nl" },
-            { naam: "iHUB Amsterdam-Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.ihub.nl" },
-            { naam: "iHUB Amstelveen (Amstelland)", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://www.ihub.nl" }
+            { naam: "iHUB Amsterdam-Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.ihub.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "iHUB Amsterdam-Oost", adres: "President Brandstraat 32, 1091 XH Amsterdam", website: "https://www.ihub.nl", positie: { lat: 52.357778, lng: 4.927778 } },
+            { naam: "iHUB Amsterdam-West", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.ihub.nl", positie: { lat: 52.370216, lng: 4.873425 } },
+            { naam: "iHUB Amsterdam-Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.ihub.nl", positie: { lat: 52.313889, lng: 4.948889 } },
+            { naam: "iHUB Amstelveen (Amstelland)", adres: "Veenplaats 19, 1182 JW Amstelveen", website: "https://www.ihub.nl", positie: { lat: 52.308889, lng: 4.863889 } }
         ]
     },
     {
@@ -141,7 +144,8 @@ const zorginstellingenData = [
         website: "https://www.invivokids.nl/",
         aanmelden: "https://www.invivokids.nl/voor-u/voor-verwijzers/",
         leeftijd: "0-18 jaar",
-        specialisatie: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen"
+        specialisatie: "Jeugd GGZ, ontwikkelingsproblematiek, gedragsproblemen",
+        positie: { lat: 52.308889, lng: 4.863889 }
     },
     {
         naam: "Leger des Heils",
@@ -151,7 +155,8 @@ const zorginstellingenData = [
         website: "https://www.legerdesheils.nl/",
         aanmelden: "https://www.legerdesheils.nl/zorglocaties",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek"
+        specialisatie: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek",
+        positie: { lat: 52.395833, lng: 4.933889 }
     },
     {
         naam: "Leveo",
@@ -161,7 +166,8 @@ const zorginstellingenData = [
         website: "https://www.leveo.nl",
         aanmelden: "https://www.leveo.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugd GGZ, complexe problematiek, gezinsbehandeling, systeemtherapie"
+        specialisatie: "Jeugd GGZ, complexe problematiek, gezinsbehandeling, systeemtherapie",
+        positie: { lat: 52.352778, lng: 4.858889 }
     },
     {
         naam: "Levvel",
@@ -171,7 +177,8 @@ const zorginstellingenData = [
         website: "https://www.levvel.nl",
         aanmelden: "https://www.levvel.nl/formulier/jongere-aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie"
+        specialisatie: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie",
+        positie: { lat: 52.352778, lng: 4.858889 }
     },
     {
         naam: "Philadelphia",
@@ -181,7 +188,8 @@ const zorginstellingenData = [
         website: "https://www.philadelphia.nl",
         aanmelden: "https://www.philadelphia.nl/aanmelden",
         leeftijd: "0-19 jaar",
-        specialisatie: "Jeugdzorg, verstandelijke beperking, ontwikkelingsproblematiek"
+        specialisatie: "Jeugdzorg, verstandelijke beperking, ontwikkelingsproblematiek",
+        positie: { lat: 52.357778, lng: 4.927778 }
     },
     {
         naam: "PsyGRO",
@@ -191,7 +199,8 @@ const zorginstellingenData = [
         website: "https://www.psygro.nl/",
         aanmelden: "https://inter-psy.nl/verwijzers/",
         leeftijd: "4-18 jaar",
-        specialisatie: "Jeugd GGZ, angst, depressie, trauma"
+        specialisatie: "Jeugd GGZ, angst, depressie, trauma",
+        positie: { lat: 52.308889, lng: 4.863889 }
     },
     {
         naam: "RIOzorg",
@@ -202,9 +211,10 @@ const zorginstellingenData = [
         aanmelden: "https://riozorg.secuform.nl",
         leeftijd: "4-18 jaar",
         specialisatie: "Concentratieproblemen, AD(H)D, Gedragsproblemen, Autisme, Trauma, Angst, Tics, Dwang, Somberheid",
+        positie: { lat: 52.313889, lng: 4.948889 },
         locaties: [
-            { naam: "RIOzorg Amsterdam Zuidoost", adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/" },
-            { naam: "RIOzorg Weesp", adres: "C.J. van Houtenlaan 1G, 1381 CN Weesp", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/" }
+            { naam: "RIOzorg Amsterdam Zuidoost", adres: "Bijlmerdreef 1001-A, 1103 TW Amsterdam", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/", positie: { lat: 52.313889, lng: 4.948889 } },
+            { naam: "RIOzorg Weesp", adres: "C.J. van Houtenlaan 1G, 1381 CN Weesp", website: "https://riozorg.nl/locatie/amsterdam-zuidoost-en-weesp/", positie: { lat: 52.308889, lng: 5.043889 } }
         ]
     },
     {
@@ -214,7 +224,8 @@ const zorginstellingenData = [
         website: "https://stepjeugdhulp.nl",
         aanmelden: "https://stepjeugdhulp.nl/#aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Enkelvoudige specialistische jeugdhulp"
+        specialisatie: "Enkelvoudige specialistische jeugdhulp",
+        positie: { lat: 52.3676, lng: 4.9041 }
     },
     {
         naam: "Stichting JA",
@@ -224,7 +235,8 @@ const zorginstellingenData = [
         website: "https://www.ja-amsterdam.nl",
         aanmelden: "https://aanmelden.ja-amsterdam.nl",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugd GGZ, gezinstherapie, traumabehandeling, psychosociaal functioneren, gezin en opvoeding"
+        specialisatie: "Jeugd GGZ, gezinstherapie, traumabehandeling, psychosociaal functioneren, gezin en opvoeding",
+        positie: { lat: 52.357778, lng: 4.927778 }
     },
     {
         naam: "Terminal 18",
@@ -234,7 +246,8 @@ const zorginstellingenData = [
         website: "https://www.terminal18.nl",
         aanmelden: "https://www.terminal18.nl/aanmelden",
         leeftijd: "12-18 jaar",
-        specialisatie: "Jeugdhulp, jongerencoaching, toekomstbegeleiding"
+        specialisatie: "Jeugdhulp, jongerencoaching, toekomstbegeleiding",
+        positie: { lat: 52.352778, lng: 4.858889 }
     },
     {
         naam: "Timon",
@@ -244,7 +257,8 @@ const zorginstellingenData = [
         website: "https://www.timon.nl",
         aanmelden: "https://www.timon.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugdhulp, pleegzorg, gezinsbegeleiding"
+        specialisatie: "Jeugdhulp, pleegzorg, gezinsbegeleiding",
+        positie: { lat: 52.395833, lng: 4.933889 }
     },
     {
         naam: "Youz",
@@ -254,7 +268,8 @@ const zorginstellingenData = [
         website: "https://youz.nl/",
         aanmelden: "https://www.youz.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugd GGZ, verslaving, gedragsproblemen, autisme"
+        specialisatie: "Jeugd GGZ, verslaving, gedragsproblemen, autisme",
+        positie: { lat: 52.352778, lng: 4.858889 }
     },
     {
         naam: "Zigzag Kindzorg",
@@ -266,8 +281,8 @@ const zorginstellingenData = [
         leeftijd: "0-7 jaar",
         specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking, ergotherapie, logopedie, fysiotherapie",
         locaties: [
-            { naam: "Zigzag Kindzorg Amsterdam-West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://www.zigzagkindzorg.nl" },
-            { naam: "Zigzag Kindzorg Amsterdam-Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://www.zigzagkindzorg.nl" }
+            { naam: "Zigzag Kindzorg Amsterdam-West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://www.zigzagkindzorg.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Zigzag Kindzorg Amsterdam-Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://www.zigzagkindzorg.nl", positie: { lat: 52.352778, lng: 4.858889 } }
         ]
     },
     {

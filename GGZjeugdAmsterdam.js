@@ -480,7 +480,7 @@ function vulZorginstellingenTabel(instellingen) {
                     <td>${locatie.adres || instelling.adres || ''}</td>
                     <td>${instelling.telefoon || ''}</td>
                     <td>${instelling.leeftijd || ''}</td>
-                    <td>${instelling.specialisaties || ''}</td>
+                    <td>${instelling.specialisatie || ''}</td>
                     <td>
                         ${websiteLink ? `<a href="${websiteLink}" target="_blank" class="btn btn-primary btn-sm">Website</a>` : ''}
                         ${aanmeldLink && aanmeldLink !== websiteLink ? `<a href="${aanmeldLink}" target="_blank" class="btn btn-success btn-sm">Aanmelden/Verwijzen</a>` : ''}
@@ -500,7 +500,7 @@ function vulZorginstellingenTabel(instellingen) {
                 <td>${instelling.adres || ''}</td>
                 <td>${instelling.telefoon || ''}</td>
                 <td>${instelling.leeftijd || ''}</td>
-                <td>${instelling.specialisaties || ''}</td>
+                <td>${instelling.specialisatie || ''}</td>
                 <td>
                     ${websiteLink ? `<a href="${websiteLink}" target="_blank" class="btn btn-primary btn-sm">Website</a>` : ''}
                     ${aanmeldLink && aanmeldLink !== websiteLink ? `<a href="${aanmeldLink}" target="_blank" class="btn btn-success btn-sm">Aanmelden/Verwijzen</a>` : ''}
@@ -639,20 +639,15 @@ function voegMarkerToe(locatie, instelling) {
 
     // Bepaal de kleur op basis van het type
     let kleur;
-    switch(instelling.type) {
-        case 'OKT':
-            kleur = '#4CAF50'; // Groen voor OKT
-            break;
-        case 'Enkelvoudige Specialistische Jeugdhulp':
-            kleur = '#FF9800'; // Oranje voor ESJH
-            break;
-        case 'Hoogspecialistische Jeugdhulp':
-            kleur = '#F44336'; // Rood voor HSJH
-            break;
-        default:
-            kleur = '#9E9E9E'; // Grijs voor overige
+    if (instelling.type.includes("OKT") || instelling.type.includes("Ouder- en Kindteam")) {
+        kleur = "#4CAF50"; // Groen voor OKT
+    } else if (instelling.type.includes("Enkelvoudige Specialistische Jeugdhulp")) {
+        kleur = "#FF9800"; // Oranje voor ESJH
+    } else if (instelling.type.includes("Hoogspecialistische Jeugdhulp")) {
+        kleur = "#F44336"; // Rood voor HSJH
+    } else {
+        kleur = "#9E9E9E"; // Grijs voor overige
     }
-
     const markerIcon = {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: kleur,
@@ -702,7 +697,7 @@ function maakInfoWindowContent(locatie, instelling) {
             <p><strong>Adres:</strong> ${locatie.adres || instelling.adres}</p>
             <p><strong>Telefoon:</strong> ${telefoon}</p>
             <p><strong>Leeftijd:</strong> ${instelling.leeftijd}</p>
-            ${instelling.specialisaties ? `<p><strong>Specialisaties:</strong> ${instelling.specialisaties}</p>` : ''}
+            ${instelling.specialisatie ? `<p><strong>Specialisaties:</strong> ${instelling.specialisatie}</p>` : ''}
             <div class="info-window-links">
                 ${websiteLink ? `<p><a href="${websiteLink}" target="_blank">Website</a></p>` : ''}
                 ${aanmeldLink && aanmeldLink !== websiteLink ? `<p><a href="${aanmeldLink}" target="_blank">Aanmelden/Verwijzen</a></p>` : ''}
@@ -803,8 +798,8 @@ function zoekZorginstellingen() {
         // Check adres
         if (instelling.adres && instelling.adres.toLowerCase().includes(zoekTerm)) return true;
         
-        // Check specialisaties
-        if (instelling.specialisaties && instelling.specialisaties.toLowerCase().includes(zoekTerm)) return true;
+        // Check specialisatie
+        if (instelling.specialisatie && instelling.specialisatie.toLowerCase().includes(zoekTerm)) return true;
         
         // Check locaties
         if (instelling.locaties) {

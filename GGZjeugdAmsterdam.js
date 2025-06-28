@@ -301,6 +301,259 @@ const zorginstellingenData = [
             { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.395833, lng: 4.933889 } },
             { naam: "Kabouterhuis Amsterdam Zuidoost", adres: "Leksmondplein 28, 1108 EL Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.385833, lng: 4.895833 } }
         ]
+    },
+    {
+        naam: "OKT Geuzenveld & Slotermeer",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Geuzenveld & Slotermeer, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3775, lng: 4.8050 }
+    },
+    {
+        naam: "OKT Osdorp",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Osdorp, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3625, lng: 4.7850 }
+    },
+    {
+        naam: "OKT De Aker & Nieuw-Sloten",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "De Aker & Nieuw-Sloten, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3525, lng: 4.7650 }
+    },
+    {
+        naam: "OKT Slotervaart",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Slotervaart, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3575, lng: 4.8300 }
+    },
+    {
+        naam: "OKT Gaasperdam",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Gaasperdam, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.2925, lng: 4.9800 }
+    },
+    {
+        naam: "OKT Watergraafsmeer",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Watergraafsmeer, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3575, lng: 4.9350 }
+    },
+    {
+        naam: "OKT Bos en Lommer",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Bos en Lommer, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3775, lng: 4.8600 }
+    },
+    {
+        naam: "OKT Oud West & De Baarsjes",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Oud West & De Baarsjes, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3625, lng: 4.8700 }
+    },
+    {
+        naam: "OKT Westerpark",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Westerpark, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3875, lng: 4.8750 }
+    },
+    {
+        naam: "OKT Zuid",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Zuid, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3525, lng: 4.8600 }
+    },
+    {
+        naam: "OKT Weesp & Driemond",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Weesp & Driemond, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3075, lng: 5.0450 }
+    },
+    {
+        naam: "OKT Centrum West",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Centrum West, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3750, lng: 4.8850 }
+    },
+    {
+        naam: "OKT Centrum Oost",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Centrum Oost, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3750, lng: 4.9150 }
+    },
+    {
+        naam: "OKT Noord Oost",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Noord Oost, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3925, lng: 4.9350 }
+    },
+    {
+        naam: "OKT Oud Noord",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Oud Noord, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3875, lng: 4.9250 }
+    },
+    {
+        naam: "OKT Noord West",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Noord West, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.4025, lng: 4.9150 }
+    },
+    {
+        naam: "OKT Oud Oost",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Oud Oost, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3575, lng: 4.9300 }
+    },
+    {
+        naam: "OKT Indische Buurt & Oostelijk Havengebied",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Indische Buurt & Oostelijk Havengebied, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3575, lng: 4.9450 }
+    },
+    {
+        naam: "OKT IJburg & Zeeburgereiland",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "IJburg & Zeeburgereiland, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3525, lng: 5.0000 }
+    },
+    {
+        naam: "OKT De Pijp & Rivierenbuurt",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "De Pijp & Rivierenbuurt, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3525, lng: 4.9000 }
+    },
+    {
+        naam: "OKT Buitenveldert & Zuidas",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Buitenveldert & Zuidas, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3325, lng: 4.8800 }
+    },
+    {
+        naam: "OKT Bijlmer Centrum",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Bijlmer Centrum, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3125, lng: 4.9500 }
+    },
+    {
+        naam: "OKT Bijlmer Oost",
+        type: "Ouder- en Kindteam (OKT)",
+        adres: "Bijlmer Oost, Amsterdam",
+        telefoon: "020 555 55 55",
+        website: "https://www.amsterdam.nl/okt",
+        aanmelden: "https://www.amsterdam.nl/okt/aanmelden",
+        leeftijd: "0-18 jaar",
+        specialisatie: "Basis jeugdhulp, opvoedondersteuning, preventieve zorg",
+        positie: { lat: 52.3125, lng: 4.9600 }
     }
 ];
 

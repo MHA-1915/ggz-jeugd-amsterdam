@@ -21,8 +21,8 @@ const zorginstellingenData = [
         locaties: [
             { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.36744, lng: 4.85713 } },
             { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl", positie: { lat: 52.334722, lng: 4.962778 } },
-            { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.41013, lng: 4.89213 } },
-            { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.31213, lng: 4.97213 } }
+            { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.313889, lng: 4.948889 } }
         ]
     },
     {

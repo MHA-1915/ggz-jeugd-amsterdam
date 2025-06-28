@@ -105,7 +105,7 @@ const zorginstellingenData = [
         aanmelden: "https://groeienglunder.nl/59-2/",
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugdhulp, ontwikkelingsstimulering, gedragsondersteuning",
-        positie: { lat: 52.370216, lng: 4.873425 }
+        positie: { lat: 52.378889, lng: 4.898889 }
     },
     {
         naam: "iHUB Care Express",
@@ -116,7 +116,7 @@ const zorginstellingenData = [
         aanmelden: "https://www.ihub.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugd GGZ, autisme, ADHD, gedragsproblemen, familiezorg, meervoudige complexe problematiek",
-        positie: { lat: 52.370216, lng: 4.873425 }
+        positie: { lat: 52.372778, lng: 4.881667 }
     },
     {
         naam: "iHUB Familiezorg",
@@ -156,7 +156,7 @@ const zorginstellingenData = [
         aanmelden: "https://www.legerdesheils.nl/zorglocaties",
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugdzorg, maatschappelijke ondersteuning, complexe problematiek",
-        positie: { lat: 52.395833, lng: 4.933889 }
+        positie: { lat: 52.402778, lng: 4.915556 }
     },
     {
         naam: "Leveo",
@@ -178,7 +178,7 @@ const zorginstellingenData = [
         aanmelden: "https://www.levvel.nl/formulier/jongere-aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "TOPggz: DAT (Dwang, angst en tics), trauma en gezin, complexe gedragsstoornissen en forensische jeugdpsychiatrie",
-        positie: { lat: 52.352778, lng: 4.858889 }
+        positie: { lat: 52.345556, lng: 4.872222 }
     },
     {
         naam: "Philadelphia",
@@ -269,7 +269,7 @@ const zorginstellingenData = [
         aanmelden: "https://www.youz.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "Jeugd GGZ, verslaving, gedragsproblemen, autisme",
-        positie: { lat: 52.352778, lng: 4.858889 }
+        positie: { lat: 52.365556, lng: 4.871667 }
     },
     {
         naam: "Zigzag Kindzorg",
@@ -281,7 +281,7 @@ const zorginstellingenData = [
         leeftijd: "0-7 jaar",
         specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking, ergotherapie, logopedie, fysiotherapie",
         locaties: [
-            { naam: "Zigzag Kindzorg Amsterdam-West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://www.zigzagkindzorg.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Zigzag Kindzorg Amsterdam-West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://www.zigzagkindzorg.nl", positie: { lat: 52.378889, lng: 4.856667 } },
             { naam: "Zigzag Kindzorg Amsterdam-Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://www.zigzagkindzorg.nl", positie: { lat: 52.352778, lng: 4.858889 } }
         ]
     },
@@ -295,10 +295,10 @@ const zorginstellingenData = [
         leeftijd: "0-7 jaar",
         specialisatie: "Autisme, ADHD, ontwikkelingsstoornissen, onderzoek, hulp thuis, kinderopvang en school, groepsbehandeling, therapie",
         positie: { lat: 52.308889, lng: 4.863889 },        locaties: [
-            { naam: "Kabouterhuis Amstelveen", adres: "Marne 127, 1186 PJ Amstelveen", website: "https://kabouterhuis.nl" },
-            { naam: "Kabouterhuis Amsterdam Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.308889, lng: 4.863889 } },
-            { naam: "Kabouterhuis Amsterdam Noord", adres: "Kopjachtplein 20, 1034 JG Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.352778, lng: 4.858889 } },
-            { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Kabouterhuis Amstelveen", adres: "Marne 127, 1186 PJ Amstelveen", website: "https://kabouterhuis.nl", positie: { lat: 52.308889, lng: 4.863889 } },
+            { naam: "Kabouterhuis Amsterdam Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.352778, lng: 4.858889 } },
+            { naam: "Kabouterhuis Amsterdam Noord", adres: "Kopjachtplein 20, 1034 JG Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.378889, lng: 4.856667 } },
             { naam: "Kabouterhuis Amsterdam Zuidoost", adres: "Leksmondplein 28, 1108 EL Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.385833, lng: 4.895833 } }
         ]
     },

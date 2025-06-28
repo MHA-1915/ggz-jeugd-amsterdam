@@ -1,3 +1,5 @@
+console.log("Script geladen");
+
 // Globale variabelen
 let map;
 let markers = [];
@@ -16,7 +18,7 @@ const zorginstellingenData = [
         leeftijd: "0-23 jaar",
         specialisatie: "Gezinstherapie, eetstoornissen, complexe problematiek",
         locaties: [
-            { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl" },
+            { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.370216, lng: 4.873425 } },
             { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl" },
             { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl" },
             { naam: "Arkin Amsterdam Zuidoost", adres: "Bijlmerdreef 1169, 1103 TT Amsterdam", website: "https://www.arkin.nl" }
@@ -30,7 +32,8 @@ const zorginstellingenData = [
         website: "https://www.boomerangzorg.nl",
         aanmelden: "https://www.boomerangzorg.nl/aanmelden",
         leeftijd: "0-23 jaar",
-        specialisatie: "Jeugdhulp, gezinsbehandeling, samenwerking Boomerang Zorg en Multi Plus Zorg"
+        specialisatie: "Jeugdhulp, gezinsbehandeling, samenwerking Boomerang Zorg en Multi Plus Zorg",
+        positie: { lat: 52.378889, lng: 4.856667 }
     },
     {
         naam: "CareHouse",
@@ -42,7 +45,7 @@ const zorginstellingenData = [
         leeftijd: "0-23 jaar",
         specialisatie: "Ontwikkelingsbeperkingen, autisme, ADHD, verstandelijke beperking",
         locaties: [
-            { naam: "CareHouse Amsterdam Centrum", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.carehouse.nl" },
+            { naam: "CareHouse Amsterdam Centrum", adres: "Van Hallstraat 10, 1051 HH Amsterdam", website: "https://www.carehouse.nl", positie: { lat: 52.370216, lng: 4.873425 } },
             { naam: "CareHouse Amsterdam Nieuw-West", adres: "Johan Cruijff Boulevard 83, 1101 DM Amsterdam", website: "https://www.carehouse.nl" },
             { naam: "CareHouse Amsterdam Noord", adres: "Strekkerweg 77, 1033 DA Amsterdam", website: "https://www.carehouse.nl" },
             { naam: "CareHouse Amsterdam IJburg", adres: "Franz Zieglerstraat 76, 1087 HN Amsterdam", website: "https://www.carehouse.nl" },
@@ -520,6 +523,8 @@ function vulZorginstellingenTabel(instellingen) {
 
 // Functie om de kaart te initialiseren
 function initMap() {
+    console.log("initMap aangeroepen");
+
     // Centreer de kaart op Amsterdam
     const amsterdam = { lat: 52.3676, lng: 4.9041 };
     
@@ -613,6 +618,8 @@ function voegLegendaToe() {
 
 // Functie om markers en info windows toe te voegen
 function voegMarkersEnInfoWindowsToe() {
+    console.log("Markers worden toegevoegd", zorginstellingenData.length);
+
     // Verwijder bestaande markers
     markers.forEach(marker => marker.setMap(null));
     markers = [];
@@ -637,9 +644,9 @@ function voegMarkersEnInfoWindowsToe() {
 
 // Functie om een enkele marker toe te voegen
 function voegMarkerToe(locatie, instelling) {
-    if (!locatie.positie) return;
+    if (!locatie.positie) { console.log("Geen positie voor:", instelling.naam); return; }
 
-    // Bepaal de kleur op basis van het type
+    console.log("Voeg marker toe voor:", instelling.naam, "op positie:", locatie.positie);    // Bepaal de kleur op basis van het type
     let kleur;
     if (instelling.type.includes('OKT') || instelling.type.includes('Ouder- en Kindteam')) {
         kleur = '#4CAF50'; // Groen voor OKT
@@ -680,7 +687,7 @@ function voegMarkerToe(locatie, instelling) {
         currentInfoWindow = infoWindow;
     });
 
-    console.log("Marker toevoegen:", locatie.positie, instelling.naam);
+    console.log("Marker:", locatie.positie, instelling.naam);
 
     markers.push(marker);
 }
@@ -862,7 +869,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isKaartPagina) {
         // De kaart wordt geïnitialiseerd door de maps-loader.js
         // Voeg markers toe aan de kaart
-        voegMarkersEnInfoWindowsToe();
         
         // Voeg event listeners toe voor de filters
         const filterForm = document.getElementById('filter-form');

@@ -17,7 +17,7 @@ const zorginstellingenData = [
         aanmelden: "https://www.arkin.nl/aanmelden",
         leeftijd: "0-23 jaar",
         specialisatie: "Gezinstherapie, eetstoornissen, complexe problematiek",
-        locaties: [
+        positie: { lat: 52.370216, lng: 4.873425 },        locaties: [
             { naam: "Arkin Amsterdam West", adres: "Baarsjesweg 224, 1058 AA Amsterdam", website: "https://www.arkin.nl", positie: { lat: 52.370216, lng: 4.873425 } },
             { naam: "Arkin Diemen", adres: "Wisselwerking 46-48, 1112 XR Diemen", website: "https://www.arkin.nl" },
             { naam: "Arkin Amsterdam Noord", adres: "Klaprozenweg 111, 1033 NN Amsterdam", website: "https://www.arkin.nl" },
@@ -279,12 +279,12 @@ const zorginstellingenData = [
         aanmelden: "https://kabouterhuis.nl/over-ons/contact/vestigingen/aanmelden/",
         leeftijd: "0-7 jaar",
         specialisatie: "Autisme, ADHD, ontwikkelingsstoornissen, onderzoek, hulp thuis, kinderopvang en school, groepsbehandeling, therapie",
-        locaties: [
+        positie: { lat: 52.308889, lng: 4.863889 },        locaties: [
             { naam: "Kabouterhuis Amstelveen", adres: "Marne 127, 1186 PJ Amstelveen", website: "https://kabouterhuis.nl" },
-            { naam: "Kabouterhuis Amsterdam Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://kabouterhuis.nl" },
-            { naam: "Kabouterhuis Amsterdam Noord", adres: "Kopjachtplein 20, 1034 JG Amsterdam", website: "https://kabouterhuis.nl" },
-            { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl" },
-            { naam: "Kabouterhuis Amsterdam Zuidoost", adres: "Leksmondplein 28, 1108 EL Amsterdam", website: "https://kabouterhuis.nl" }
+            { naam: "Kabouterhuis Amsterdam Zuid", adres: "Amsteldijk 196, 1079 LK Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.308889, lng: 4.863889 } },
+            { naam: "Kabouterhuis Amsterdam Noord", adres: "Kopjachtplein 20, 1034 JG Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.352778, lng: 4.858889 } },
+            { naam: "Kabouterhuis Amsterdam West", adres: "Albardagracht 1, 1063 NN Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.395833, lng: 4.933889 } },
+            { naam: "Kabouterhuis Amsterdam Zuidoost", adres: "Leksmondplein 28, 1108 EL Amsterdam", website: "https://kabouterhuis.nl", positie: { lat: 52.385833, lng: 4.895833 } }
         ]
     }
 ];
